@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC-Fit | Kurse</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MC-Fit | Kurse</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <img src="assets/img/logo.png" alt="MC-Fit Logo" class="logo">
-        <nav>
-            <ul>
-                <li><a href="index.html">Start</a></li>
-                <li><a href="kurse.html" class="active">Kurse</a></li>
-                <li><a href="trainer.html">Trainer</a></li>
-                <li><a href="kontakt.html">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
+  <div id="topbar-mount"></div>
 
-    <section>
-        <h1>Unsere Kurse</h1>
-        <div class="kurse-container">
-            <div class="kurs-card">
-                <h2>Functional Training</h2>
-                <p>Montag & Mittwoch – 18:00 Uhr</p>
-            </div>
-            <div class="kurs-card">
-                <h2>Yoga</h2>
-                <p>Dienstag & Donnerstag – 17:30 Uhr</p>
-            </div>
-            <div class="kurs-card">
-                <h2>Box-Fit</h2>
-                <p>Freitag – 19:00 Uhr</p>
-            </div>
+  <div class="layout">
+    <div id="sidebar-mount"></div>
+
+    <main class="content">
+      <section class="about">
+        <h2>Unsere Kurse</h2>
+        <p>Hier findest du eine Auswahl unserer beliebtesten Kurse.</p>
+      </section>
+
+      <section class="highlight-cards">
+        <div class="card">
+          <h3>Functional Training</h3>
+          <p>Montag & Mittwoch – 18:00 Uhr</p>
         </div>
-    </section>
+        <div class="card">
+          <h3>Yoga</h3>
+          <p>Dienstag & Donnerstag – 17:30 Uhr</p>
+        </div>
+        <div class="card">
+          <h3>Box-Fit</h3>
+          <p>Freitag – 19:00 Uhr</p>
+        </div>
+      </section>
 
-    <footer>
+      <footer>
         <p>© 2025 MC-Fit. Alle Rechte vorbehalten.</p>
-    </footer>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./assets/js/include.js"></script>
 </body>
 </html>

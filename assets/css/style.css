@@ -16,7 +16,7 @@ a {
     text-decoration: none;
 }
 
-/* === Topbar === */
+/* === Topbar (fixiert) === */
 .topbar {
     display: flex;
     justify-content: space-between;
@@ -24,8 +24,11 @@ a {
     background: #111;
     border-bottom: 2px solid gold;
     padding: 10px 30px;
-    position: sticky;
+    position: fixed;     /* änderte von sticky -> fixed */
     top: 0;
+    left: 0;
+    right: 0;
+    height: 62px;        /* Referenzhöhe für Layout/Sidebar */
     z-index: 1000;
 }
 
@@ -86,9 +89,10 @@ a {
 .layout {
     display: flex;
     min-height: 100vh;
+    padding-top: 62px;     /* Platz für die fixierte Topbar */
 }
 
-/* Sidebar links */
+/* Sidebar links (fixiert, eigener Scroll) */
 .sidebar {
     width: 230px;
     background: #111;
@@ -98,9 +102,11 @@ a {
     justify-content: start;
     align-items: center;
     padding-top: 30px;
-    position: sticky;
-    top: 62px; /* Höhe der Topbar */
-    height: calc(100vh - 62px);
+    position: fixed;
+    top: 62px;            /* direkt unter der Topbar */
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;     /* eigener Scrollbereich */
 }
 
 .sidebar ul {
@@ -130,10 +136,11 @@ a {
     color: black;
 }
 
-/* === Inhaltsbereich === */
+/* === Inhaltsbereich (scrollt unabhängig) === */
 .content {
     flex: 1;
     padding: 40px 60px;
+    margin-left: 230px;    /* Platz für die fixierte Sidebar */
 }
 
 /* === Hero === */
@@ -204,20 +211,24 @@ footer {
 @media (max-width: 900px) {
     .layout {
         flex-direction: column;
+        padding-top: 62px; /* Topbar bleibt fixiert */
     }
 
     .sidebar {
-        flex-direction: row;
-        justify-content: space-around;
+        position: static;
         width: 100%;
         height: auto;
         border-right: none;
         border-top: 2px solid gold;
-        position: relative;
-        top: 0;
+        padding-top: 10px;
+        overflow-y: visible; /* kein eigener Scroll im mobilen Modus */
+        top: auto;
+        bottom: auto;
+        left: auto;
     }
 
     .content {
         padding: 20px;
+        margin-left: 0;     /* Sidebar ist nicht mehr links fixiert */
     }
 }

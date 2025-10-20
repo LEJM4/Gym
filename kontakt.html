@@ -1,48 +1,44 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC-Fit | Kontakt</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MC-Fit | Kontakt</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="./assets/img/logo.png" alt="MC-Fit Logo" class="logo">
-            <h1>MC-Fit</h1>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Start</a></li>
-                <li><a href="kurse.html">Kurse</a></li>
-                <li><a href="trainer.html">Trainer</a></li>
-                <li><a href="kontakt.html" class="active">Kontakt</a></li>
-            </ul>
-        </nav>
-    </header>
+  <div id="topbar-mount"></div>
 
-    <section class="about">
+  <div class="layout">
+    <div id="sidebar-mount"></div>
+
+    <main class="content">
+      <section class="about">
         <h2>Kontaktiere uns</h2>
         <p>Hast du Fragen, Anregungen oder möchtest dich anmelden? Schreib uns einfach!</p>
-    </section>
+      </section>
 
-    <section class="contact">
+      <section class="contact">
         <form action="https://formsubmit.co/YOUR_EMAIL" method="POST" class="kontakt-form">
-            <input type="text" name="name" placeholder="Dein Name" required>
-            <input type="email" name="email" placeholder="Deine E-Mail" required>
-            <textarea name="message" rows="5" placeholder="Deine Nachricht..." required></textarea>
-            <button type="submit" class="btn">Absenden</button>
+          <input type="text" name="name" placeholder="Dein Name" required>
+          <input type="email" name="email" placeholder="Deine E-Mail" required>
+          <textarea name="message" rows="5" placeholder="Deine Nachricht..." required></textarea>
+          <button type="submit" class="btn btn-gold">Absenden</button>
         </form>
 
         <div class="info">
-            <p><strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt</p>
-            <p><strong>Öffnungszeiten:</strong> Mo–Fr 8–22 Uhr, Sa–So 10–20 Uhr</p>
+          <p><strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt</p>
+          <p><strong>Öffnungszeiten:</strong> Mo–Fr 8–22 Uhr, Sa–So 10–20 Uhr</p>
         </div>
-    </section>
+      </section>
 
-    <footer>
+      <footer>
         <p>© 2025 MC-Fit. Alle Rechte vorbehalten.</p>
-    </footer>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./assets/js/include.js"></script>
 </body>
 </html>
