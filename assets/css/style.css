@@ -1,79 +1,171 @@
-/* Basislayout */
-.page-layout {
-    display: flex;
-    flex-direction: row;
-    min-height: 100vh;
+/* === Global Styles === */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    background-color: #000;
+    color: #fff;
+    line-height: 1.6;
 }
 
-/* Sidebar rechts */
-.sidebar {
-    width: 220px;
-    background: #111;
-    border-left: 2px solid gold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    padding: 30px 15px;
-    position: fixed;
-    right: 0;
-    top: 0;
-    bottom: 0;
+h1, h2, h3 {
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
-/* Sidebar Navigation */
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin-top: 50px;
-    width: 100%;
-}
-
-.sidebar li {
-    margin-bottom: 20px;
-}
-
-.sidebar a {
-    display: block;
-    text-align: center;
-    padding: 12px;
-    border-radius: 20px; /* 👈 rundere Buttons */
-    color: gold;
+a {
     text-decoration: none;
+}
+
+/* === Header === */
+header {
+    background: #111;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    border-bottom: 2px solid gold;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: gold;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 8px 14px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    background-color: gold;
+    color: black;
+}
+
+/* === Hero Section === */
+.hero {
+    background: linear-gradient(to bottom right, #111, #000);
+    text-align: center;
+    padding: 120px 20px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero h2 span {
+    color: gold;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.btn {
+    background: gold;
+    color: black;
+    padding: 12px 25px;
+    border-radius: 25px;
     font-weight: bold;
     transition: all 0.3s ease;
 }
 
-.sidebar a:hover, .sidebar a.active {
-    background: gold;
-    color: black;
-}
-
-/* Hero-Abschnitt anpassen */
-main {
-    flex: 1;
-    padding: 60px;
-    margin-right: 240px; /* Platz für Sidebar */
-}
-
-/* Runde Formen */
-.kurs-card, .trainer-card, .kontakt-form input, .kontakt-form textarea, .kontakt-form button {
-    border-radius: 20px; /* 👈 alles schön abgerundet */
-}
-
-/* Optional: Schatten-Effekt */
-.kurs-card, .trainer-card {
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
-}
-
-/* Button Hover */
 .btn:hover {
     background: #ffd700;
     transform: scale(1.05);
 }
 
-/* Logo */
-.logo {
-    width: 100px;
-    border-radius: 50%; /* rundes Logo */
+/* === About Section === */
+.about {
+    text-align: center;
+    padding: 60px 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
+.about h2 {
+    color: gold;
+    margin-bottom: 20px;
+}
+
+/* === Highlight Cards === */
+.highlight-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 50px 20px;
+    background: #0a0a0a;
+}
+
+.card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 20px;
+    padding: 25px;
+    width: 280px;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
+}
+
+.card h3 {
+    color: gold;
+    margin-bottom: 10px;
+}
+
+/* === Footer === */
+footer {
+    background: #111;
+    text-align: center;
+    padding: 20px;
+    border-top: 2px solid gold;
+    font-size: 0.9rem;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .highlight-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+    }
 }
