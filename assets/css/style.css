@@ -140,6 +140,42 @@ nav a:hover, nav a.active {
     margin-bottom: 10px;
 }
 
+.trainer-img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+/* === Kontaktformular === */
+.kontakt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.kontakt-form input, 
+.kontakt-form textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.kontakt-form button {
+    background: gold;
+    border: none;
+    color: black;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.kontakt-form button:hover {
+    background: #ffd700;
+}
+
 /* === Footer === */
 footer {
     background: #111;

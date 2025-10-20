@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MC-Fit | Kontakt</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <header>
-        <img src="assets/img/logo.png" alt="MC-Fit Logo" class="logo">
+        <div class="logo-container">
+            <img src="./assets/img/logo.png" alt="MC-Fit Logo" class="logo">
+            <h1>MC-Fit</h1>
+        </div>
         <nav>
             <ul>
                 <li><a href="index.html">Start</a></li>
@@ -19,8 +22,12 @@
         </nav>
     </header>
 
-    <section>
-        <h1>Kontakt</h1>
+    <section class="about">
+        <h2>Kontaktiere uns</h2>
+        <p>Hast du Fragen, Anregungen oder möchtest dich anmelden? Schreib uns einfach!</p>
+    </section>
+
+    <section class="contact">
         <form action="https://formsubmit.co/YOUR_EMAIL" method="POST" class="kontakt-form">
             <input type="text" name="name" placeholder="Dein Name" required>
             <input type="email" name="email" placeholder="Deine E-Mail" required>

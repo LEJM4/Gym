@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MC-Fit | Trainer</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
     <header>
-        <img src="assets/img/logo.png" alt="MC-Fit Logo" class="logo">
+        <div class="logo-container">
+            <img src="./assets/img/logo.png" alt="MC-Fit Logo" class="logo">
+            <h1>MC-Fit</h1>
+        </div>
         <nav>
             <ul>
                 <li><a href="index.html">Start</a></li>
@@ -19,19 +22,21 @@
         </nav>
     </header>
 
-    <section>
-        <h1>Unser Team</h1>
-        <div class="trainer-container">
-            <div class="trainer-card">
-                <img src="assets/img/trainer1.jpg" alt="Trainer">
-                <h2>Max Kraft</h2>
-                <p>Functional & CrossFit Experte</p>
-            </div>
-            <div class="trainer-card">
-                <img src="assets/img/trainer2.jpg" alt="Trainerin">
-                <h2>Lisa Flex</h2>
-                <p>Yoga & Mobility Coach</p>
-            </div>
+    <section class="about">
+        <h2>Unser Team</h2>
+        <p>Lerne unsere erfahrenen Trainer kennen, die dich bei jedem Schritt begleiten.</p>
+    </section>
+
+    <section class="highlight-cards">
+        <div class="card">
+            <img src="./assets/img/trainer1.jpg" alt="Trainer Max" class="trainer-img">
+            <h3>Max Kraft</h3>
+            <p>Functional & CrossFit Experte</p>
+        </div>
+        <div class="card">
+            <img src="./assets/img/trainer2.jpg" alt="Trainerin Lisa" class="trainer-img">
+            <h3>Lisa Flex</h3>
+            <p>Yoga & Mobility Coach</p>
         </div>
     </section>
 
