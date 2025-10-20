@@ -24,11 +24,11 @@ a {
     background: #111;
     border-bottom: 2px solid gold;
     padding: 10px 30px;
-    position: fixed;     /* änderte von sticky -> fixed */
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: 62px;        /* Referenzhöhe für Layout/Sidebar */
+    height: 62px;
     z-index: 1000;
 }
 
@@ -89,7 +89,7 @@ a {
 .layout {
     display: flex;
     min-height: 100vh;
-    padding-top: 62px;     /* Platz für die fixierte Topbar */
+    padding-top: 62px; /* Platz für die fixierte Topbar */
 }
 
 /* Sidebar links (fixiert, eigener Scroll) */
@@ -103,10 +103,10 @@ a {
     align-items: center;
     padding-top: 30px;
     position: fixed;
-    top: 62px;            /* direkt unter der Topbar */
+    top: 62px; /* direkt unter der Topbar */
     bottom: 0;
     left: 0;
-    overflow-y: auto;     /* eigener Scrollbereich */
+    overflow-y: auto; /* eigener Scrollbereich */
 }
 
 .sidebar ul {
@@ -122,25 +122,84 @@ a {
     margin: 10px 0;
 }
 
+/* Basislinks */
 .sidebar a {
+    position: relative;
     display: block;
-    padding: 12px;
+    padding: 12px 16px; /* leicht erweitert */
     border-radius: 10px;
     color: gold;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: background .25s ease, color .25s ease, transform .25s ease, box-shadow .25s ease, padding .25s ease;
+    overflow: hidden; /* für den Sheen-Effekt */
 }
 
-.sidebar a:hover, .sidebar a.active {
+/* Hover + aktive Zustände */
+.sidebar a:hover {
+    background: rgba(255, 215, 0, 0.08);
+    color: gold;
+    transform: translateX(4px);
+    padding: 12px 20px;
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.35), 0 0 28px rgba(255, 215, 0, 0.18);
+}
+
+.sidebar a.active {
     background: gold;
     color: black;
+    box-shadow: 0 0 16px rgba(255, 215, 0, 0.4), 0 0 36px rgba(255, 215, 0, 0.22);
+}
+
+/* Klick-Effekt */
+.sidebar a:active {
+    transform: translateX(2px) scale(0.99);
+}
+
+/* Sheen (bewegter Lichtreflex) */
+.sidebar a::after {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -40%;
+    width: 60%;
+    height: 340%;
+    transform: rotate(25deg);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.18) 50%, rgba(255,255,255,0) 100%);
+    opacity: 0;
+    transition: opacity .25s ease, transform .55s ease;
+    pointer-events: none;
+}
+
+.sidebar a:hover::after {
+    opacity: 1;
+    transform: translateX(140%) rotate(25deg);
+}
+
+/* Goldleiste links (aktive/hover) */
+.sidebar a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    bottom: 8px;
+    width: 4px;
+    border-radius: 4px;
+    background: linear-gradient(180deg, gold, #ffd700);
+    transform: scaleY(0);
+    transform-origin: center;
+    transition: transform .25s ease;
+    opacity: .9;
+}
+
+.sidebar a:hover::before,
+.sidebar a.active::before {
+    transform: scaleY(1);
 }
 
 /* === Inhaltsbereich (scrollt unabhängig) === */
 .content {
     flex: 1;
     padding: 40px 60px;
-    margin-left: 230px;    /* Platz für die fixierte Sidebar */
+    margin-left: 230px; /* Platz für Sidebar */
 }
 
 /* === Hero === */
@@ -197,6 +256,36 @@ a {
     color: gold;
 }
 
+/* === Kontaktformular === */
+.kontakt-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 40px auto;
+}
+
+.kontakt-form input,
+.kontakt-form textarea {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+.kontakt-form button {
+    background: gold;
+    border: none;
+    color: black;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.kontakt-form button:hover {
+    background: #ffd700;
+}
+
 /* === Footer === */
 footer {
     text-align: center;
@@ -207,11 +296,23 @@ footer {
     border-radius: 15px;
 }
 
+/* === Reduced Motion === */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar a,
+    .sidebar a::after,
+    .sidebar a::before {
+        transition: none;
+    }
+    .sidebar a:hover { transform: none; }
+    .sidebar a:hover::after { opacity: .15; transform: none; }
+    .sidebar a:hover::before { transform: none; }
+}
+
 /* === Responsive Design === */
 @media (max-width: 900px) {
     .layout {
         flex-direction: column;
-        padding-top: 62px; /* Topbar bleibt fixiert */
+        padding-top: 62px;
     }
 
     .sidebar {
@@ -221,7 +322,7 @@ footer {
         border-right: none;
         border-top: 2px solid gold;
         padding-top: 10px;
-        overflow-y: visible; /* kein eigener Scroll im mobilen Modus */
+        overflow-y: visible;
         top: auto;
         bottom: auto;
         left: auto;
@@ -229,6 +330,16 @@ footer {
 
     .content {
         padding: 20px;
-        margin-left: 0;     /* Sidebar ist nicht mehr links fixiert */
+        margin-left: 0;
+    }
+
+    .sidebar a {
+        padding: 10px 12px;
+        transform: none;
+    }
+
+    .sidebar a:hover {
+        transform: none;
+        padding: 10px 12px;
     }
 }
