@@ -3,47 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MC-Fit | Kurse</title>
+    <title>MC-Fit | Dein Fitnessstudio</title>
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
-        <div class="logo-container">
+    <!-- Top-Leiste -->
+    <header class="topbar">
+        <div class="topbar-left">
             <img src="./assets/img/logo.png" alt="MC-Fit Logo" class="logo">
             <h1>MC-Fit</h1>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Start</a></li>
-                <li><a href="kurse.html" class="active">Kurse</a></li>
-                <li><a href="trainer.html">Trainer</a></li>
-                <li><a href="kontakt.html">Kontakt</a></li>
-            </ul>
-        </nav>
+        <div class="topbar-center">
+            <a href="#" class="btn btn-gold">Mitglied werden</a>
+        </div>
+        <div class="topbar-right">
+            <a href="kontakt.html" class="btn btn-outline">Kontakt</a>
+        </div>
     </header>
 
-    <section class="about">
-        <h2>Unsere Kurse</h2>
-        <p>Hier findest du eine Auswahl unserer beliebtesten Kurse.</p>
-    </section>
+    <!-- Seiteninhalt -->
+    <div class="layout">
+        <!-- Sidebar links -->
+        <aside class="sidebar">
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Start</a></li>
+                    <li><a href="kurse.html">Kurse</a></li>
+                    <li><a href="trainer.html">Trainer</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+            </nav>
+        </aside>
 
-    <section class="highlight-cards">
-        <div class="card">
-            <h3>Functional Training</h3>
-            <p>Montag & Mittwoch – 18:00 Uhr</p>
-        </div>
-        <div class="card">
-            <h3>Yoga</h3>
-            <p>Dienstag & Donnerstag – 17:30 Uhr</p>
-        </div>
-        <div class="card">
-            <h3>Box-Fit</h3>
-            <p>Freitag – 19:00 Uhr</p>
-        </div>
-    </section>
+        <!-- Hauptinhalt rechts -->
+        <main class="content">
+            <section class="hero">
+                <h2>Willkommen bei <span>MC-Fit</span></h2>
+                <p>Dein Weg zu mehr Kraft, Ausdauer und Wohlbefinden beginnt hier.</p>
+                <a href="kontakt.html" class="btn btn-gold">Jetzt Kontakt aufnehmen</a>
+            </section>
 
-    <footer>
-        <p>© 2025 MC-Fit. Alle Rechte vorbehalten.</p>
-    </footer>
+            <section class="about">
+                <h2>Warum MC-Fit?</h2>
+                <p>Bei uns trainierst du mit modernsten Geräten, erfahrenen Trainern und einem starken Team. Egal ob du Muskelaufbau, Ausdauer oder einfach ein besseres Körpergefühl willst – wir bringen dich ans Ziel.</p>
+            </section>
+
+            <section class="highlight-cards">
+                <div class="card">
+                    <h3>Moderne Ausstattung</h3>
+                    <p>Trainiere mit hochwertigen Geräten in angenehmer Atmosphäre.</p>
+                </div>
+                <div class="card">
+                    <h3>Individuelle Betreuung</h3>
+                    <p>Unsere Trainer unterstützen dich mit Expertise und Motivation.</p>
+                </div>
+                <div class="card">
+                    <h3>Flexible Kurse</h3>
+                    <p>Von Yoga bis CrossFit – wir bieten für jeden das passende Programm.</p>
+                </div>
+            </section>
+
+            <footer>
+                <p>© 2025 MC-Fit. Alle Rechte vorbehalten.</p>
+            </footer>
+        </main>
+    </div>
 </body>
 </html>
