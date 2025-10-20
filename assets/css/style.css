@@ -1,108 +1,79 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    background: #000;
-    color: #fff;
+/* Basislayout */
+.page-layout {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
+/* Sidebar rechts */
+.sidebar {
+    width: 220px;
     background: #111;
-}
-
-.logo {
-    height: 50px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: gold;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-nav a.active {
-    border-bottom: 2px solid gold;
-}
-
-.hero {
-    text-align: center;
-    padding: 100px 20px;
-    background: linear-gradient(to bottom, #111, #000);
-}
-
-.hero h1 span {
-    color: gold;
-}
-
-.btn {
-    display: inline-block;
-    background: gold;
-    color: black;
-    padding: 10px 20px;
-    margin-top: 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-.kurse-container, .trainer-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    padding: 40px;
-}
-
-.kurs-card, .trainer-card {
-    background: #111;
-    padding: 20px;
-    border-radius: 10px;
-    width: 250px;
-    text-align: center;
-}
-
-.trainer-card img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-}
-
-.kontakt-form {
+    border-left: 2px solid gold;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-    margin: auto;
-    padding: 40px;
+    align-items: center;
+    justify-content: start;
+    padding: 30px 15px;
+    position: fixed;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
-.kontakt-form input, .kontakt-form textarea {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
+/* Sidebar Navigation */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+    width: 100%;
 }
 
-.kontakt-form button {
-    background: gold;
-    border: none;
-    color: black;
-    padding: 10px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
+.sidebar li {
+    margin-bottom: 20px;
 }
 
-footer {
+.sidebar a {
+    display: block;
     text-align: center;
-    padding: 20px;
-    background: #111;
+    padding: 12px;
+    border-radius: 20px; /* 👈 rundere Buttons */
+    color: gold;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background: gold;
+    color: black;
+}
+
+/* Hero-Abschnitt anpassen */
+main {
+    flex: 1;
+    padding: 60px;
+    margin-right: 240px; /* Platz für Sidebar */
+}
+
+/* Runde Formen */
+.kurs-card, .trainer-card, .kontakt-form input, .kontakt-form textarea, .kontakt-form button {
+    border-radius: 20px; /* 👈 alles schön abgerundet */
+}
+
+/* Optional: Schatten-Effekt */
+.kurs-card, .trainer-card {
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+}
+
+/* Button Hover */
+.btn:hover {
+    background: #ffd700;
+    transform: scale(1.05);
+}
+
+/* Logo */
+.logo {
+    width: 100px;
+    border-radius: 50%; /* rundes Logo */
 }
