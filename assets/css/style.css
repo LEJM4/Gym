@@ -1,4 +1,35 @@
 /* === Ladezustand verhindern Flackern === */
+/* === THEME VARIABLEN (Light & Dark Mode) === */
+
+/* 🌞 Light Mode */
+:root[data-theme='light'] {
+  --bg-color: #f8f8f8;              /* Haupt-Hintergrund */
+  --text-color: #111;               /* Standardtext */
+  --accent-color: #d4af37;          /* Gold-Ton */
+  --card-bg: #ffffff;               /* Karten und Content-Hintergrund */
+  --border-color: #ddd;             /* Linien / Rahmen */
+  --sidebar-bg: #f0f0f0;            /* Sidebar */
+  --topbar-bg: #ffffff;             /* Topbar */
+  --btn-hover: #e0b93d;             /* Button-Hover */
+  --preloader-bg: #ffffff;          /* Preloader-Hintergrund */
+  --preloader-ring: #d4af37;        /* Preloader-Ring */
+}
+
+/* 🌙 Dark Mode */
+:root[data-theme='dark'] {
+  --bg-color: #000000;
+  --text-color: #ffffff;
+  --accent-color: gold;
+  --card-bg: #111111;
+  --border-color: gold;
+  --sidebar-bg: #111111;
+  --topbar-bg: #111111;
+  --btn-hover: #ffd700;
+  --preloader-bg: #000000;
+  --preloader-ring: gold;
+}
+
+
 body.loading {
   visibility: hidden;
   opacity: 0;
@@ -34,8 +65,8 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #111;
-    border-bottom: 2px solid gold;
+    background: var(--topbar-bg);
+    border-bottom: 2px solid var(--accent-color);
     padding: 10px 30px;
     position: fixed;
     top: 0;
@@ -78,25 +109,26 @@ a {
 }
 
 .btn-gold {
-    background: gold;
-    color: black;
+  background: var(--accent-color);
+  color: var(--bg-color);
 }
 
 .btn-gold:hover {
-    background: #ffd700;
-    transform: scale(1.05);
+  background: var(--btn-hover);
+  transform: scale(1.05);
 }
 
 .btn-outline {
-    border: 2px solid gold;
-    color: gold;
-    background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
 }
 
 .btn-outline:hover {
-    background: gold;
-    color: black;
+  background: var(--accent-color);
+  color: var(--bg-color);
 }
+
 
 /* === Sprache + Theme === */
 .lang-switch {
@@ -134,23 +166,6 @@ a {
 .theme-toggle:hover {
   transform: rotate(20deg);
   color: #ffd700;
-}
-
-/* === Theme-Varianten === */
-:root[data-theme='light'] {
-  --bg-color: #fff;
-  --text-color: #111;
-  --accent-color: gold;
-  --card-bg: #f5f5f5;
-  --border-color: #ddd;
-}
-
-:root[data-theme='dark'] {
-  --bg-color: #000;
-  --text-color: #fff;
-  --accent-color: gold;
-  --card-bg: #111;
-  --border-color: gold;
 }
 
 /* Bestehende Farben ersetzen mit Variablen */
@@ -196,8 +211,8 @@ footer {
 /* Sidebar links (fixiert, eigener Scroll) */
 .sidebar {
     width: 230px;
-    background: #111;
-    border-right: 2px solid gold;
+    background: var(--sidebar-bg);
+    border-right: 2px solid var(--accent-color);
     display: flex;
     flex-direction: column;
     justify-content: start;
@@ -449,14 +464,14 @@ footer {
 #preloader {
   position: fixed;
   inset: 0;
-  background: var(--bg-color, #000);
+  background: var(--preloader-bg, var(--bg-color, #000));
   color: var(--accent-color, gold);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   z-index: 9999;
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  transition: opacity 0.6s ease, visibility 0.6s ease, background-color 0.4s ease, color 0.4s ease;
 }
 
 #preloader.hidden {
@@ -476,11 +491,12 @@ footer {
   animation: pulse 1.4s ease-in-out infinite;
 }
 
+/* Ring mit Theme-Farbe */
 .preloader-ring {
   width: 60px;
   height: 60px;
   border: 4px solid rgba(255, 215, 0, 0.2);
-  border-top: 4px solid gold;
+  border-top: 4px solid var(--preloader-ring, gold);
   border-radius: 50%;
   margin: 0 auto 12px auto;
   animation: spin 1.2s linear infinite;
@@ -500,4 +516,21 @@ footer {
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--accent-color, gold);
+}
+
+/* === Smooth Theme Transition === */
+body, 
+.sidebar, 
+.topbar, 
+footer, 
+.card, 
+#preloader, 
+.btn, 
+.btn-outline, 
+.btn-gold {
+  transition:
+    background-color 0.4s ease,
+    color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
 }
