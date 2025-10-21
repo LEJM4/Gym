@@ -1,0 +1,6 @@
+für die Topbar:
+- ganz rechts wechseln der Sprache (Englisch und Deutsch)
+- wechseln von Hell-Dunkel-Modus --> neben der Spracheinstellung (weiß statt schwarz)
+
+für die Sidebar:
+- neue Seite wo die Mitgliedschaften angezeigt werden

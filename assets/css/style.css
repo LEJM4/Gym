@@ -85,6 +85,94 @@ a {
     color: black;
 }
 
+/* === Sprache + Theme === */
+.lang-switch {
+  display: flex;
+  gap: 6px;
+  margin-left: 10px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid gold;
+  color: gold;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active, .lang-btn:hover {
+  background: gold;
+  color: black;
+}
+
+.theme-toggle {
+  margin-left: 10px;
+  border: none;
+  background: transparent;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: gold;
+  transition: transform 0.2s ease, color 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(20deg);
+  color: #ffd700;
+}
+
+/* === Theme-Varianten === */
+:root[data-theme='light'] {
+  --bg-color: #fff;
+  --text-color: #111;
+  --accent-color: gold;
+  --card-bg: #f5f5f5;
+  --border-color: #ddd;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #000;
+  --text-color: #fff;
+  --accent-color: gold;
+  --card-bg: #111;
+  --border-color: gold;
+}
+
+/* Bestehende Farben ersetzen mit Variablen */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.sidebar,
+.topbar,
+footer {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.sidebar a {
+  color: var(--accent-color);
+}
+
+.sidebar a.active {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.btn-gold {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.btn-outline {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+
 /* === Hauptlayout mit Sidebar === */
 .layout {
     display: flex;
