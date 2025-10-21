@@ -57,14 +57,20 @@ async function loadPartials() {
   }
 }
 
-/* --- Sidebar: aktiven Menüpunkt markieren --- */
+/* --- Sidebar: aktiven Menüpunkt markieren (SPA-kompatibel) --- */
 function initSidebarActive() {
   const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+
   document.querySelectorAll('.sidebar a').forEach(a => {
     const href = (a.getAttribute('href') || '').toLowerCase();
-    if (href === current) a.classList.add('active');
+    if (href === current) {
+      a.classList.add('active');
+    } else {
+      a.classList.remove('active');
+    }
   });
 }
+
 
 /* --- 🌗 Theme Toggle mit SVG + sanfter Animation --- */
 function initThemeToggle() {

@@ -1,70 +1,75 @@
 /* ===============================
    spa.js
-   Client-Side Navigation (Mini SPA)
-   funktioniert mit include.js + Preloader
+   Mini SPA mit Preloader + Fade
    =============================== */
 
 const contentContainer = document.querySelector('main.content');
+const preloader = document.getElementById('preloader');
 
 /** Seite dynamisch laden */
 async function loadPage(url, addToHistory = true) {
   try {
+    // Preloader aktivieren
+    preloader.classList.remove('hidden');
     document.body.classList.add('loading');
     document.documentElement.style.visibility = 'hidden';
+
+    // kleinen Delay für sanftes Anzeigen
+    await new Promise(res => setTimeout(res, 200));
 
     // Inhalt abrufen
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Fehler beim Laden von ${url}`);
     const html = await response.text();
 
-    // Nur <main> aus dem Dokument extrahieren
+    // Nur <main> extrahieren
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, 'text/html');
     const newMain = doc.querySelector('main.content');
     if (!newMain) throw new Error('Kein <main> gefunden.');
 
-    // Sanftes Ausblenden
+    // Sanft ausblenden
     contentContainer.classList.add('fade-out');
     await new Promise(res => setTimeout(res, 200));
 
     // Inhalt ersetzen
     contentContainer.innerHTML = newMain.innerHTML;
 
-    // Sanftes Einblenden
+    // Sidebar & andere Komponenten aktualisieren
+    initSidebarActive();
+    window.scrollTo(0, 0);
+
+    // Sanft einblenden
     contentContainer.classList.remove('fade-out');
     contentContainer.classList.add('fade-in');
     setTimeout(() => contentContainer.classList.remove('fade-in'), 400);
 
-    // URL aktualisieren (wenn gewünscht)
+    // URL anpassen
     if (addToHistory) history.pushState(null, '', url);
 
-    // Nachladen: Sidebar-Active + Scroll reset
-    initSidebarActive();
-    window.scrollTo(0, 0);
-
-    // Sichtbar machen
-    document.body.classList.remove('loading');
-    document.documentElement.style.visibility = 'visible';
   } catch (err) {
     console.error('❌ Fehler beim Laden:', err);
     contentContainer.innerHTML = `<p style="padding:2rem;color:red;">Fehler beim Laden der Seite.</p>`;
-    document.documentElement.style.visibility = 'visible';
+  } finally {
+    // Preloader sanft ausblenden
+    setTimeout(() => {
+      preloader?.classList.add('hidden');
+      document.body.classList.remove('loading');
+      document.documentElement.style.visibility = 'visible';
+    }, 400);
   }
 }
 
 /** Klicks auf interne Links abfangen */
 document.addEventListener('click', e => {
-  const link = e.target.closest('a');
+  const link = e.target.closest('a[data-link]');
   if (!link) return;
 
   const href = link.getAttribute('href');
-  if (!href || href.startsWith('http') || href.startsWith('#')) return; // externe Links ignorieren
+  if (!href || href.startsWith('http') || href.startsWith('#')) return;
 
-  // Wenn Link auf gleiche Domain zeigt → SPA
-  if (href.endsWith('.html')) {
-    e.preventDefault();
-    loadPage(href);
-  }
+  e.preventDefault();
+  loadPage(href);
 });
 
 /** Browser-Navigation (← / →) */
