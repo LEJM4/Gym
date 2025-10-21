@@ -30,16 +30,24 @@ async function loadPartials() {
     initThemeToggle();
     initLanguageSwitch();
 
-    // --- Preloader sichtbar lassen bis alles eingefügt ist ---
-    const preloader = document.getElementById('preloader');
+  // --- Preloader sichtbar lassen bis alles eingefügt ist ---
+  const preloader = document.getElementById('preloader');
 
-    // leichte Verzögerung für weichen Übergang
-    setTimeout(() => {
-      preloader?.classList.add('hidden');
-      document.body.classList.remove('loading');
-      document.body.classList.add('ready');
-      document.documentElement.style.visibility = 'visible';
-    }, 450);
+  // 1️⃣ Seite noch unsichtbar halten
+  document.documentElement.style.visibility = 'hidden';
+
+  // 2️⃣ Preloader langsam ausblenden
+  setTimeout(() => {
+    preloader?.classList.add('hidden');
+  }, 300);
+
+  // 3️⃣ Erst nach Ende der Animation sichtbar machen
+  setTimeout(() => {
+    document.body.classList.remove('loading');
+    document.body.classList.add('ready');
+    document.documentElement.style.visibility = 'visible';
+  }, 900); // = 300ms Verzögerung + 600ms Fade
+
 
   } catch (err) {
     console.error('Fehler beim Laden der Partials:', err);
