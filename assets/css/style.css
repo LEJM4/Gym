@@ -29,14 +29,14 @@
 }
 
 /* === Ladezustand verhindern Flackern === */
-body.loading {
+body.loading *:not(#preloader):not(#preloader *) {
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.2s ease-out;
 }
 body.ready {
   visibility: visible;
   opacity: 1;
+  transition: opacity 0.4s ease-in;
 }
 
 /* === Grundlayout === */
@@ -148,22 +148,16 @@ a { text-decoration: none; }
   border-radius: 50%;
   position: relative;
 }
-
-/* Icon-Stil */
 .theme-toggle svg {
   width: 20px;
   height: 20px;
   fill: var(--accent-color);
   transition: fill 0.3s ease, transform 0.4s ease, opacity 0.4s ease;
 }
-
-/* Hover: sanfte Rotation + goldener Glow */
 .theme-toggle:hover {
   transform: rotate(15deg);
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.4), 0 0 24px rgba(255, 215, 0, 0.25);
 }
-
-/* Pulsierender Lichtschein-Effekt */
 .theme-toggle::after {
   content: "";
   position: absolute;
@@ -177,14 +171,10 @@ a { text-decoration: none; }
   opacity: 1;
   animation: pulse-glow 1.5s ease-in-out infinite;
 }
-
-/* sanftes Pulsieren */
 @keyframes pulse-glow {
   0%, 100% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.4); }
   50% { box-shadow: 0 0 18px rgba(255, 215, 0, 0.6); }
 }
-
-/* Icon beim Klick kurz animieren (wird per JS hinzugefügt) */
 .icon-anim {
   transform: rotate(180deg) scale(0.8);
   opacity: 0.3;
@@ -357,6 +347,10 @@ section, p, h1, h2, h3, h4, h5, h6 {
 }
 
 /* === PRELOADER === */
+body.loading #preloader {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
 #preloader {
   position: fixed;
   inset: 0;
@@ -372,6 +366,12 @@ section, p, h1, h2, h3, h4, h5, h6 {
 #preloader.hidden {
   opacity: 0;
   visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#preloader.hidden .preloader-inner {
+  transform: scale(0.95);
+  opacity: 0;
+  transition: all 0.4s ease;
 }
 .preloader-inner { text-align: center; }
 .preloader-logo {
@@ -390,15 +390,18 @@ section, p, h1, h2, h3, h4, h5, h6 {
   margin: 0 auto 12px auto;
   animation: spin 1.2s linear infinite;
 }
-@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.05); }
-}
 #preloader p {
   font-weight: 600;
   letter-spacing: 1px;
   color: var(--accent-color);
+}
+@keyframes spin {
+  from { transform: rotate(0); }
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
 }
 
 /* === Smooth Theme Transition === */

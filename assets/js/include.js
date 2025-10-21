@@ -139,4 +139,15 @@ function initLanguageSwitch() {
 }
 
 // --- 3️⃣ Start ---
-document.addEventListener('DOMContentLoaded', loadPartials);
+document.addEventListener('DOMContentLoaded', async () => {
+  document.body.classList.add('loading');
+
+  await loadPartials();
+
+  // kurze Sicherheitsverzögerung (damit Loader-Animation sichtbar bleibt)
+  setTimeout(() => {
+    document.getElementById('preloader')?.classList.add('hidden');
+    document.body.classList.remove('loading');
+    document.body.classList.add('ready');
+  }, 400); // 0.4s – kannst du nach Geschmack anpassen
+});
