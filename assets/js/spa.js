@@ -1,6 +1,6 @@
 /* ===============================
    spa.js
-   Mini SPA mit Preloader + Fade
+   Mini SPA mit Preloader + korrekter Sidebar-Aktualisierung
    =============================== */
 
 const contentContainer = document.querySelector('main.content');
@@ -14,10 +14,8 @@ async function loadPage(url, addToHistory = true) {
     document.body.classList.add('loading');
     document.documentElement.style.visibility = 'hidden';
 
-    // kleinen Delay für sanftes Anzeigen
-    await new Promise(res => setTimeout(res, 200));
+    await new Promise(res => setTimeout(res, 200)); // sanftes Einblenden
 
-    // Inhalt abrufen
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Fehler beim Laden von ${url}`);
     const html = await response.text();
@@ -35,7 +33,10 @@ async function loadPage(url, addToHistory = true) {
     // Inhalt ersetzen
     contentContainer.innerHTML = newMain.innerHTML;
 
-    // Sidebar & andere Komponenten aktualisieren
+    // URL zuerst aktualisieren
+    if (addToHistory) history.pushState(null, '', url);
+
+    // Jetzt Sidebar aktualisieren (korrekt)
     initSidebarActive();
     window.scrollTo(0, 0);
 
@@ -44,14 +45,11 @@ async function loadPage(url, addToHistory = true) {
     contentContainer.classList.add('fade-in');
     setTimeout(() => contentContainer.classList.remove('fade-in'), 400);
 
-    // URL anpassen
-    if (addToHistory) history.pushState(null, '', url);
-
   } catch (err) {
     console.error('❌ Fehler beim Laden:', err);
     contentContainer.innerHTML = `<p style="padding:2rem;color:red;">Fehler beim Laden der Seite.</p>`;
   } finally {
-    // Preloader sanft ausblenden
+    // Preloader ausblenden, Seite zeigen
     setTimeout(() => {
       preloader?.classList.add('hidden');
       document.body.classList.remove('loading');
