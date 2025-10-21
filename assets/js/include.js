@@ -1,26 +1,47 @@
+/* ===============================
+   include.js
+   Lädt Topbar & Sidebar automatisch
+   + Theme / Language / Active-Link
+   =============================== */
+
+// --- 1️⃣ Theme sofort setzen, bevor HTML rendert ---
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+
+// --- 2️⃣ Nach Laden der Seite: Partials einfügen ---
 async function loadPartials() {
   try {
+    // Dateien parallel laden
     const [topbarHtml, sidebarHtml] = await Promise.all([
-      fetch('./partials/topbar.html').then(r => r.text()),
-      fetch('./partials/sidebar.html').then(r => r.text())
+      fetch('./partials/topbar.html').then(r => {
+        if (!r.ok) throw new Error('Topbar konnte nicht geladen werden.');
+        return r.text();
+      }),
+      fetch('./partials/sidebar.html').then(r => {
+        if (!r.ok) throw new Error('Sidebar konnte nicht geladen werden.');
+        return r.text();
+      })
     ]);
 
+    // Mount-Punkte holen
     const topbarMount = document.getElementById('topbar-mount');
     const sidebarMount = document.getElementById('sidebar-mount');
 
+    // Inhalte einfügen
     if (topbarMount) topbarMount.innerHTML = topbarHtml;
     if (sidebarMount) sidebarMount.innerHTML = sidebarHtml;
 
-    // Nach Laden: init Funktionen starten
+    // Nachträgliche Funktionen aktivieren
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
-  } catch (e) {
-    console.error('Fehler beim Laden der Partials:', e);
+
+  } catch (err) {
+    console.error('Fehler beim Laden der Partials:', err);
   }
 }
 
-/* Aktiven Menüpunkt markieren */
+/* --- Sidebar: aktiven Menüpunkt markieren --- */
 function initSidebarActive() {
   const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   document.querySelectorAll('.sidebar a').forEach(a => {
@@ -29,7 +50,7 @@ function initSidebarActive() {
   });
 }
 
-/* 🌗 Theme Toggle */
+/* --- 🌗 Theme Toggle --- */
 function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
@@ -48,7 +69,7 @@ function initThemeToggle() {
   });
 }
 
-/* 🌍 Language Switch (einfaches Text-Umschalten) */
+/* --- 🌍 Language Switch --- */
 function initLanguageSwitch() {
   const btnDe = document.getElementById('lang-de');
   const btnEn = document.getElementById('lang-en');
@@ -68,4 +89,5 @@ function initLanguageSwitch() {
   btnEn.addEventListener('click', () => setLang('en'));
 }
 
+// --- 3️⃣ Start ---
 document.addEventListener('DOMContentLoaded', loadPartials);
