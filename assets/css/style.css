@@ -54,10 +54,10 @@ h1, h2, h3 {
 }
 a { text-decoration: none; }
 
-/* === Topbar (fixiert) === */
+/* === Topbar (optimiert) === */
 .topbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   background: var(--topbar-bg);
   border-bottom: 2px solid var(--accent-color);
@@ -67,22 +67,24 @@ a { text-decoration: none; }
   height: 62px;
   z-index: 1000;
 }
+
 .topbar-left {
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: flex-start;
 }
-.logo {
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
-  object-fit: cover;
+
+.topbar-center {
+  display: flex;
+  justify-content: center;
 }
-.topbar-center { text-align: center; }
+
 .topbar-right {
   display: flex;
   align-items: center;
   gap: 10px;
+  justify-content: flex-end;
 }
 
 /* === Buttons === */
@@ -506,4 +508,43 @@ body.ready .layout {
 @keyframes pulseActive {
   0% { background-color: var(--gold); color: black; }
   100% { background-color: transparent; color: var(--gold); }
+}
+
+
+/* === Sidebar Feinschliff === */
+.sidebar {
+  gap: 5px;
+}
+
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar li {
+  margin: 0;
+}
+
+.sidebar a {
+  padding: 12px 18px;
+  text-align: left;
+  width: 85%;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.sidebar a:hover {
+  transform: translateX(6px);
+  background: rgba(255, 215, 0, 0.12);
+}
+
+.sidebar a.active {
+  transform: none;
+}
+
+/* === Content leicht nach rechts verschieben === */
+.content {
+  margin-left: 240px;
+  padding: 50px 60px;
 }
