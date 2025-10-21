@@ -548,3 +548,23 @@ body.ready .layout {
   margin-left: 240px;
   padding: 50px 60px;
 }
+
+
+/* Logo-Größe in der Topbar robust begrenzen */
+.topbar .logo {
+  /* Höhe auf Topbar abstimmen */
+  max-height: 44px;          /* 62px Topbar – Padding: etwas Luft lassen */
+  height: 44px;              /* feste Höhe */
+  width: auto;               /* Breite automatisch, behält Seitenverhältnis */
+  display: block;            /* verhindert Baseline-Versatz */
+  border-radius: 50%;
+  object-fit: cover;         /* falls quadratisch zugeschnitten werden soll */
+}
+
+/* Optional: kleine Geräte noch kompakter */
+@media (max-width: 480px) {
+  .topbar .logo {
+    max-height: 38px;
+    height: 38px;
+  }
+}
