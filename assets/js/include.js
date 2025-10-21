@@ -2,8 +2,10 @@
    include.js
    Lädt Topbar & Sidebar automatisch
    + Theme / Language / Active-Link
+   + Preloader / Fade-In
    =============================== */
 
+// --- 0️⃣ Ladezustand aktivieren ---
 document.body.classList.add('loading');
 
 // --- 1️⃣ Theme sofort setzen, bevor HTML rendert ---
@@ -38,8 +40,22 @@ async function loadPartials() {
     initThemeToggle();
     initLanguageSwitch();
 
+    // --- Preloader ausblenden, wenn alles geladen ist ---
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      setTimeout(() => {
+        preloader.classList.add('hidden');
+      }, 300); // kleine Verzögerung für weichen Übergang
+    }
+
+    // Body anzeigen
+    document.body.classList.remove('loading');
+    document.body.classList.add('ready');
+
   } catch (err) {
     console.error('Fehler beim Laden der Partials:', err);
+    document.body.classList.remove('loading');
+    document.body.classList.add('ready');
   }
 }
 
@@ -82,6 +98,12 @@ function initLanguageSwitch() {
     btnDe.classList.toggle('active', lang === 'de');
     btnEn.classList.toggle('active', lang === 'en');
     document.documentElement.setAttribute('lang', lang);
+
+    // Optional: Text im Preloader anpassen
+    const preloaderText = document.querySelector('#preloader p');
+    if (preloaderText) {
+      preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
+    }
   };
 
   const saved = localStorage.getItem('lang') || 'de';
@@ -93,7 +115,3 @@ function initLanguageSwitch() {
 
 // --- 3️⃣ Start ---
 document.addEventListener('DOMContentLoaded', loadPartials);
-
-// Wenn alles fertig geladen ist:
-document.body.classList.remove('loading');
-document.body.classList.add('ready');
