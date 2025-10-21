@@ -66,9 +66,19 @@ document.addEventListener('click', e => {
   const href = link.getAttribute('href');
   if (!href || href.startsWith('http') || href.startsWith('#')) return;
 
+  // 🧠 NEU: Prüfen, ob es dieselbe Seite ist
+  const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  const target = href.toLowerCase();
+  if (target === current) {
+    // Benutzer klickt auf die aktuelle Seite → nichts neu laden
+    e.preventDefault();
+    return;
+  }
+
   e.preventDefault();
   loadPage(href);
 });
+
 
 /** Browser-Navigation (← / →) */
 window.addEventListener('popstate', () => {
