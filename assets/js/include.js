@@ -2,60 +2,50 @@
    include.js
    Lädt Topbar & Sidebar automatisch
    + Theme / Language / Active-Link
-   + Preloader / Fade-In
+   + Preloader / Fade-In (flackerfrei)
    =============================== */
 
-// --- 0️⃣ Ladezustand aktivieren ---
+// --- 0️⃣ Ladezustand sofort aktivieren (vor jeglichem Rendern) ---
+document.documentElement.style.visibility = 'hidden';
 document.body.classList.add('loading');
 
-// --- 1️⃣ Theme sofort setzen, bevor HTML rendert ---
+// --- 1️⃣ Theme direkt setzen ---
 const savedTheme = localStorage.getItem('theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
-// --- 2️⃣ Nach Laden der Seite: Partials einfügen ---
+// --- 2️⃣ Partials laden ---
 async function loadPartials() {
   try {
-    // Dateien parallel laden
     const [topbarHtml, sidebarHtml] = await Promise.all([
-      fetch('./partials/topbar.html').then(r => {
-        if (!r.ok) throw new Error('Topbar konnte nicht geladen werden.');
-        return r.text();
-      }),
-      fetch('./partials/sidebar.html').then(r => {
-        if (!r.ok) throw new Error('Sidebar konnte nicht geladen werden.');
-        return r.text();
-      })
+      fetch('./partials/topbar.html').then(r => r.ok ? r.text() : Promise.reject('Topbar Fehler')),
+      fetch('./partials/sidebar.html').then(r => r.ok ? r.text() : Promise.reject('Sidebar Fehler'))
     ]);
 
-    // Mount-Punkte holen
-    const topbarMount = document.getElementById('topbar-mount');
-    const sidebarMount = document.getElementById('sidebar-mount');
+    // Mount-Punkte einfügen
+    document.getElementById('topbar-mount').innerHTML = topbarHtml;
+    document.getElementById('sidebar-mount').innerHTML = sidebarHtml;
 
-    // Inhalte einfügen
-    if (topbarMount) topbarMount.innerHTML = topbarHtml;
-    if (sidebarMount) sidebarMount.innerHTML = sidebarHtml;
-
-    // Nachträgliche Funktionen aktivieren
+    // Init Scripts
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
 
-    // --- Preloader ausblenden, wenn alles geladen ist ---
+    // --- Preloader sichtbar lassen bis alles eingefügt ist ---
     const preloader = document.getElementById('preloader');
-    if (preloader) {
-      setTimeout(() => {
-        preloader.classList.add('hidden');
-      }, 300); // kleine Verzögerung für weichen Übergang
-    }
 
-    // Body anzeigen
-    document.body.classList.remove('loading');
-    document.body.classList.add('ready');
+    // leichte Verzögerung für weichen Übergang
+    setTimeout(() => {
+      preloader?.classList.add('hidden');
+      document.body.classList.remove('loading');
+      document.body.classList.add('ready');
+      document.documentElement.style.visibility = 'visible';
+    }, 450);
 
   } catch (err) {
     console.error('Fehler beim Laden der Partials:', err);
     document.body.classList.remove('loading');
     document.body.classList.add('ready');
+    document.documentElement.style.visibility = 'visible';
   }
 }
 
@@ -83,7 +73,6 @@ function initThemeToggle() {
     const current = root.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
 
-    // kleine Dreh-/Fade-Animation
     icon.classList.add('icon-anim');
     setTimeout(() => icon.classList.remove('icon-anim'), 400);
 
@@ -99,11 +88,9 @@ function setThemeIcon(theme) {
   if (!icon) return;
 
   if (theme === 'dark') {
-    // 🌙 Mond
     icon.setAttribute('viewBox', '0 0 24 24');
     icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
   } else {
-    // ☀️ Sonne
     icon.setAttribute('viewBox', '0 0 24 24');
     icon.innerHTML = `
       <circle cx="12" cy="12" r="5"/>
@@ -123,31 +110,15 @@ function initLanguageSwitch() {
     btnDe.classList.toggle('active', lang === 'de');
     btnEn.classList.toggle('active', lang === 'en');
     document.documentElement.setAttribute('lang', lang);
-
-    // Optional: Text im Preloader anpassen
     const preloaderText = document.querySelector('#preloader p');
-    if (preloaderText) {
-      preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
-    }
+    if (preloaderText) preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
   };
 
   const saved = localStorage.getItem('lang') || 'de';
   setLang(saved);
-
   btnDe.addEventListener('click', () => setLang('de'));
   btnEn.addEventListener('click', () => setLang('en'));
 }
 
 // --- 3️⃣ Start ---
-document.addEventListener('DOMContentLoaded', async () => {
-  document.body.classList.add('loading');
-
-  await loadPartials();
-
-  // kurze Sicherheitsverzögerung (damit Loader-Animation sichtbar bleibt)
-  setTimeout(() => {
-    document.getElementById('preloader')?.classList.add('hidden');
-    document.body.classList.remove('loading');
-    document.body.classList.add('ready');
-  }, 400); // 0.4s – kannst du nach Geschmack anpassen
-});
+document.addEventListener('DOMContentLoaded', loadPartials);
