@@ -4,6 +4,8 @@
    + Theme / Language / Active-Link
    =============================== */
 
+document.body.classList.add('loading');
+
 // --- 1️⃣ Theme sofort setzen, bevor HTML rendert ---
 const savedTheme = localStorage.getItem('theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
@@ -91,3 +93,7 @@ function initLanguageSwitch() {
 
 // --- 3️⃣ Start ---
 document.addEventListener('DOMContentLoaded', loadPartials);
+
+// Wenn alles fertig geladen ist:
+document.body.classList.remove('loading');
+document.body.classList.add('ready');

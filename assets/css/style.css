@@ -1,3 +1,16 @@
+/* === Ladezustand verhindern Flackern === */
+body.loading {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+}
+
+body.ready {
+  visibility: visible;
+  opacity: 1;
+}
+
+
 /* === Grundlayout === */
 body {
     margin: 0;
