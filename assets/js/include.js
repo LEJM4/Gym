@@ -68,23 +68,48 @@ function initSidebarActive() {
   });
 }
 
-/* --- 🌗 Theme Toggle --- */
+/* --- 🌗 Theme Toggle mit SVG + sanfter Animation --- */
 function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
-  if (!btn) return;
+  const icon = document.getElementById('theme-icon');
+  if (!btn || !icon) return;
 
   const root = document.documentElement;
   const saved = localStorage.getItem('theme') || 'dark';
   root.setAttribute('data-theme', saved);
-  btn.textContent = saved === 'dark' ? '🌙' : '☀️';
+  setThemeIcon(saved);
 
   btn.addEventListener('click', () => {
     const current = root.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
+
+    // kleine Dreh-/Fade-Animation
+    icon.classList.add('icon-anim');
+    setTimeout(() => icon.classList.remove('icon-anim'), 400);
+
     root.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-    btn.textContent = next === 'dark' ? '🌙' : '☀️';
+    setThemeIcon(next);
   });
+}
+
+/* --- 🔆 SVG-Icon wechseln --- */
+function setThemeIcon(theme) {
+  const icon = document.getElementById('theme-icon');
+  if (!icon) return;
+
+  if (theme === 'dark') {
+    // 🌙 Mond
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+  } else {
+    // ☀️ Sonne
+    icon.setAttribute('viewBox', '0 0 24 24');
+    icon.innerHTML = `
+      <circle cx="12" cy="12" r="5"/>
+      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+    `;
+  }
 }
 
 /* --- 🌍 Language Switch --- */
