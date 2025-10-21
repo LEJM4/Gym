@@ -1,73 +1,53 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERIK-Fit | Dein Fitnessstudio</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERIK-Fit | Dein Fitnessstudio</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Top-Leiste -->
-    <header class="topbar">
-        <div class="topbar-left">
-            <img src="./assets/img/logo.png" alt="ERIK-Fit Logo" class="logo">
-            <h1>ERIK-Fit</h1>
+  <!-- Mount-Punkte für Partials -->
+  <div id="topbar-mount"></div>
+
+  <div class="layout">
+    <div id="sidebar-mount"></div>
+
+    <main class="content">
+      <section class="hero">
+        <h2>Willkommen bei <span>ERIK-Fit</span></h2>
+        <p>Dein Weg zu mehr Kraft, Ausdauer und Wohlbefinden beginnt hier.</p>
+        <a href="kontakt.html" class="btn btn-gold">Jetzt Kontakt aufnehmen</a>
+      </section>
+
+      <section class="about">
+        <h2>Warum ERIK-Fit?</h2>
+        <p>Bei uns trainierst du mit modernsten Geräten, erfahrenen Trainern und einem starken Team. 
+           Egal ob Muskelaufbau, Ausdauer oder einfach ein besseres Körpergefühl – wir bringen dich ans Ziel.</p>
+      </section>
+
+      <section class="highlight-cards">
+        <div class="card">
+          <h3>Moderne Ausstattung</h3>
+          <p>Trainiere mit hochwertigen Geräten in angenehmer Atmosphäre.</p>
         </div>
-        <div class="topbar-center">
-            <a href="#" class="btn btn-gold">Mitglied werden</a>
+        <div class="card">
+          <h3>Individuelle Betreuung</h3>
+          <p>Unsere Trainer unterstützen dich mit Expertise und Motivation.</p>
         </div>
-        <div class="topbar-right">
-            <a href="kontakt.html" class="btn btn-outline">Kontakt</a>
+        <div class="card">
+          <h3>Flexible Kurse</h3>
+          <p>Von Yoga bis CrossFit – wir bieten für jeden das passende Programm.</p>
         </div>
-    </header>
+      </section>
 
-    <!-- Seiteninhalt -->
-    <div class="layout">
-        <!-- Sidebar links -->
-        <aside class="sidebar">
-            <nav>
-                <ul>
-                    <li><a href="index.html" class="active">Start</a></li>
-                    <li><a href="kurse.html">Kurse</a></li>
-                    <li><a href="trainer.html">Trainer</a></li>
-                    <li><a href="kontakt.html">Kontakt</a></li>
-                </ul>
-            </nav>
-        </aside>
+      <footer>
+        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+      </footer>
+    </main>
+  </div>
 
-        <!-- Hauptinhalt rechts -->
-        <main class="content">
-            <section class="hero">
-                <h2>Willkommen bei <span>ERIK-Fit</span></h2>
-                <p>Dein Weg zu mehr Kraft, Ausdauer und Wohlbefinden beginnt hier.</p>
-                <a href="kontakt.html" class="btn btn-gold">Jetzt Kontakt aufnehmen</a>
-            </section>
-
-            <section class="about">
-                <h2>Warum ERIK-Fit?</h2>
-                <p>Bei uns trainierst du mit modernsten Geräten, erfahrenen Trainern und einem starken Team. Egal ob du Muskelaufbau, Ausdauer oder einfach ein besseres Körpergefühl willst – wir bringen dich ans Ziel.</p>
-            </section>
-
-            <section class="highlight-cards">
-                <div class="card">
-                    <h3>Moderne Ausstattung</h3>
-                    <p>Trainiere mit hochwertigen Geräten in angenehmer Atmosphäre.</p>
-                </div>
-                <div class="card">
-                    <h3>Individuelle Betreuung</h3>
-                    <p>Unsere Trainer unterstützen dich mit Expertise und Motivation.</p>
-                </div>
-                <div class="card">
-                    <h3>Flexible Kurse</h3>
-                    <p>Von Yoga bis CrossFit – wir bieten für jeden das passende Programm.</p>
-                </div>
-            </section>
-
-            <footer>
-                <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
-            </footer>
-        </main>
-    </div>
+  <script src="./assets/js/include.js"></script>
 </body>
 </html>
