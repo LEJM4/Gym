@@ -453,3 +453,14 @@ body.ready .layout {
   opacity: 1;
   transition: opacity 0.6s ease-in-out;
 }
+
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
