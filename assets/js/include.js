@@ -4,9 +4,10 @@
    + Theme / Language / Active-Link
    + Preloader / Fade-In (flackerfrei)
    + Universeller Burger (mit Slide-Animation)
+   + Mobile Fix (kein verschobener Start)
    =============================== */
 
-// --- 0️⃣ Ladezustand sofort aktivieren (vor jeglichem Rendern) ---
+// --- 0️⃣ Ladezustand sofort aktivieren ---
 document.documentElement.style.visibility = 'hidden';
 document.body.classList.add('loading');
 
@@ -26,7 +27,7 @@ async function loadPartials() {
     document.getElementById('topbar-mount').innerHTML = topbarHtml;
     document.getElementById('sidebar-mount').innerHTML = sidebarHtml;
 
-    // === Jetzt sind die Partials im DOM – also Init-Funktionen starten ===
+    // Init-Funktionen erst starten, wenn HTML geladen ist
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
@@ -50,7 +51,7 @@ async function loadPartials() {
   }
 }
 
-/* --- Sidebar: aktiven Menüpunkt markieren (SPA-kompatibel) --- */
+/* --- Sidebar: aktiven Menüpunkt markieren --- */
 function initSidebarActive() {
   const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   document.querySelectorAll('.sidebar a').forEach(a => {
@@ -59,7 +60,7 @@ function initSidebarActive() {
   });
 }
 
-/* --- 🌗 Theme Toggle mit SVG + sanfter Animation --- */
+/* --- 🌗 Theme Toggle mit SVG --- */
 function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   const icon = document.getElementById('theme-icon');
@@ -118,8 +119,7 @@ function initLanguageSwitch() {
   btnEn.addEventListener('click', () => setLang('en'));
 }
 
-/* === 📱💻 Mobile & Desktop Menü Toggle mit weicher Animation === */
-/* === 📱💻 Mobile & Desktop Menü Toggle – perfekt synchronisiert === */
+/* === 📱💻 Mobile & Desktop Menü Toggle (synchronisiert) === */
 function initMenuToggle() {
   const menuBtn = document.getElementById('menu-toggle');
   const sidebar = document.querySelector('.sidebar');
@@ -153,15 +153,11 @@ function initMenuToggle() {
         sidebar.style.width = '230px';
         sidebar.style.opacity = '1';
 
-        // Sofort reflow erzwingen
         sidebar.offsetHeight;
-
-        // Jetzt beide gleichzeitig animieren
         requestAnimationFrame(() => {
           document.body.classList.remove('sidebar-collapsed');
         });
 
-        // Nach der Animation overflow wieder aktivieren
         setTimeout(() => (sidebar.style.overflow = 'auto'), 460);
       }
     }
@@ -191,11 +187,18 @@ function initMenuToggle() {
   });
 }
 
-
 /* === Start + Topbar-Höhenbeobachtung === */
 document.addEventListener('DOMContentLoaded', () => {
   loadPartials();
 
+  // 📱 Fix: Wenn Handy → Sidebar standardmäßig geschlossen
+  if (window.innerWidth < 900) {
+    document.body.classList.add('sidebar-collapsed');
+  } else {
+    document.body.classList.remove('sidebar-collapsed');
+  }
+
+  // 🧭 Dynamische Topbar-Höhe (z. B. für iPhone Safe-Area)
   const observer = new ResizeObserver(() => {
     const topbar = document.querySelector('.topbar');
     if (topbar) {
