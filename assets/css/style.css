@@ -10,6 +10,7 @@
    7. Preloader / Animationen
    8. Fade / Transition Effekte
    9. Responsive Design
+   10.RESPONSIVE NAVIGATION & BURGER-MENÜ
    ========================================================= */
 
 /* === 1️⃣ THEME VARIABLEN (Light & Dark Mode) === */
@@ -396,4 +397,97 @@ footer {
   }
   .sidebar a { transform: none; padding: 10px 12px; }
   .sidebar a:hover { transform: none; }
+}
+
+
+
+/* =====================================================
+   10. RESPONSIVE NAVIGATION & BURGER-MENÜ
+   ===================================================== */
+
+/* === Menü-Button (Burger-Icon) === */
+.menu-toggle {
+  display: none; /* Desktop: unsichtbar */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-color);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  justify-self: end;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 1001;
+}
+.menu-toggle svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent-color);
+  transition: transform 0.3s ease;
+}
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* === Sidebar: Ein-/Ausblenden (Mobile) === */
+@media (max-width: 900px) {
+  .menu-toggle {
+    display: flex; /* jetzt sichtbar */
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 62px;
+    left: -250px;
+    width: 230px;
+    height: calc(100vh - 62px);
+    background: var(--sidebar-bg);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+    border-right: 2px solid var(--accent-color);
+    padding-top: 20px;
+    transition: left 0.4s ease;
+    z-index: 999;
+  }
+  .sidebar.open {
+    left: 0;
+  }
+
+  /* Body-Overlay bei offenem Menü */
+  body.menu-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 998;
+  }
+
+  /* Inhalt etwas kompakter */
+  .content {
+    margin-left: 0;
+    padding: 25px;
+  }
+
+  /* Topbar kompaktere Spaltenaufteilung */
+  .topbar {
+    grid-template-columns: auto 1fr auto;
+  }
+
+  /* Buttons mittig */
+  .topbar-center {
+    justify-content: center;
+  }
+}
+
+/* === Sidebar-Animation === */
+@media (max-width: 900px) {
+  .sidebar.open {
+    animation: slideIn 0.4s ease forwards;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0.3; }
+    to   { transform: translateX(0); opacity: 1; }
+  }
 }

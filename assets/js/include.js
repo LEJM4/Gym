@@ -29,6 +29,7 @@ async function loadPartials() {
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
+    initMenuToggle();
 
   // --- Preloader sichtbar lassen bis alles eingefügt ist ---
   const preloader = document.getElementById('preloader');
@@ -133,6 +134,36 @@ function initLanguageSwitch() {
   btnDe.addEventListener('click', () => setLang('de'));
   btnEn.addEventListener('click', () => setLang('en'));
 }
+
+
+
+/* === Mobile Menü Toggle === */
+function initMenuToggle() {
+  const menuBtn = document.getElementById('menu-toggle');
+  const sidebar = document.querySelector('.sidebar');
+  if (!menuBtn || !sidebar) return;
+
+  menuBtn.addEventListener('click', () => {
+    const isOpen = sidebar.classList.toggle('open');
+    document.body.classList.toggle('menu-open', isOpen);
+  });
+
+  // Klick außerhalb schließt das Menü
+  document.addEventListener('click', e => {
+    if (
+      sidebar.classList.contains('open') &&
+      !sidebar.contains(e.target) &&
+      !menuBtn.contains(e.target)
+    ) {
+      sidebar.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    }
+  });
+}
+
+
+
+
 
 // --- 3️⃣ Start ---
 document.addEventListener('DOMContentLoaded', loadPartials);
