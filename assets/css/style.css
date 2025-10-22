@@ -562,59 +562,100 @@ footer {
 .menu-toggle:hover { transform: scale(1.1); }
 .menu-toggle.open svg { transform: rotate(90deg); }
 
-/* --- Mobile (<900px) --- */
+/* === 📱 Optimierte TOPBAR für kleine Geräte (<900px) === */
 @media (max-width: 900px) {
   .topbar {
-    grid-template-columns: auto 1fr auto;
-    padding: 0 15px;
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
     height: var(--real-topbar-height, 64px);
-  }
-  .topbar-left { display: flex; align-items: center; gap: 10px; }
-  .topbar .logo { height: 42px; width: auto; }
-  .menu-toggle { display: flex; order: 1; }
-  .topbar-center a.btn-gold { font-size: 0.9rem; padding: 8px 14px; }
-  @media (max-width: 600px) { .topbar-left h1 { display: none; } }
-
-  .sidebar {
-    position: fixed; top: var(--real-topbar-height, 60px);
-    left: -250px; width: 230px;
-    height: calc(100vh - var(--real-topbar-height, 60px));
-    background: var(--sidebar-bg);
-    border-right: 2px solid var(--accent-color);
-    box-shadow: 2px 0 15px rgba(0,0,0,0.3);
-    padding-top: 20px; transition: left 0.4s ease; z-index: 999;
-  }
-  .sidebar.open { left: 0; animation: slideIn 0.4s ease forwards; }
-
-  body.menu-open::before {
-    content: ""; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.45); z-index: 998;
+    gap: 8px;
   }
 
-  .content { margin-left: 0; padding: 25px; width: 100%; transition: none; }
-}
+  /* --- Linke Seite: Burger + Logo --- */
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
 
-/* === 🔟 SIDEBAR SLIDE / DESKTOP COLLAPSE === */
-.sidebar.collapsed {
-  width: 0; overflow: hidden; border-right: none;
-}
-.sidebar.collapsed ul, .sidebar.collapsed a {
-  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
-}
-body.sidebar-collapsed .content { margin-left: 0; transition: margin-left 0.45s ease; }
-body:not(.sidebar-collapsed) .content { margin-left: 240px; }
+  .menu-toggle {
+    display: flex;
+    order: 1;
+    margin-right: 4px;
+    color: var(--accent-color);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 38px;
+    height: 38px;
+    justify-content: center;
+    align-items: center;
+  }
 
-/* --- Animation --- */
-@keyframes slideIn {
-  from { transform: translateX(-100%); opacity: 0.3; }
-  to { transform: translateX(0); opacity: 1; }
-}
+  .menu-toggle svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--accent-color);
+  }
 
-/* === MOBILE FIX === */
-@media (max-width: 900px) {
-  body.sidebar-collapsed .content,
-  body:not(.sidebar-collapsed) .content { margin-left: 0 !important; }
-  .sidebar { left: -250px; }
-  .sidebar.open { left: 0; }
-  .topbar { padding-top: env(safe-area-inset-top, 4px); }
+  .topbar .logo {
+    height: 38px;
+    width: auto;
+    display: block;
+  }
+
+  /* --- Mittig: Button Mitglied werden --- */
+  .topbar-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topbar-center a.btn-gold {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+
+  /* --- Rechts: Sprache & Theme --- */
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lang-btn {
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+
+  .theme-toggle {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* --- Optional: H1-Text ausblenden auf sehr kleinen Geräten --- */
+  @media (max-width: 600px) {
+    .topbar-left h1 {
+      display: none;
+    }
+  }
 }
