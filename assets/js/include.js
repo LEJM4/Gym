@@ -215,3 +215,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 100);
 });
+
+// === 🔄 Bei Fensteränderung oder Bildschirmdrehung Höhe neu berechnen ===
+window.addEventListener('resize', updateTopbarHeight);
+window.addEventListener('orientationchange', updateTopbarHeight);
+
+function updateTopbarHeight() {
+  const topbar = document.querySelector('.topbar');
+  if (topbar) {
+    const h = topbar.offsetHeight;
+    document.documentElement.style.setProperty('--real-topbar-height', `${h}px`);
+  }
+}
