@@ -25,30 +25,29 @@ async function loadPartials() {
     document.getElementById('topbar-mount').innerHTML = topbarHtml;
     document.getElementById('sidebar-mount').innerHTML = sidebarHtml;
 
-    // Init Scripts
+    // === Jetzt sind die Partials im DOM – also Init-Funktionen starten ===
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
-    initMenuToggle();
+    initMenuToggle(); // <- jetzt ist Sidebar & Button wirklich da
 
-  // --- Preloader sichtbar lassen bis alles eingefügt ist ---
-  const preloader = document.getElementById('preloader');
+    // --- Preloader sichtbar lassen bis alles eingefügt ist ---
+    const preloader = document.getElementById('preloader');
 
-  // 1️⃣ Seite noch unsichtbar halten
-  document.documentElement.style.visibility = 'hidden';
+    // 1️⃣ Seite noch unsichtbar halten
+    document.documentElement.style.visibility = 'hidden';
 
-  // 2️⃣ Preloader langsam ausblenden
-  setTimeout(() => {
-    preloader?.classList.add('hidden');
-  }, 300);
+    // 2️⃣ Preloader langsam ausblenden
+    setTimeout(() => {
+      preloader?.classList.add('hidden');
+    }, 300);
 
-  // 3️⃣ Erst nach Ende der Animation sichtbar machen
-  setTimeout(() => {
-    document.body.classList.remove('loading');
-    document.body.classList.add('ready');
-    document.documentElement.style.visibility = 'visible';
-  }, 900); // = 300ms Verzögerung + 600ms Fade
-
+    // 3️⃣ Erst nach Ende der Animation sichtbar machen
+    setTimeout(() => {
+      document.body.classList.remove('loading');
+      document.body.classList.add('ready');
+      document.documentElement.style.visibility = 'visible';
+    }, 900); // = 300ms Verzögerung + 600ms Fade
 
   } catch (err) {
     console.error('Fehler beim Laden der Partials:', err);
@@ -61,17 +60,11 @@ async function loadPartials() {
 /* --- Sidebar: aktiven Menüpunkt markieren (SPA-kompatibel) --- */
 function initSidebarActive() {
   const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
-
   document.querySelectorAll('.sidebar a').forEach(a => {
     const href = (a.getAttribute('href') || '').toLowerCase();
-    if (href === current) {
-      a.classList.add('active');
-    } else {
-      a.classList.remove('active');
-    }
+    a.classList.toggle('active', href === current);
   });
 }
-
 
 /* --- 🌗 Theme Toggle mit SVG + sanfter Animation --- */
 function initThemeToggle() {
@@ -87,10 +80,8 @@ function initThemeToggle() {
   btn.addEventListener('click', () => {
     const current = root.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
-
     icon.classList.add('icon-anim');
     setTimeout(() => icon.classList.remove('icon-anim'), 400);
-
     root.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
     setThemeIcon(next);
@@ -103,10 +94,8 @@ function setThemeIcon(theme) {
   if (!icon) return;
 
   if (theme === 'dark') {
-    icon.setAttribute('viewBox', '0 0 24 24');
     icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
   } else {
-    icon.setAttribute('viewBox', '0 0 24 24');
     icon.innerHTML = `
       <circle cx="12" cy="12" r="5"/>
       <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
@@ -126,7 +115,8 @@ function initLanguageSwitch() {
     btnEn.classList.toggle('active', lang === 'en');
     document.documentElement.setAttribute('lang', lang);
     const preloaderText = document.querySelector('#preloader p');
-    if (preloaderText) preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
+    if (preloaderText)
+      preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
   };
 
   const saved = localStorage.getItem('lang') || 'de';
@@ -135,21 +125,20 @@ function initLanguageSwitch() {
   btnEn.addEventListener('click', () => setLang('en'));
 }
 
-
-
 /* === Mobile Menü Toggle === */
 function initMenuToggle() {
   const menuBtn = document.getElementById('menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   if (!menuBtn || !sidebar) return;
 
-  menuBtn.addEventListener('click', () => {
+  menuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     const isOpen = sidebar.classList.toggle('open');
     document.body.classList.toggle('menu-open', isOpen);
   });
 
   // Klick außerhalb schließt das Menü
-  document.addEventListener('click', e => {
+  document.addEventListener('click', (e) => {
     if (
       sidebar.classList.contains('open') &&
       !sidebar.contains(e.target) &&
@@ -161,15 +150,11 @@ function initMenuToggle() {
   });
 }
 
-
-
-
-
-// --- 3️⃣ Start ---
+/* === Start + Topbar-Höhenbeobachtung === */
 document.addEventListener('DOMContentLoaded', () => {
   loadPartials();
 
-  // Sidebar-Top dynamisch anpassen, sobald Topbar vorhanden ist
+  // Sidebar-Top dynamisch anpassen
   const observer = new ResizeObserver(() => {
     const topbar = document.querySelector('.topbar');
     if (topbar) {
@@ -178,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Warten, bis Topbar existiert (nach Laden der Partials)
+  // Beobachtung starten, sobald Topbar da ist
   const checkTopbar = setInterval(() => {
     const topbar = document.querySelector('.topbar');
     if (topbar) {
