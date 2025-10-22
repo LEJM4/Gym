@@ -9,8 +9,7 @@
    6. Content / Sections / Cards / Formulare / Footer
    7. Preloader / Animationen
    8. Fade / Transition Effekte
-   9. Responsive Design
-   10.RESPONSIVE NAVIGATION & BURGER-MENÜ
+   9. Responsive Design + Burger-Menü
    ========================================================= */
 
 /* === 1️⃣ THEME VARIABLEN (Light & Dark Mode) === */
@@ -51,23 +50,37 @@ body {
   line-height: 1.6;
   transition: background-color 0.4s ease, color 0.4s ease;
 }
-h1, h2, h3 { font-weight: 700; letter-spacing: 0.5px; }
-a { text-decoration: none; color: inherit; }
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
 body.loading *:not(#preloader):not(#preloader *) {
-  visibility: hidden; opacity: 0;
+  visibility: hidden;
+  opacity: 0;
 }
-body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; }
 
-/* === 3️⃣ TOPBAR (perfekt zentriert) === */
+body.ready {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease-in;
+}
+
+/* === 3️⃣ TOPBAR === */
 
 .topbar {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
-  align-items: center;                 /* exakte vertikale Mitte */
+  align-items: center;
   background: var(--topbar-bg);
   border-bottom: 2px solid var(--accent-color);
-  padding: 0 30px;                     /* nur horizontales Padding */
+  padding: 0 30px;
   position: fixed;
   top: 0; left: 0; right: 0;
   height: 62px;
@@ -81,23 +94,37 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   gap: 10px;
   justify-content: flex-start;
 }
-.topbar-center { display: flex; justify-content: center; }
-.topbar-right { display: flex; align-items: center; gap: 10px; justify-content: flex-end; }
 
-.topbar * { line-height: 1; }
+.topbar-center {
+  display: flex;
+  justify-content: center;
+}
 
-/* Logo-Größe */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.topbar * {
+  line-height: 1;
+}
+
 .topbar .logo {
   height: 46px;
   max-height: 46px;
   width: auto;
   border-radius: 50%;
   object-fit: cover;
-  display: block;   /* bleibt block, vertical-align nicht nötig */
+  display: block;
 }
 
 @media (max-width: 480px) {
-  .topbar .logo { height: 38px; max-height: 38px; }
+  .topbar .logo {
+    height: 38px;
+    max-height: 38px;
+  }
 }
 
 .topbar-left h1 {
@@ -118,25 +145,34 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   transition: all 0.3s ease;
   line-height: 1.2;
 }
+
 .btn-gold {
   background: var(--accent-color);
   color: var(--bg-color);
 }
+
 .btn-gold:hover {
   background: var(--btn-hover);
   transform: scale(1.05);
 }
+
 .btn-outline {
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
   background: transparent;
 }
+
 .btn-outline:hover {
   background: var(--accent-color);
   color: var(--bg-color);
 }
 
-.lang-switch { display: flex; gap: 6px; margin-left: 10px; }
+.lang-switch {
+  display: flex;
+  gap: 6px;
+  margin-left: 10px;
+}
+
 .lang-btn {
   background: transparent;
   border: 1px solid var(--accent-color);
@@ -147,7 +183,9 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   font-weight: 600;
   transition: all 0.2s ease;
 }
-.lang-btn.active, .lang-btn:hover {
+
+.lang-btn.active,
+.lang-btn:hover {
   background: var(--accent-color);
   color: var(--bg-color);
 }
@@ -158,17 +196,23 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   background: transparent;
   border: none;
   cursor: pointer;
-  width: 28px; height: 28px;
-  display: flex; align-items: center; justify-content: center;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: var(--accent-color);
   border-radius: 50%;
   transition: transform 0.3s ease, box-shadow 0.4s ease;
 }
+
 .theme-toggle svg {
-  width: 20px; height: 20px;
+  width: 20px;
+  height: 20px;
   fill: var(--accent-color);
   transition: fill 0.3s ease, transform 0.4s ease;
 }
+
 .theme-toggle:hover {
   transform: rotate(15deg);
   box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
@@ -191,18 +235,23 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   align-items: center;
   padding-top: 30px;
   position: fixed;
-  top: 62px; bottom: 0; left: 0;
+  top: 62px;
+  bottom: 0;
+  left: 0;
   overflow-y: auto;
   gap: 8px;
 }
+
 .sidebar ul {
   list-style: none;
-  padding: 0; margin: 0;
+  padding: 0;
+  margin: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
+
 .sidebar a {
   position: relative;
   display: block;
@@ -215,29 +264,36 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   margin: 0 auto;
   text-align: left;
 }
+
 .sidebar a:hover {
   background: rgba(255, 215, 0, 0.12);
   transform: translateX(6px);
 }
+
 .sidebar a.active {
   background: var(--accent-color);
   color: var(--bg-color);
   transform: none;
   box-shadow: 0 0 16px rgba(255, 215, 0, 0.4);
 }
+
 .sidebar a::before {
   content: "";
   position: absolute;
   left: 0;
-  top: 8px; bottom: 8px;
+  top: 8px;
+  bottom: 8px;
   width: 4px;
   border-radius: 4px;
   background: linear-gradient(180deg, var(--accent-color), var(--btn-hover));
   transform: scaleY(0);
-  transition: transform .25s ease;
+  transition: transform 0.25s ease;
 }
+
 .sidebar a:hover::before,
-.sidebar a.active::before { transform: scaleY(1); }
+.sidebar a.active::before {
+  transform: scaleY(1);
+}
 
 .content {
   flex: 1;
@@ -254,7 +310,10 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
 }
-.hero h2 span { color: var(--accent-color); }
+
+.hero h2 span {
+  color: var(--accent-color);
+}
 
 .about {
   text-align: center;
@@ -262,6 +321,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   max-width: 800px;
   margin: auto;
 }
+
 .about h2 {
   color: var(--accent-color);
   margin-bottom: 15px;
@@ -274,6 +334,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   gap: 25px;
   padding: 40px 20px;
 }
+
 .card {
   background: var(--card-bg);
   border-radius: 20px;
@@ -283,11 +344,15 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   transition: all 0.3s ease;
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.1);
 }
+
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 6px 15px rgba(255, 215, 0, 0.3);
 }
-.card h3 { color: var(--accent-color); }
+
+.card h3 {
+  color: var(--accent-color);
+}
 
 .kontakt-form {
   display: flex;
@@ -296,6 +361,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   max-width: 400px;
   margin: 40px auto;
 }
+
 .kontakt-form input,
 .kontakt-form textarea {
   padding: 10px;
@@ -304,6 +370,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   background: var(--card-bg);
   color: var(--text-color);
 }
+
 .kontakt-form button {
   background: var(--accent-color);
   border: none;
@@ -313,7 +380,10 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   border-radius: 10px;
   cursor: pointer;
 }
-.kontakt-form button:hover { background: var(--btn-hover); }
+
+.kontakt-form button:hover {
+  background: var(--btn-hover);
+}
 
 footer {
   text-align: center;
@@ -339,122 +409,116 @@ footer {
   transition: opacity 0.6s ease, visibility 0.6s ease;
   opacity: 1;
 }
+
 #preloader.hidden {
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
 }
-.preloader-inner { text-align: center; }
+
+.preloader-inner {
+  text-align: center;
+}
+
 .preloader-logo {
-  width: 80px; height: 80px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   margin-bottom: 20px;
   animation: pulse 1.4s ease-in-out infinite;
 }
+
 .preloader-ring {
-  width: 60px; height: 60px;
+  width: 60px;
+  height: 60px;
   border: 4px solid rgba(255, 215, 0, 0.2);
   border-top: 4px solid var(--preloader-ring);
   border-radius: 50%;
   margin: 0 auto 12px;
   animation: spin 1.2s linear infinite;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @keyframes pulse {
-  0%,100% { opacity: 1; transform: scale(1); }
+  0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(1.05); }
 }
 
 /* === 8️⃣ Fade / Transition Effekte === */
 
 .fade-out { opacity: 0; transition: opacity 0.2s ease; }
-.fade-in { opacity: 1; transition: opacity 0.4s ease; }
-
-.sidebar a.pulse { animation: pulseActive 0.4s ease; }
-@keyframes pulseActive {
-  0% { background-color: var(--gold); color: black; }
-  100% { background-color: transparent; color: var(--gold); }
-}
-
-/* === 9️⃣ Responsive Design === */
-
-@media (max-width: 900px) {
-  .layout {
-    flex-direction: column;
-    padding-top: 62px;
-  }
-  .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-top: 2px solid var(--accent-color);
-    padding-top: 10px;
-  }
-  .content {
-    padding: 20px;
-    margin-left: 0;
-  }
-  .sidebar a { transform: none; padding: 10px 12px; }
-  .sidebar a:hover { transform: none; }
-}
-
-
+.fade-in  { opacity: 1; transition: opacity 0.4s ease; }
 
 /* =====================================================
-   10. RESPONSIVE NAVIGATION & BURGER-MENÜ
+   9️⃣ + 10️⃣ RESPONSIVE DESIGN & BURGER-MENÜ (FINAL)
    ===================================================== */
 
-/* === Menü-Button (Burger-Icon) === */
-.menu-toggle {
-  display: none; /* Desktop: unsichtbar */
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--accent-color);
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  justify-self: end;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.3s ease, color 0.3s ease;
-  z-index: 1001;
-}
-.menu-toggle svg {
-  width: 28px;
-  height: 28px;
-  stroke: var(--accent-color);
-  transition: transform 0.3s ease;
-}
-.menu-toggle:hover {
-  transform: scale(1.1);
-}
-
-/* === Sidebar: Ein-/Ausblenden (Mobile) === */
-@media (max-width: 900px) {
-  .menu-toggle {
-    display: flex; /* jetzt sichtbar */
-  }
-
+/* ---------- DESKTOP (≥900px) ---------- */
+@media (min-width: 901px) {
+  .menu-toggle { display: none; }
   .sidebar {
     position: fixed;
     top: 62px;
-    left: -250px;
+    left: 0;
     width: 230px;
     height: calc(100vh - 62px);
+    transition: none;
+  }
+  .content {
+    margin-left: 240px;
+    padding: 50px 60px;
+  }
+}
+
+/* ---------- MOBILE (<900px) ---------- */
+@media (max-width: 900px) {
+  .topbar {
+    grid-template-columns: auto 1fr auto;
+    padding: 0 15px;
+    height: var(--real-topbar-height, 60px);
+  }
+
+  .menu-toggle {
+    display: flex;
+    background: transparent;
+    border: none;
+    color: var(--accent-color);
+    width: 40px; height: 40px;
+    align-items: center; justify-content: center;
+    z-index: 1001;
+    cursor: pointer;
+  }
+
+  .menu-toggle svg {
+    width: 28px; height: 28px;
+    stroke: var(--accent-color);
+    transition: transform 0.3s ease;
+  }
+
+  .menu-toggle:hover { transform: scale(1.1); }
+
+  .sidebar {
+    position: fixed;
+    top: var(--real-topbar-height, 60px);
+    left: -250px;
+    width: 230px;
+    height: calc(100vh - var(--real-topbar-height, 60px));
     background: var(--sidebar-bg);
-    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
     border-right: 2px solid var(--accent-color);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
     padding-top: 20px;
     transition: left 0.4s ease;
     z-index: 999;
   }
+
   .sidebar.open {
     left: 0;
+    animation: slideIn 0.4s ease forwards;
   }
 
-  /* Body-Overlay bei offenem Menü */
   body.menu-open::before {
     content: "";
     position: fixed;
@@ -463,190 +527,30 @@ footer {
     z-index: 998;
   }
 
-  /* Inhalt etwas kompakter */
   .content {
     margin-left: 0;
     padding: 25px;
   }
 
-  /* Topbar kompaktere Spaltenaufteilung */
-  .topbar {
-    grid-template-columns: auto 1fr auto;
-  }
-
-  /* Buttons mittig */
-  .topbar-center {
-    justify-content: center;
-  }
-}
-
-/* === Sidebar-Animation === */
-@media (max-width: 900px) {
-  .sidebar.open {
-    animation: slideIn 0.4s ease forwards;
-  }
-
-  @keyframes slideIn {
-    from { transform: translateX(-100%); opacity: 0.3; }
-    to   { transform: translateX(0); opacity: 1; }
-  }
-}
-
-/* =====================================================
-   MOBILE TOPBAR FIX (LOGO + BURGER SICHTBAR)
-   ===================================================== */
-
-@media (max-width: 900px) {
-  /* Topbar kompakter und aufgeräumt */
-  .topbar {
-    grid-template-columns: auto 1fr auto;
-    padding: 0 15px;
-    height: 60px;
-  }
-
-  .topbar-left {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  /* Logo etwas kleiner für Mobile */
-  .topbar .logo {
-    height: 40px;
-    max-height: 40px;
-  }
-
-  /* Burger sichtbar und neben Logo */
-  .menu-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    order: 2;
-  }
-
-  /* Button “Mitglied werden” mittig und schmaler */
-  .topbar-center a.btn-gold {
-    font-size: 0.9rem;
-    padding: 8px 14px;
-  }
-
-  /* Sprach- & Theme-Schalter enger */
-  .topbar-right {
-    gap: 6px;
-  }
-
-  .lang-btn {
-    padding: 3px 8px;
-    font-size: 0.8rem;
-  }
-
-  .theme-toggle {
-    width: 26px;
-    height: 26px;
-  }
-
-  .theme-toggle svg {
-    width: 18px;
-    height: 18px;
-  }
-
-@media (max-width: 900px) {
-  /* Burger soll links neben dem Logo sichtbar sein */
   .topbar-left {
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  .menu-toggle {
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-    color: var(--accent-color);
-  }
-
-  /* Logo kleiner und mittig mit Burger ausgerichtet */
-  .topbar .logo {
-    height: 42px;
-    width: auto;
-    display: block;
-  }
-
-  /* Überschrift neben Logo ausblenden auf Handy (spart Platz) */
   @media (max-width: 600px) {
-    .topbar-left h1 {
-      display: none;
-    }
+    .topbar-left h1 { display: none; }
+  }
+
+  .topbar-center a.btn-gold {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    white-space: nowrap;
   }
 }
 
-
-  /* Bei sehr kleinen Geräten (<600 px): “Mitglied werden” unter das Logo */
-  @media (max-width: 600px) {
-    .topbar {
-      grid-template-columns: 1fr auto;
-      grid-template-areas:
-        "left right"
-        "center center";
-      row-gap: 6px;
-      height: auto;
-      padding-top: 8px;
-      padding-bottom: 8px;
-    }
-
-    .topbar-left {
-      grid-area: left;
-    }
-    .topbar-center {
-      grid-area: center;
-      justify-content: center;
-    }
-    .topbar-right {
-      grid-area: right;
-    }
-
-    .topbar-center a.btn-gold {
-      width: 100%;
-      max-width: 220px;
-    }
-  }
-}
-
-
-/* =====================================================
-   FIX: Sidebar überlappt Topbar (Mobile)
-   ===================================================== */
-
-/* Basis */
-.sidebar {
-  top: var(--topbar-height, 62px); /* dynamisch, fallback 62px */
-}
-
-/* Automatische Anpassung auf Mobile */
-@media (max-width: 900px) {
-  .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-  }
-
-  .sidebar {
-    top: auto;             /* überschreiben */
-    inset: 0 auto 0 0;     /* sichert Position */
-    margin-top: calc(var(--real-topbar-height, 0px)); /* Platzhalter (wird per JS gesetzt) */
-  }
-}
-
-.menu-toggle {
-  margin-left: 0;
-  justify-self: flex-start;
-}
-
-@media (max-width: 900px) {
-  .topbar-left {
-    justify-content: flex-start;
-    gap: 8px;
-  }
+/* ---------- ANIMATION ---------- */
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0.3; }
+  to   { transform: translateX(0); opacity: 1; }
 }
