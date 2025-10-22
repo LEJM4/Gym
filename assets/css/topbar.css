@@ -1,4 +1,4 @@
-/* === 3️⃣ TOPBAR (Neu, Erik-Fit 2025) === */
+/* === 3️⃣ TOPBAR (Erik-Fit 2025 – final, zentriert & clean) === */
 
 /* --- Grundstruktur --- */
 .topbar {
@@ -9,9 +9,11 @@
   background: var(--topbar-bg);
   border-bottom: 2px solid var(--accent-color);
   padding: 0 20px;
-  height: 68px;
+  height: 70px;
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 1000;
   box-sizing: border-box;
 }
@@ -35,10 +37,13 @@
   cursor: pointer;
   transition: none; /* ❌ Keine Animation */
 }
+
 .menu-toggle svg {
   width: 28px;
   height: 28px;
   stroke: var(--accent-color);
+  display: block;
+  margin: auto;
 }
 
 .logo {
@@ -47,13 +52,18 @@
   border-radius: 50%;
   object-fit: cover;
   display: block;
+  align-self: center;
+  position: relative;
+  top: 1px; /* minimaler optischer Ausgleich */
 }
 
 /* --- Mitte: Mitglied werden --- */
 .topbar-center {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
+
 .topbar-center .btn-gold {
   font-size: 1rem;
   padding: 10px 22px;
@@ -64,11 +74,13 @@
 .topbar-right {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
 }
 
 .lang-switch {
   display: flex;
+  align-items: center;
   gap: 6px;
 }
 
@@ -81,7 +93,12 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
 }
+
 .lang-btn.active,
 .lang-btn:hover {
   background: var(--accent-color);
@@ -99,10 +116,22 @@
   align-items: center;
   justify-content: center;
 }
+
 .theme-toggle svg {
   width: 20px;
   height: 20px;
   fill: var(--accent-color);
+  display: block;
+  margin: auto;
+}
+
+/* --- Vertikale Zentrierung Fix für alle Container --- */
+.topbar,
+.topbar-left,
+.topbar-center,
+.topbar-right {
+  display: flex;
+  align-items: center;
 }
 
 /* --- Responsive Anpassungen --- */
@@ -129,6 +158,7 @@
 
   .logo {
     height: 38px;
+    top: 0;
   }
 
   .topbar-center .btn-gold {
@@ -139,6 +169,7 @@
   .lang-btn {
     padding: 3px 8px;
     font-size: 0.85rem;
+    height: 30px;
   }
 
   .theme-toggle svg {
