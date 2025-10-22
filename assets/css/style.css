@@ -617,3 +617,21 @@ body.sidebar-collapsed .content {
 body.sidebar-collapsed .menu-toggle {
   transform: rotate(90deg);
 }
+
+/* =====================================================
+   Smooth Content Slide bei Sidebar-Animation
+   ===================================================== */
+
+.content {
+  transition: margin-left 0.45s ease;  /* gleicht Dauer der Sidebar an */
+}
+
+/* Wenn Sidebar eingeklappt (Desktop) */
+body.sidebar-collapsed .content {
+  margin-left: 0;
+}
+
+/* Wenn Sidebar normal ausgeklappt (Desktop) */
+body:not(.sidebar-collapsed) .content {
+  margin-left: 240px; /* oder dein aktueller Wert */
+}

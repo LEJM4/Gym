@@ -146,6 +146,8 @@ function initMenuToggle() {
         sidebar.style.width = '0px';
         sidebar.style.opacity = '0';
         document.body.classList.add('sidebar-collapsed');
+        // sorgt dafür, dass Content gleichzeitig mitfährt
+        sidebar.offsetHeight; // reflow-Trick, um Transition zu synchronisieren
         sidebar.classList.add('collapsed');
       } else {
         // ✅ Weiches Ausklappen
