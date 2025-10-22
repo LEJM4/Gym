@@ -119,6 +119,7 @@ function initLanguageSwitch() {
 }
 
 /* === 📱💻 Mobile & Desktop Menü Toggle mit weicher Animation === */
+/* === 📱💻 Mobile & Desktop Menü Toggle mit perfektem Slide === */
 function initMenuToggle() {
   const menuBtn = document.getElementById('menu-toggle');
   const sidebar = document.querySelector('.sidebar');
@@ -126,23 +127,38 @@ function initMenuToggle() {
 
   menuBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-
     const isMobile = window.innerWidth < 900;
 
     if (isMobile) {
-      // Klassisches Mobile Menü
+      // --- Mobile Version ---
       const isOpen = sidebar.classList.toggle('open');
       document.body.classList.toggle('menu-open', isOpen);
       menuBtn.classList.toggle('open', isOpen);
     } else {
-      // Desktop: Sidebar weich einklappen
-      const isCollapsed = sidebar.classList.toggle('collapsed');
-      document.body.classList.toggle('sidebar-collapsed', isCollapsed);
+      // --- Desktop Slide-Version ---
+      const isCollapsed = sidebar.classList.contains('collapsed');
 
-      sidebar.style.transition = 'width 0.4s ease, opacity 0.3s ease';
+      sidebar.style.transition = 'width 0.45s ease, opacity 0.35s ease';
       sidebar.style.overflow = 'hidden';
-      sidebar.style.opacity = isCollapsed ? '0' : '1';
-      sidebar.style.width = isCollapsed ? '0' : '230px';
+
+      if (!isCollapsed) {
+        // ✅ Einklappen
+        sidebar.style.width = '0px';
+        sidebar.style.opacity = '0';
+        document.body.classList.add('sidebar-collapsed');
+        sidebar.classList.add('collapsed');
+      } else {
+        // ✅ Weiches Ausklappen
+        sidebar.style.width = '230px';
+        sidebar.style.opacity = '1';
+        sidebar.classList.remove('collapsed');
+
+        // Sobald Animation durch ist, entfernen wir overflow hidden
+        setTimeout(() => {
+          sidebar.style.overflow = 'auto';
+          document.body.classList.remove('sidebar-collapsed');
+        }, 450);
+      }
     }
   });
 
@@ -160,7 +176,7 @@ function initMenuToggle() {
     }
   });
 
-  // Auf Handy: Klick auf Link → Sidebar schließen
+  // Klick auf Link (nur Mobile) → Sidebar automatisch schließen
   sidebar.addEventListener('click', (e) => {
     if (e.target.tagName === 'A' && window.innerWidth < 900) {
       sidebar.classList.remove('open');
@@ -169,6 +185,7 @@ function initMenuToggle() {
     }
   });
 }
+
 
 /* === Start + Topbar-Höhenbeobachtung === */
 document.addEventListener('DOMContentLoaded', () => {
