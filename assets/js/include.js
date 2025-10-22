@@ -166,4 +166,24 @@ function initMenuToggle() {
 
 
 // --- 3️⃣ Start ---
-document.addEventListener('DOMContentLoaded', loadPartials);
+document.addEventListener('DOMContentLoaded', () => {
+  loadPartials();
+
+  // Sidebar-Top dynamisch anpassen, sobald Topbar vorhanden ist
+  const observer = new ResizeObserver(() => {
+    const topbar = document.querySelector('.topbar');
+    if (topbar) {
+      const h = topbar.offsetHeight;
+      document.documentElement.style.setProperty('--real-topbar-height', `${h}px`);
+    }
+  });
+
+  // Warten, bis Topbar existiert (nach Laden der Partials)
+  const checkTopbar = setInterval(() => {
+    const topbar = document.querySelector('.topbar');
+    if (topbar) {
+      observer.observe(topbar);
+      clearInterval(checkTopbar);
+    }
+  }, 100);
+});

@@ -611,3 +611,42 @@ footer {
     }
   }
 }
+
+
+/* =====================================================
+   FIX: Sidebar überlappt Topbar (Mobile)
+   ===================================================== */
+
+/* Basis */
+.sidebar {
+  top: var(--topbar-height, 62px); /* dynamisch, fallback 62px */
+}
+
+/* Automatische Anpassung auf Mobile */
+@media (max-width: 900px) {
+  .topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+  }
+
+  .sidebar {
+    top: auto;             /* überschreiben */
+    inset: 0 auto 0 0;     /* sichert Position */
+    margin-top: calc(var(--real-topbar-height, 0px)); /* Platzhalter (wird per JS gesetzt) */
+  }
+}
+
+.menu-toggle {
+  margin-left: 0;
+  justify-self: flex-start;
+}
+
+@media (max-width: 900px) {
+  .topbar-left {
+    justify-content: flex-start;
+    gap: 8px;
+  }
+}
