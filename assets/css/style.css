@@ -550,17 +550,32 @@ footer {
 /* === 8️⃣ FADE / TRANSITIONS === */
 .fade-out { opacity: 0; transition: opacity 0.2s ease; }
 .fade-in  { opacity: 1; transition: opacity 0.4s ease; }
-
 /* === 9️⃣ RESPONSIVE DESIGN & BURGER === */
 .menu-toggle {
-  display: flex; background: transparent; border: none; cursor: pointer;
-  color: var(--accent-color); width: 42px; height: 42px;
-  border-radius: 50%; align-items: center; justify-content: center;
-  transition: transform 0.3s ease; z-index: 1001;
+  display: flex;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-color);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+  z-index: 1001;
 }
-.menu-toggle svg { width: 28px; height: 28px; stroke: var(--accent-color); }
-.menu-toggle:hover { transform: scale(1.1); }
-.menu-toggle.open svg { transform: rotate(90deg); }
+.menu-toggle svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent-color);
+}
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+.menu-toggle.open svg {
+  transform: rotate(90deg);
+}
 
 /* === 📱 Optimierte TOPBAR für kleine Geräte (<900px) === */
 @media (max-width: 900px) {
@@ -572,6 +587,12 @@ footer {
     padding: 0 10px;
     height: var(--real-topbar-height, 64px);
     gap: 8px;
+    background: var(--topbar-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
   }
 
   /* --- Linke Seite: Burger + Logo --- */
@@ -657,5 +678,95 @@ footer {
     .topbar-left h1 {
       display: none;
     }
+  }
+
+  /* --- Sidebar mobile --- */
+  .sidebar {
+    position: fixed;
+    top: var(--real-topbar-height, 60px);
+    left: -250px;
+    width: 230px;
+    height: calc(100vh - var(--real-topbar-height, 60px));
+    background: var(--sidebar-bg);
+    border-right: 2px solid var(--accent-color);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+    padding-top: 20px;
+    transition: left 0.4s ease;
+    z-index: 999;
+  }
+
+  .sidebar.open {
+    left: 0;
+    animation: slideIn 0.4s ease forwards;
+  }
+
+  /* --- Overlay bei offenem Menü --- */
+  body.menu-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 998;
+  }
+
+  /* --- Inhalt (Content) --- */
+  .content {
+    margin-left: 0;
+    padding: 25px;
+    width: 100%;
+    transition: none;
+  }
+
+  /* --- Fix für Safe-Area auf iPhones --- */
+  .topbar {
+    padding-top: env(safe-area-inset-top, 4px);
+  }
+}
+
+/* === 🔟 SIDEBAR SLIDE / DESKTOP COLLAPSE === */
+.sidebar.collapsed {
+  width: 0;
+  overflow: hidden;
+  border-right: none;
+}
+.sidebar.collapsed ul,
+.sidebar.collapsed a {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+body.sidebar-collapsed .content {
+  margin-left: 0;
+  transition: margin-left 0.45s ease;
+}
+body:not(.sidebar-collapsed) .content {
+  margin-left: 240px;
+}
+
+/* --- Animation --- */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0.3;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* === MOBILE FIX === */
+@media (max-width: 900px) {
+  body.sidebar-collapsed .content,
+  body:not(.sidebar-collapsed) .content {
+    margin-left: 0 !important;
+  }
+
+  .sidebar {
+    left: -250px;
+  }
+
+  .sidebar.open {
+    left: 0;
   }
 }
