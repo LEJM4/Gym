@@ -491,3 +491,92 @@ footer {
     to   { transform: translateX(0); opacity: 1; }
   }
 }
+
+/* =====================================================
+   MOBILE TOPBAR FIX (LOGO + BURGER SICHTBAR)
+   ===================================================== */
+
+@media (max-width: 900px) {
+  /* Topbar kompakter und aufgeräumt */
+  .topbar {
+    grid-template-columns: auto 1fr auto;
+    padding: 0 15px;
+    height: 60px;
+  }
+
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* Logo etwas kleiner für Mobile */
+  .topbar .logo {
+    height: 40px;
+    max-height: 40px;
+  }
+
+  /* Burger sichtbar und neben Logo */
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    order: 2;
+  }
+
+  /* Button “Mitglied werden” mittig und schmaler */
+  .topbar-center a.btn-gold {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+  }
+
+  /* Sprach- & Theme-Schalter enger */
+  .topbar-right {
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 3px 8px;
+    font-size: 0.8rem;
+  }
+
+  .theme-toggle {
+    width: 26px;
+    height: 26px;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Bei sehr kleinen Geräten (<600 px): “Mitglied werden” unter das Logo */
+  @media (max-width: 600px) {
+    .topbar {
+      grid-template-columns: 1fr auto;
+      grid-template-areas:
+        "left right"
+        "center center";
+      row-gap: 6px;
+      height: auto;
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+
+    .topbar-left {
+      grid-area: left;
+    }
+    .topbar-center {
+      grid-area: center;
+      justify-content: center;
+    }
+    .topbar-right {
+      grid-area: right;
+    }
+
+    .topbar-center a.btn-gold {
+      width: 100%;
+      max-width: 220px;
+    }
+  }
+}
