@@ -1,5 +1,318 @@
 /* =========================================================
-   ERIK-FIT – Style.css (Vollständig + Stabil + Kein Burger-Anim)
+   ERIK-FIT – Style.css
+   Struktur:
+   1. Theme Variablen
+   2. Grundlayout / Body
+   3. Topbar
+   4. Buttons / Sprache / Theme-Toggle
+   5. Layout + Sidebar
+   6. Content / Sections / Cards / Formulare / Footer
+   7. Preloader / Animationen
+   8. Fade / Transition Effekte
+   9. Responsive Design + Burger-Menü
+   ========================================================= */
+
+/* === 1️⃣ THEME VARIABLEN (Light & Dark Mode) === */
+
+:root[data-theme='light'] {
+  --bg-color: #f8f8f8;
+  --text-color: #111;
+  --accent-color: #d4af37;
+  --card-bg: #ffffff;
+  --border-color: #ddd;
+  --sidebar-bg: #f0f0f0;
+  --topbar-bg: #ffffff;
+  --btn-hover: #e0b93d;
+  --preloader-bg: #ffffff;
+  --preloader-ring: #d4af37;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #000;
+  --text-color: #fff;
+  --accent-color: gold;
+  --card-bg: #111;
+  --border-color: gold;
+  --sidebar-bg: #111;
+  --topbar-bg: #111;
+  --btn-hover: #ffd700;
+  --preloader-bg: #000;
+  --preloader-ring: gold;
+}
+
+/* === 2️⃣ Grundlayout / Body === */
+
+body {
+  margin: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+body.loading *:not(#preloader):not(#preloader *) {
+  visibility: hidden;
+  opacity: 0;
+}
+
+body.ready {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease-in;
+}
+
+/* === 3️⃣ TOPBAR === */
+
+.topbar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  background: var(--topbar-bg);
+  border-bottom: 2px solid var(--accent-color);
+  padding: 0 30px;
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 62px;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.topbar-center {
+  display: flex;
+  justify-content: center;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.topbar * {
+  line-height: 1;
+}
+
+.topbar .logo {
+  height: 46px;
+  max-height: 46px;
+  width: auto;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 480px) {
+  .topbar .logo {
+    height: 38px;
+    max-height: 38px;
+  }
+}
+
+.topbar-left h1 {
+  margin: 0;
+  line-height: 1;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+}
+
+/* === 4️⃣ Buttons / Sprache / Theme-Toggle === */
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  line-height: 1.2;
+}
+
+.btn-gold {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.btn-gold:hover {
+  background: var(--btn-hover);
+  transform: scale(1.05);
+}
+
+.btn-outline {
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.lang-switch {
+  display: flex;
+  gap: 6px;
+  margin-left: 10px;
+}
+
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.lang-btn.active,
+.lang-btn:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+/* Theme-Toggle */
+.theme-toggle {
+  margin-left: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent-color);
+  transition: fill 0.3s ease, transform 0.4s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(15deg);
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.4);
+}
+
+/* === 5️⃣ Layout + Sidebar === */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 62px;
+}
+
+.sidebar {
+  width: 230px;
+  background: var(--sidebar-bg);
+  border-right: 2px solid var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  position: fixed;
+  top: 62px;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  gap: 8px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar a {
+  position: relative;
+  display: block;
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: var(--accent-color);
+  font-weight: bold;
+  transition: all 0.25s ease;
+  width: 85%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.sidebar a:hover {
+  background: rgba(255, 215, 0, 0.12);
+  transform: translateX(6px);
+}
+
+.sidebar a.active {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  transform: none;
+  box-shadow: 0 0 16px rgba(255, 215, 0, 0.4);
+}
+
+.sidebar a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--accent-color), var(--btn-hover));
+  transform: scaleY(0);
+  transition: transform 0.25s ease;
+}
+
+.sidebar a:hover::before,
+.sidebar a.active::before {
+  transform: scaleY(1);
+}
+
+.content {
+  flex: 1;
+  margin-left: 240px;
+  padding: 50px 60px;
+}
+/* =========================================================
+   ERIK-FIT – Style.css (Final Version)
+   Struktur:
+   1. Theme Variablen
+   2. Grundlayout / Body
+   3. Topbar
+   4. Buttons / Sprache / Theme-Toggle
+   5. Layout + Sidebar
+   6. Content / Sections / Cards / Formulare / Footer
+   7. Preloader / Animationen
+   8. Fade / Transition Effekte
+   9. Responsive Design & Burger-Menü
+   10. Sidebar Slide & Mobile Fixes
    ========================================================= */
 
 /* === 1️⃣ THEME VARIABLEN === */
@@ -15,6 +328,7 @@
   --preloader-bg: #ffffff;
   --preloader-ring: #d4af37;
 }
+
 :root[data-theme='dark'] {
   --bg-color: #000;
   --text-color: #fff;
@@ -28,7 +342,7 @@
   --preloader-ring: gold;
 }
 
-/* === 2️⃣ BODY / LAYOUT === */
+/* === 2️⃣ GRUNDLAYOUT === */
 body {
   margin: 0;
   background: var(--bg-color);
@@ -39,23 +353,22 @@ body {
 }
 h1, h2, h3 { font-weight: 700; letter-spacing: 0.5px; }
 a { text-decoration: none; color: inherit; }
+
 body.loading *:not(#preloader):not(#preloader *) { visibility: hidden; opacity: 0; }
 body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; }
 
 /* === 3️⃣ TOPBAR === */
 .topbar {
   display: grid;
-  grid-template-columns: auto auto 1fr auto auto;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   background: var(--topbar-bg);
   border-bottom: 2px solid var(--accent-color);
   padding: 0 30px;
-  height: 70px;
   position: fixed;
   top: 0; left: 0; right: 0;
+  height: 62px;
   z-index: 1000;
-  gap: 14px;
   box-sizing: border-box;
 }
 .topbar-left, .topbar-right {
@@ -65,18 +378,10 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
 }
 .topbar-center { display: flex; justify-content: center; }
 .topbar .logo {
-  height: 46px;
-  width: auto;
-  border-radius: 50%;
-  object-fit: cover;
-  display: block;
+  height: 46px; width: auto; border-radius: 50%; object-fit: cover; display: block;
 }
-.topbar-left h1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 0;
-  color: var(--accent-color);
-  letter-spacing: 0.5px;
+@media (max-width: 480px) {
+  .topbar .logo { height: 38px; max-height: 38px; }
 }
 
 /* === 4️⃣ BUTTONS / SPRACHE / THEME === */
@@ -92,7 +397,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
 .btn-outline { border: 2px solid var(--accent-color); color: var(--accent-color); }
 .btn-outline:hover { background: var(--accent-color); color: var(--bg-color); }
 
-.lang-switch { display: flex; gap: 6px; }
+.lang-switch { display: flex; gap: 6px; margin-left: 10px; }
 .lang-btn {
   border: 1px solid var(--accent-color);
   color: var(--accent-color);
@@ -106,6 +411,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
 .lang-btn.active, .lang-btn:hover { background: var(--accent-color); color: var(--bg-color); }
 
 .theme-toggle {
+  margin-left: 10px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -118,8 +424,8 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
 .theme-toggle svg { width: 20px; height: 20px; fill: var(--accent-color); }
 .theme-toggle:hover { transform: rotate(15deg); box-shadow: 0 0 12px rgba(255,215,0,0.4); }
 
-/* === 5️⃣ SIDEBAR / LAYOUT === */
-.layout { display: flex; min-height: 100vh; padding-top: 70px; }
+/* === 5️⃣ SIDEBAR & LAYOUT === */
+.layout { display: flex; min-height: 100vh; padding-top: 62px; }
 .sidebar {
   width: 230px;
   background: var(--sidebar-bg);
@@ -129,7 +435,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   align-items: center;
   padding-top: 30px;
   position: fixed;
-  top: 70px; bottom: 0; left: 0;
+  top: 62px; bottom: 0; left: 0;
   overflow-y: auto;
   gap: 8px;
   transition: width 0.45s ease, opacity 0.35s ease;
@@ -167,7 +473,7 @@ body.ready { visibility: visible; opacity: 1; transition: opacity 0.4s ease-in; 
   transition: margin-left 0.45s ease;
 }
 
-/* === 6️⃣ CONTENT / FOOTER === */
+/* === 6️⃣ CONTENT SECTIONS === */
 .hero {
   text-align: center;
   padding: 100px 20px;
@@ -230,84 +536,456 @@ footer {
 #preloader {
   position: fixed; inset: 0;
   background: var(--preloader-bg); color: var(--accent-color);
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  z-index: 9999;
+  display: flex; justify-content: center; align-items: center;
+  flex-direction: column; z-index: 9999;
   transition: opacity 0.6s ease, visibility 0.6s ease;
 }
 #preloader.hidden { opacity: 0; pointer-events: none; visibility: hidden; }
-.preloader-logo {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 15px;
-}
-.preloader-ring {
-  width: 60px; height: 60px;
-  border: 4px solid rgba(255,215,0,0.2);
-  border-top: 4px solid var(--preloader-ring);
-  border-radius: 50%;
-  animation: spin 1.2s linear infinite;
-  margin-bottom: 10px;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+.preloader-logo { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px; animation: pulse 1.4s ease-in-out infinite; }
+.preloader-ring { width: 60px; height: 60px; border: 4px solid rgba(255,215,0,0.2); border-top: 4px solid var(--preloader-ring); border-radius: 50%; margin: 0 auto 12px; animation: spin 1.2s linear infinite; }
 
-/* === 8️⃣ FADE === */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.6;transform:scale(1.05);} }
+
+/* === 8️⃣ FADE / TRANSITIONS === */
 .fade-out { opacity: 0; transition: opacity 0.2s ease; }
 .fade-in  { opacity: 1; transition: opacity 0.4s ease; }
 
-/* === 9️⃣ BURGER / RESPONSIVE === */
+/* === 9️⃣ RESPONSIVE DESIGN & BURGER === */
 .menu-toggle {
   display: flex;
-  align-items: center;
-  justify-content: center;
   background: transparent;
   border: none;
-  color: var(--accent-color);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
   cursor: pointer;
-  transition: none !important; /* ❌ Keine Animation */
+  color: var(--accent-color);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
   z-index: 1001;
 }
-.menu-toggle svg { width: 26px; height: 26px; stroke: var(--accent-color); }
+.menu-toggle svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent-color);
+}
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+.menu-toggle.open svg {
+  transform: rotate(90deg);
+}
 
-/* === 📱 MOBILE === */
+/* === 📱 Optimierte TOPBAR für kleine Geräte (<900px) === */
 @media (max-width: 900px) {
   .topbar {
+    display: grid;
     grid-template-columns: auto auto 1fr auto auto;
+    align-items: center;
+    justify-content: space-between;
     padding: 0 10px;
     height: var(--real-topbar-height, 64px);
     gap: 8px;
-    padding-top: env(safe-area-inset-top, 4px);
+    background: var(--topbar-bg);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
   }
-  .topbar-left { display: flex; align-items: center; gap: 10px; }
-  .topbar .logo { height: 38px; }
-  .topbar-center a.btn-gold { font-size: 0.9rem; padding: 8px 14px; }
-  .lang-btn { padding: 3px 8px; font-size: 0.8rem; }
-  .theme-toggle { width: 28px; height: 28px; }
-  .theme-toggle svg { width: 18px; height: 18px; }
-  @media (max-width: 600px) { .topbar-left h1 { display: none; } }
 
+  /* --- Linke Seite: Burger + Logo --- */
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  /* === Menü-Button (Burger) ohne Animation === */
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: none; /* Keine Hover-/Dreh-Animation */
+  }
+
+  .menu-toggle svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--accent-color);
+  }
+
+  .topbar .logo {
+    height: 38px;
+    width: auto;
+    display: block;
+  }
+
+  /* --- Mittig: Button Mitglied werden --- */
+  .topbar-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topbar-center a.btn-gold {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+
+  /* --- Rechts: Sprache & Theme --- */
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lang-btn {
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+
+  .theme-toggle {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* --- Optional: H1-Text ausblenden auf sehr kleinen Geräten --- */
+  @media (max-width: 600px) {
+    .topbar-left h1 {
+      display: none;
+    }
+  }
+
+  /* --- Sidebar mobile --- */
   .sidebar {
-    top: var(--real-topbar-height, 64px);
+    position: fixed;
+    top: var(--real-topbar-height, 60px);
     left: -250px;
     width: 230px;
-    height: calc(100vh - var(--real-topbar-height, 64px));
+    height: calc(100vh - var(--real-topbar-height, 60px));
+    background: var(--sidebar-bg);
+    border-right: 2px solid var(--accent-color);
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+    padding-top: 20px;
     transition: left 0.4s ease;
     z-index: 999;
   }
-  .sidebar.open { left: 0; }
-  body.menu-open::before {
-    content: ""; position: fixed; inset: 0;
-    background: rgba(0, 0, 0, 0.45); z-index: 998;
+
+  .sidebar.open {
+    left: 0;
+    animation: slideIn 0.4s ease forwards;
   }
-  .content { margin-left: 0; padding: 25px; width: 100%; transition: none; }
+
+  /* --- Overlay bei offenem Menü --- */
+  body.menu-open::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 998;
+  }
+
+  /* --- Inhalt (Content) --- */
+  .content {
+    margin-left: 0;
+    padding: 25px;
+    width: 100%;
+    transition: none;
+  }
+
+  /* --- Fix für Safe-Area auf iPhones --- */
+  .topbar {
+    padding-top: env(safe-area-inset-top, 4px);
+  }
 }
 
-/* === 💻 DESKTOP === */
-@media (min-width: 900px) {
-  .content { margin-left: 240px; }
-  .menu-toggle { display: flex; }
+/* === 🔟 SIDEBAR SLIDE / DESKTOP COLLAPSE === */
+.sidebar.collapsed {
+  width: 0;
+  overflow: hidden;
+  border-right: none;
 }
+.sidebar.collapsed ul,
+.sidebar.collapsed a {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+body.sidebar-collapsed .content {
+  margin-left: 0;
+  transition: margin-left 0.45s ease;
+}
+body:not(.sidebar-collapsed) .content {
+  margin-left: 240px;
+}
+
+/* --- Animation --- */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0.3;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* === MOBILE FIX === */
+@media (max-width: 900px) {
+  body.sidebar-collapsed .content,
+  body:not(.sidebar-collapsed) .content {
+    margin-left: 0 !important;
+  }
+
+  .sidebar {
+    left: -250px;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+}
+
+/* === 📱 Optimierte TOPBAR für kleine Geräte (<900px) === */
+@media (max-width: 900px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
+    height: var(--real-topbar-height, 64px);
+    gap: 8px;
+    background: var(--topbar-bg);
+    border-bottom: 2px solid var(--accent-color);
+  }
+
+  /* --- Linke Seite: Burger + Logo --- */
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    order: 1;
+    background: transparent;
+    border: none;
+    color: var(--accent-color);
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .menu-toggle svg {
+    width: 26px;
+    height: 26px;
+    stroke: var(--accent-color);
+  }
+
+  .topbar .logo {
+    height: 38px;
+    width: auto;
+    display: block;
+  }
+
+  /* --- Mittig: Mitglied werden --- */
+  .topbar-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topbar-center a.btn-gold {
+    font-size: 0.9rem;
+    padding: 8px 14px;
+    white-space: nowrap;
+  }
+
+  /* --- Rechts: Sprache & Theme --- */
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 4px;
+  }
+
+  .lang-btn {
+    padding: 3px 8px;
+    font-size: 0.8rem;
+    border-radius: 6px;
+  }
+
+  .theme-toggle {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* --- Kontakt-Button auf Mobile ausblenden --- */
+  .topbar-right a.btn-outline {
+    display: none;
+  }
+
+  /* --- Optional: Titel ausblenden auf sehr kleinen Geräten --- */
+  @media (max-width: 600px) {
+    .topbar-left h1 {
+      display: none;
+    }
+  }
+}
+
+/* --- Für ultrakleine Geräte (<360px): Button etwas kompakter --- */
+@media (max-width: 360px) {
+  .topbar-center a.btn-gold {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
+
+/* === 💻 Optimierte Desktop-Topbar MIT BURGER (≥900px) === */
+@media (min-width: 900px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto; /* 🍔 + Logo + Mitte + DE/EN + Theme */
+    align-items: center;
+    justify-content: space-between;
+    background: var(--topbar-bg);
+    border-bottom: 2px solid var(--accent-color);
+    padding: 0 40px;
+    height: 70px;
+    z-index: 1000;
+    gap: 14px;
+  }
+
+  /* --- Linke Seite: Burger + Logo + Titel --- */
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+
+  .menu-toggle svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--accent-color);
+  }
+
+  .topbar .logo {
+    height: 50px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .topbar-left h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+  }
+
+  /* --- Mitte: Mitglied werden --- */
+  .topbar-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topbar-center a.btn-gold {
+    font-size: 1rem;
+    padding: 10px 24px;
+    white-space: nowrap;
+  }
+
+  /* --- Rechts: Sprache & Theme --- */
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-toggle svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+.menu-toggle:hover { transform: scale(1.1); }
+.menu-toggle.open svg { transform: rotate(90deg); }
