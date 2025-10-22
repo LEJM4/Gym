@@ -882,3 +882,109 @@ body:not(.sidebar-collapsed) .content {
     padding: 6px 10px;
   }
 }
+
+/* === 💻 Optimierte Desktop-Topbar MIT BURGER (≥900px) === */
+@media (min-width: 900px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: auto auto 1fr auto auto; /* 🍔 + Logo + Mitte + DE/EN + Theme */
+    align-items: center;
+    justify-content: space-between;
+    background: var(--topbar-bg);
+    border-bottom: 2px solid var(--accent-color);
+    padding: 0 40px;
+    height: 70px;
+    z-index: 1000;
+    gap: 14px;
+  }
+
+  /* --- Linke Seite: Burger + Logo + Titel --- */
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 14px;
+  }
+
+  .menu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    color: var(--accent-color);
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-toggle:hover {
+    transform: scale(1.1);
+  }
+
+  .menu-toggle svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--accent-color);
+  }
+
+  .topbar .logo {
+    height: 50px;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .topbar-left h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--accent-color);
+    letter-spacing: 0.5px;
+  }
+
+  /* --- Mitte: Mitglied werden --- */
+  .topbar-center {
+    display: flex;
+    justify-content: center;
+  }
+
+  .topbar-center a.btn-gold {
+    font-size: 1rem;
+    padding: 10px 24px;
+    white-space: nowrap;
+  }
+
+  /* --- Rechts: Sprache & Theme --- */
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lang-switch {
+    display: flex;
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+  }
+
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .theme-toggle svg {
+    width: 20px;
+    height: 20px;
+  }
+}
