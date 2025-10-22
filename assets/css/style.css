@@ -550,6 +550,37 @@ footer {
     height: 18px;
   }
 
+@media (max-width: 900px) {
+  /* Burger soll links neben dem Logo sichtbar sein */
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-color);
+  }
+
+  /* Logo kleiner und mittig mit Burger ausgerichtet */
+  .topbar .logo {
+    height: 42px;
+    width: auto;
+    display: block;
+  }
+
+  /* Überschrift neben Logo ausblenden auf Handy (spart Platz) */
+  @media (max-width: 600px) {
+    .topbar-left h1 {
+      display: none;
+    }
+  }
+}
+
+
   /* Bei sehr kleinen Geräten (<600 px): “Mitglied werden” unter das Logo */
   @media (max-width: 600px) {
     .topbar {

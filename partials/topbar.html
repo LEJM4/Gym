@@ -1,27 +1,29 @@
-<!-- Mobile Menü Button -->
-<button id="menu-toggle" class="menu-toggle" title="Menü öffnen">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <path d="M3 6h18M3 12h18M3 18h18"
+<header class="topbar">
+  <!-- ⬅️ LINKS: Logo + Burger -->
+  <div class="topbar-left">
+    <button id="menu-toggle" class="menu-toggle" title="Menü öffnen">
+      <!-- stylisches goldenes Burger-Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M3 6h18M3 12h18M3 18h18"
           stroke="currentColor"
           stroke-width="2"
           stroke-linecap="round"
-          stroke-linejoin="round"/>
-  </svg>
-</button>
-
-<header class="topbar">
-  <div class="topbar-left">
-    <img src="./assets/img/logo.png" alt="ERIK-Fit Logo" class="logo" width="90" height="90" />
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+    <img src="./assets/img/logo.png" alt="ERIK-Fit Logo" class="logo" />
     <h1>ERIK-Fit</h1>
   </div>
 
+  <!-- ⬆️ MITTE: Mitglied werden -->
   <div class="topbar-center">
-    <!-- Mitglied werden -->
     <a href="mitgliedschaften.html" data-link class="btn btn-gold">Mitglied werden</a>
   </div>
 
+  <!-- ➡️ RECHTS: Kontakt + Sprache + Theme -->
   <div class="topbar-right">
-    <!-- Kontakt -->
     <a href="kontakt.html" data-link class="btn btn-outline">Kontakt</a>
 
     <!-- Sprache -->
@@ -33,9 +35,7 @@
     <!-- Theme Toggle -->
     <button id="theme-toggle" class="theme-toggle" title="Theme wechseln">
       <svg id="theme-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path
-          d="M12 2a9.93 9.93 0 0 0-9 5.5 10 10 0 0 0 18 9.5A10 10 0 0 1 12 2z"
-        />
+        <path d="M12 2a9.93 9.93 0 0 0-9 5.5 10 10 0 0 0 18 9.5A10 10 0 0 1 12 2z"/>
       </svg>
     </button>
   </div>
