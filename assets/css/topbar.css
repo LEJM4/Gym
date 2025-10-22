@@ -1,27 +1,47 @@
-/* === 3️⃣ TOPBAR === */
+/* === 3️⃣ TOPBAR (Neu, Erik-Fit 2025) === */
 
+/* --- Grundstruktur --- */
 .topbar {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
+  justify-content: space-between;
   background: var(--topbar-bg);
   border-bottom: 2px solid var(--accent-color);
-  padding: 0 30px;
+  padding: 0 20px;
+  height: 68px;
   position: fixed;
   top: 0; left: 0; right: 0;
-  height: 62px;
   z-index: 1000;
   box-sizing: border-box;
 }
 
-.topbar-left, .topbar-right {
+/* --- Linke Seite: Burger + Logo --- */
+.topbar-left {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 14px;
 }
-.topbar-center { display: flex; justify-content: center; }
 
-.topbar .logo {
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  transition: none; /* ❌ Keine Animation */
+}
+.menu-toggle svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent-color);
+}
+
+.logo {
   height: 46px;
   width: auto;
   border-radius: 50%;
@@ -29,21 +49,113 @@
   display: block;
 }
 
-/* --- Burger Menü --- */
-.menu-toggle {
+/* --- Mitte: Mitglied werden --- */
+.topbar-center {
   display: flex;
+  justify-content: center;
+}
+.topbar-center .btn-gold {
+  font-size: 1rem;
+  padding: 10px 22px;
+  white-space: nowrap;
+}
+
+/* --- Rechte Seite: Sprache + Theme --- */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lang-switch {
+  display: flex;
+  gap: 6px;
+}
+
+.lang-btn {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--accent-color);
+  background: transparent;
+  color: var(--accent-color);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lang-btn.active,
+.lang-btn:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.theme-toggle {
   background: transparent;
   border: none;
   cursor: pointer;
+  width: 32px;
+  height: 32px;
   color: var(--accent-color);
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
+  display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease;
-  z-index: 1001;
 }
-.menu-toggle svg { width: 28px; height: 28px; stroke: var(--accent-color); }
-.menu-toggle:hover { transform: scale(1.1); }
-.menu-toggle.open svg { transform: rotate(90deg); }
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--accent-color);
+}
+
+/* --- Responsive Anpassungen --- */
+@media (max-width: 900px) {
+  .topbar {
+    grid-template-columns: auto 1fr auto;
+    padding: 0 12px;
+    height: 62px;
+  }
+
+  .topbar-left {
+    gap: 10px;
+  }
+
+  .menu-toggle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .menu-toggle svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  .logo {
+    height: 38px;
+  }
+
+  .topbar-center .btn-gold {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .lang-btn {
+    padding: 3px 8px;
+    font-size: 0.85rem;
+  }
+
+  .theme-toggle svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Optional: H1-Text (falls vorhanden) ausblenden */
+  .topbar-left h1 {
+    display: none;
+  }
+}
+
+/* --- Extra-Small Devices --- */
+@media (max-width: 360px) {
+  .topbar-center .btn-gold {
+    font-size: 0.8rem;
+    padding: 6px 10px;
+  }
+}
