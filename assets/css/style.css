@@ -589,3 +589,31 @@ footer {
 .menu-toggle.open svg {
   transform: rotate(90deg);
 }
+/* =====================================================
+   UNIVERSALES SIDEBAR-EINKLAPPEN (auch Desktop)
+   ===================================================== */
+
+/* Standard: Sidebar sichtbar */
+.sidebar.collapsed {
+  width: 0;
+  overflow: hidden;
+  border-right: none;
+}
+
+.sidebar.collapsed ul,
+.sidebar.collapsed a {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Content verbreitert sich, wenn Sidebar eingeklappt */
+body.sidebar-collapsed .content {
+  margin-left: 0;
+  transition: margin-left 0.4s ease;
+}
+
+/* Burger leicht verschieben bei eingeklappter Sidebar */
+body.sidebar-collapsed .menu-toggle {
+  transform: rotate(90deg);
+}

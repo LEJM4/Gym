@@ -3,6 +3,7 @@
    Lädt Topbar & Sidebar automatisch
    + Theme / Language / Active-Link
    + Preloader / Fade-In (flackerfrei)
+   + Universeller Burger (mit Slide-Animation)
    =============================== */
 
 // --- 0️⃣ Ladezustand sofort aktivieren (vor jeglichem Rendern) ---
@@ -29,26 +30,18 @@ async function loadPartials() {
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
-    initMenuToggle(); // <- jetzt ist Sidebar & Button wirklich da
+    initMenuToggle();
 
     // --- Preloader sichtbar lassen bis alles eingefügt ist ---
     const preloader = document.getElementById('preloader');
-
-    // 1️⃣ Seite noch unsichtbar halten
     document.documentElement.style.visibility = 'hidden';
 
-    // 2️⃣ Preloader langsam ausblenden
-    setTimeout(() => {
-      preloader?.classList.add('hidden');
-    }, 300);
-
-    // 3️⃣ Erst nach Ende der Animation sichtbar machen
+    setTimeout(() => preloader?.classList.add('hidden'), 300);
     setTimeout(() => {
       document.body.classList.remove('loading');
       document.body.classList.add('ready');
       document.documentElement.style.visibility = 'visible';
-    }, 900); // = 300ms Verzögerung + 600ms Fade
-
+    }, 900);
   } catch (err) {
     console.error('Fehler beim Laden der Partials:', err);
     document.body.classList.remove('loading');
@@ -125,19 +118,32 @@ function initLanguageSwitch() {
   btnEn.addEventListener('click', () => setLang('en'));
 }
 
-/* === Mobile Menü Toggle === */
-/* === Mobile & Desktop Menü Toggle === */
+/* === 📱💻 Mobile & Desktop Menü Toggle mit weicher Animation === */
 function initMenuToggle() {
   const menuBtn = document.getElementById('menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   if (!menuBtn || !sidebar) return;
 
-  // Klick auf Burger-Button
   menuBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    const isOpen = sidebar.classList.toggle('open');
-    document.body.classList.toggle('menu-open', isOpen);
-    menuBtn.classList.toggle('open', isOpen); // Burger-Icon animieren
+
+    const isMobile = window.innerWidth < 900;
+
+    if (isMobile) {
+      // Klassisches Mobile Menü
+      const isOpen = sidebar.classList.toggle('open');
+      document.body.classList.toggle('menu-open', isOpen);
+      menuBtn.classList.toggle('open', isOpen);
+    } else {
+      // Desktop: Sidebar weich einklappen
+      const isCollapsed = sidebar.classList.toggle('collapsed');
+      document.body.classList.toggle('sidebar-collapsed', isCollapsed);
+
+      sidebar.style.transition = 'width 0.4s ease, opacity 0.3s ease';
+      sidebar.style.overflow = 'hidden';
+      sidebar.style.opacity = isCollapsed ? '0' : '1';
+      sidebar.style.width = isCollapsed ? '0' : '230px';
+    }
   });
 
   // Klick außerhalb → schließt Menü (nur Mobile)
@@ -154,7 +160,7 @@ function initMenuToggle() {
     }
   });
 
-  // ⬇️ NEW: Wenn Link in Sidebar geklickt → auf Handy automatisch einklappen
+  // Auf Handy: Klick auf Link → Sidebar schließen
   sidebar.addEventListener('click', (e) => {
     if (e.target.tagName === 'A' && window.innerWidth < 900) {
       sidebar.classList.remove('open');
@@ -168,7 +174,6 @@ function initMenuToggle() {
 document.addEventListener('DOMContentLoaded', () => {
   loadPartials();
 
-  // Sidebar-Top dynamisch anpassen
   const observer = new ResizeObserver(() => {
     const topbar = document.querySelector('.topbar');
     if (topbar) {
@@ -177,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Beobachtung starten, sobald Topbar da ist
   const checkTopbar = setInterval(() => {
     const topbar = document.querySelector('.topbar');
     if (topbar) {
