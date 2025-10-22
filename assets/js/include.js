@@ -119,11 +119,12 @@ function initLanguageSwitch() {
 }
 
 /* === 📱💻 Mobile & Desktop Menü Toggle mit weicher Animation === */
-/* === 📱💻 Mobile & Desktop Menü Toggle mit perfektem Slide === */
+/* === 📱💻 Mobile & Desktop Menü Toggle – perfekt synchronisiert === */
 function initMenuToggle() {
   const menuBtn = document.getElementById('menu-toggle');
   const sidebar = document.querySelector('.sidebar');
-  if (!menuBtn || !sidebar) return;
+  const content = document.querySelector('.content');
+  if (!menuBtn || !sidebar || !content) return;
 
   menuBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -137,35 +138,37 @@ function initMenuToggle() {
     } else {
       // --- Desktop Slide-Version ---
       const isCollapsed = sidebar.classList.contains('collapsed');
-
       sidebar.style.transition = 'width 0.45s ease, opacity 0.35s ease';
       sidebar.style.overflow = 'hidden';
 
       if (!isCollapsed) {
         // ✅ Einklappen
+        sidebar.classList.add('collapsed');
+        document.body.classList.add('sidebar-collapsed');
         sidebar.style.width = '0px';
         sidebar.style.opacity = '0';
-        document.body.classList.add('sidebar-collapsed');
-        // sorgt dafür, dass Content gleichzeitig mitfährt
-        sidebar.offsetHeight; // reflow-Trick, um Transition zu synchronisieren
-        sidebar.classList.add('collapsed');
       } else {
-        // ✅ Weiches Ausklappen
+        // ✅ Ausklappen (synchron mit Content)
+        sidebar.classList.remove('collapsed');
         sidebar.style.width = '230px';
         sidebar.style.opacity = '1';
-        sidebar.classList.remove('collapsed');
 
-        // Sobald Animation durch ist, entfernen wir overflow hidden
-        setTimeout(() => {
-          sidebar.style.overflow = 'auto';
+        // Sofort reflow erzwingen
+        sidebar.offsetHeight;
+
+        // Jetzt beide gleichzeitig animieren
+        requestAnimationFrame(() => {
           document.body.classList.remove('sidebar-collapsed');
-        }, 450);
+        });
+
+        // Nach der Animation overflow wieder aktivieren
+        setTimeout(() => (sidebar.style.overflow = 'auto'), 460);
       }
     }
   });
 
   // Klick außerhalb → schließt Menü (nur Mobile)
-  document.addEventListener('click', e => {
+  document.addEventListener('click', (e) => {
     if (
       window.innerWidth < 900 &&
       sidebar.classList.contains('open') &&
