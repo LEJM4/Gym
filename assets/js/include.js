@@ -126,26 +126,40 @@ function initLanguageSwitch() {
 }
 
 /* === Mobile Menü Toggle === */
+/* === Mobile & Desktop Menü Toggle === */
 function initMenuToggle() {
   const menuBtn = document.getElementById('menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   if (!menuBtn || !sidebar) return;
 
+  // Klick auf Burger-Button
   menuBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = sidebar.classList.toggle('open');
     document.body.classList.toggle('menu-open', isOpen);
+    menuBtn.classList.toggle('open', isOpen); // Burger-Icon animieren
   });
 
-  // Klick außerhalb schließt das Menü
-  document.addEventListener('click', (e) => {
+  // Klick außerhalb → schließt Menü (nur Mobile)
+  document.addEventListener('click', e => {
     if (
+      window.innerWidth < 900 &&
       sidebar.classList.contains('open') &&
       !sidebar.contains(e.target) &&
       !menuBtn.contains(e.target)
     ) {
       sidebar.classList.remove('open');
       document.body.classList.remove('menu-open');
+      menuBtn.classList.remove('open');
+    }
+  });
+
+  // ⬇️ NEW: Wenn Link in Sidebar geklickt → auf Handy automatisch einklappen
+  sidebar.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' && window.innerWidth < 900) {
+      sidebar.classList.remove('open');
+      document.body.classList.remove('menu-open');
+      menuBtn.classList.remove('open');
     }
   });
 }

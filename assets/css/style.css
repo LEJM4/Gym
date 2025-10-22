@@ -554,3 +554,38 @@ footer {
   from { transform: translateX(-100%); opacity: 0.3; }
   to   { transform: translateX(0); opacity: 1; }
 }
+
+/* ==============================================
+   UNIVERSAL BURGER (auch Desktop einklappbar)
+   ============================================== */
+
+.menu-toggle {
+  display: flex;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--accent-color);
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 1001;
+}
+
+.menu-toggle svg {
+  width: 28px;
+  height: 28px;
+  stroke: var(--accent-color);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* Animation (Burger → X) */
+.menu-toggle.open svg {
+  transform: rotate(90deg);
+}
