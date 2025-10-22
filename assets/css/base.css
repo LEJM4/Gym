@@ -1,0 +1,49 @@
+/* === 1️⃣ BASE: Variablen, Grundlayout === */
+
+:root[data-theme='light'] {
+  --bg-color: #f8f8f8;
+  --text-color: #111;
+  --accent-color: #d4af37;
+  --card-bg: #ffffff;
+  --border-color: #ddd;
+  --sidebar-bg: #f0f0f0;
+  --topbar-bg: #ffffff;
+  --btn-hover: #e0b93d;
+  --preloader-bg: #ffffff;
+  --preloader-ring: #d4af37;
+}
+
+:root[data-theme='dark'] {
+  --bg-color: #000;
+  --text-color: #fff;
+  --accent-color: gold;
+  --card-bg: #111;
+  --border-color: gold;
+  --sidebar-bg: #111;
+  --topbar-bg: #111;
+  --btn-hover: #ffd700;
+  --preloader-bg: #000;
+  --preloader-ring: gold;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Montserrat", sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+h1, h2, h3 { font-weight: 700; letter-spacing: 0.5px; }
+a { text-decoration: none; color: inherit; }
+
+body.loading *:not(#preloader):not(#preloader *) {
+  visibility: hidden;
+  opacity: 0;
+}
+body.ready {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease-in;
+}

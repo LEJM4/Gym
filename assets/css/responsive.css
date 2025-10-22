@@ -1,0 +1,36 @@
+/* === 7️⃣ RESPONSIVE DESIGN === */
+
+/* Mobile Topbar */
+@media (max-width: 900px) {
+  .topbar {
+    grid-template-columns: auto auto 1fr auto auto;
+    padding: 0 10px;
+    height: var(--real-topbar-height, 64px);
+  }
+
+  .topbar-left h1 { display: none; }
+  .content { margin-left: 0; padding: 25px; width: 100%; }
+
+  .sidebar {
+    position: fixed; left: -250px;
+    width: 230px; height: calc(100vh - var(--real-topbar-height, 60px));
+    top: var(--real-topbar-height, 60px);
+    background: var(--sidebar-bg);
+    transition: left 0.4s ease;
+    z-index: 999;
+  }
+  .sidebar.open { left: 0; }
+
+  body.menu-open::before {
+    content: ""; position: fixed; inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 998;
+  }
+}
+
+/* Ultra-small */
+@media (max-width: 360px) {
+  .topbar-center a.btn-gold {
+    font-size: 0.8rem; padding: 6px 10px;
+  }
+}

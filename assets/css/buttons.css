@@ -1,0 +1,43 @@
+/* === 2️⃣ BUTTONS / SPRACHE / THEME === */
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-gold { background: var(--accent-color); color: var(--bg-color); }
+.btn-gold:hover { background: var(--btn-hover); transform: scale(1.05); }
+.btn-outline { border: 2px solid var(--accent-color); color: var(--accent-color); }
+.btn-outline:hover { background: var(--accent-color); color: var(--bg-color); }
+
+.lang-switch { display: flex; gap: 6px; margin-left: 10px; }
+.lang-btn {
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 4px 10px;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.lang-btn.active, .lang-btn:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.theme-toggle {
+  margin-left: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--accent-color);
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.4s ease;
+}
+.theme-toggle svg { width: 20px; height: 20px; fill: var(--accent-color); }
+.theme-toggle:hover { transform: rotate(15deg); box-shadow: 0 0 12px rgba(255,215,0,0.4); }

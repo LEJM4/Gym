@@ -1,0 +1,57 @@
+/* === 4️⃣ SIDEBAR & LAYOUT === */
+
+.layout { display: flex; min-height: 100vh; padding-top: 62px; }
+
+.sidebar {
+  width: 230px;
+  background: var(--sidebar-bg);
+  border-right: 2px solid var(--accent-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  position: fixed;
+  top: 62px; bottom: 0; left: 0;
+  overflow-y: auto;
+  gap: 8px;
+  transition: width 0.45s ease, opacity 0.35s ease;
+}
+.sidebar ul {
+  list-style: none; padding: 0; margin: 0;
+  width: 100%; display: flex; flex-direction: column; gap: 8px;
+}
+.sidebar a {
+  position: relative; display: block;
+  padding: 12px 18px;
+  border-radius: 8px;
+  color: var(--accent-color);
+  font-weight: bold;
+  transition: all 0.25s ease;
+  width: 85%; margin: 0 auto; text-align: left;
+}
+.sidebar a:hover { background: rgba(255,215,0,0.12); transform: translateX(6px); }
+.sidebar a.active {
+  background: var(--accent-color); color: var(--bg-color);
+  box-shadow: 0 0 16px rgba(255,215,0,0.4);
+}
+.sidebar a::before {
+  content: ""; position: absolute; left: 0; top: 8px; bottom: 8px; width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--accent-color), var(--btn-hover));
+  transform: scaleY(0); transition: transform 0.25s ease;
+}
+.sidebar a:hover::before, .sidebar a.active::before { transform: scaleY(1); }
+
+.content {
+  flex: 1;
+  margin-left: 240px;
+  padding: 50px 60px;
+  transition: margin-left 0.45s ease;
+}
+
+/* Collapsed Sidebar */
+.sidebar.collapsed { width: 0; overflow: hidden; border-right: none; }
+.sidebar.collapsed ul, .sidebar.collapsed a {
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+}
+body.sidebar-collapsed .content { margin-left: 0; }
