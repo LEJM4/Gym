@@ -1,10 +1,5 @@
 /* ===============================
-   include.js
-   Lädt Topbar & Sidebar automatisch
-   + Theme / Language / Active-Link
-   + Preloader / Fade-In (flackerfrei)
-   + Universeller Burger (mit Slide-Animation)
-   + Mobile Fix (kein verschobener Start)
+   include.js – erweitert mit Sprachsystem (DE / EN)
    =============================== */
 
 // --- 0️⃣ Ladezustand sofort aktivieren ---
@@ -97,7 +92,25 @@ function setThemeIcon(theme) {
   }
 }
 
-/* --- 🌍 Language Switch --- */
+/* === 🌍 Sprachsystem === */
+async function loadLanguage(lang) {
+  try {
+    const res = await fetch(`./assets/lang/${lang}.json`);
+    if (!res.ok) throw new Error('Sprachdatei fehlt');
+    const data = await res.json();
+    applyTranslations(data);
+  } catch (err) {
+    console.error('❌ Fehler beim Laden der Übersetzung:', err);
+  }
+}
+
+function applyTranslations(data) {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (data[key]) el.textContent = data[key];
+  });
+}
+
 function initLanguageSwitch() {
   const btnDe = document.getElementById('lang-de');
   const btnEn = document.getElementById('lang-en');
@@ -108,9 +121,12 @@ function initLanguageSwitch() {
     btnDe.classList.toggle('active', lang === 'de');
     btnEn.classList.toggle('active', lang === 'en');
     document.documentElement.setAttribute('lang', lang);
+
     const preloaderText = document.querySelector('#preloader p');
     if (preloaderText)
       preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
+
+    loadLanguage(lang);
   };
 
   const saved = localStorage.getItem('lang') || 'de';
@@ -131,12 +147,10 @@ function initMenuToggle() {
     const isMobile = window.innerWidth < 900;
 
     if (isMobile) {
-      // --- Mobile Version ---
       const isOpen = sidebar.classList.toggle('open');
       document.body.classList.toggle('menu-open', isOpen);
       menuBtn.classList.toggle('open', isOpen);
     } else {
-      // --- Desktop Slide-Version ---
       const isCollapsed = sidebar.classList.contains('collapsed');
       sidebar.style.transition = 'width 0.45s ease, opacity 0.35s ease';
       sidebar.style.overflow = 'hidden';
@@ -222,34 +236,38 @@ function updateTopbarHeight() {
 }
 
 /* === 🪄 SPA-Hook: Seitenabhängiger Code === */
-document.addEventListener("pageLoaded", (e) => {
-  const current = (e.detail.url.split("/").pop() || "index.html").toLowerCase();
+document.addEventListener('pageLoaded', (e) => {
+  const current = (e.detail.url.split('/').pop() || 'index.html').toLowerCase();
+
+  // Sprache nachladen bei SPA-Wechsel
+  const lang = localStorage.getItem('lang') || 'de';
+  loadLanguage(lang);
 
   // Nur auf der Mitgliedschaftsseite aktivieren
-  if (current === "mitgliedschaften.html") {
+  if (current === 'mitgliedschaften.html') {
     initVertragsAuswahl();
   }
 });
 
 /* === 🧾 Vertragsauswahl (Mitgliedschaften) === */
 function initVertragsAuswahl() {
-  const buttons = document.querySelectorAll(".vertrag-btn");
-  const vertragSection = document.getElementById("vertrag-section");
-  const selectedTarif = document.getElementById("selected-tarif");
+  const buttons = document.querySelectorAll('.vertrag-btn');
+  const vertragSection = document.getElementById('vertrag-section');
+  const selectedTarif = document.getElementById('selected-tarif');
 
   if (!buttons.length || !vertragSection) return;
 
   buttons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const tarif = btn.closest(".card").dataset.tarif;
+    btn.addEventListener('click', () => {
+      const tarif = btn.closest('.card').dataset.tarif;
       selectedTarif.textContent = tarif;
-      vertragSection.classList.add("active");
-      vertragSection.scrollIntoView({ behavior: "smooth" });
+      vertragSection.classList.add('active');
+      vertragSection.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  const form = document.getElementById("vertrags-formular");
-  form?.addEventListener("submit", (e) => {
+  const form = document.getElementById('vertrags-formular');
+  form?.addEventListener('submit', (e) => {
     e.preventDefault();
     alert(`✅ Vertrag für "${selectedTarif.textContent}" wurde erfolgreich übermittelt!`);
     form.reset();

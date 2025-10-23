@@ -3,51 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MC-Fit | Kurse</title>
+  <title data-i18n="courses_title">MC-Fit | Kurse</title>
   <link rel="stylesheet" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="loading">
   <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
       <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo"/>
       <div class="preloader-ring"></div>
-      <p>Lädt...</p>
+      <p data-i18n="loading">Lädt...</p>
     </div>
   </div>
 
+  <!-- Topbar & Sidebar -->
   <div id="topbar-mount"></div>
   <div class="layout">
     <div id="sidebar-mount"></div>
 
     <main class="content">
+      <!-- Überschrift -->
       <section class="about">
-        <h2>Unsere Kurse</h2>
-        <p>Hier findest du eine Auswahl unserer beliebtesten Kurse.</p>
+        <h2 data-i18n="courses_heading">Unsere Kurse</h2>
+        <p data-i18n="courses_intro">Hier findest du eine Auswahl unserer beliebtesten Kurse.</p>
       </section>
 
+      <!-- Kurskarten -->
       <section class="highlight-cards">
         <div class="card">
-          <h3>Functional Training</h3>
-          <p>Montag & Mittwoch – 18:00 Uhr</p>
+          <h3 data-i18n="course1_title">Functional Training</h3>
+          <p data-i18n="course1_time">Montag & Mittwoch – 18:00 Uhr</p>
         </div>
         <div class="card">
-          <h3>Yoga</h3>
-          <p>Dienstag & Donnerstag – 17:30 Uhr</p>
+          <h3 data-i18n="course2_title">Yoga</h3>
+          <p data-i18n="course2_time">Dienstag & Donnerstag – 17:30 Uhr</p>
         </div>
         <div class="card">
-          <h3>Box-Fit</h3>
-          <p>Freitag – 19:00 Uhr</p>
+          <h3 data-i18n="course3_title">Box-Fit</h3>
+          <p data-i18n="course3_time">Freitag – 19:00 Uhr</p>
         </div>
       </section>
 
+      <!-- Footer -->
       <footer>
-        <p>© 2025 MC-Fit. Alle Rechte vorbehalten.</p>
+        <p data-i18n="footer">© 2025 MC-Fit. Alle Rechte vorbehalten.</p>
       </footer>
     </main>
   </div>
 
-  <script src="./assets/js/include.js"></script>
+  <script src="./assets/js/include.js" defer></script>
 </body>
 </html>

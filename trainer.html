@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ERIK-Fit | Trainer</title>
+  <title data-i18n="trainer_title">ERIK-Fit | Trainer</title>
   <link rel="stylesheet" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="loading">
   <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
       <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo"/>
       <div class="preloader-ring"></div>
-      <p>Lädt...</p>
+      <p data-i18n="loading">Lädt...</p>
     </div>
   </div>
 
@@ -22,30 +23,33 @@
     <div id="sidebar-mount"></div>
 
     <main class="content">
+      <!-- Abschnitt: Überschrift -->
       <section class="about">
-        <h2>Unser Team</h2>
-        <p>Lerne unsere erfahrenen Trainer kennen, die dich bei jedem Schritt begleiten.</p>
+        <h2 data-i18n="trainer_heading">Unser Team</h2>
+        <p data-i18n="trainer_intro">Lerne unsere erfahrenen Trainer kennen, die dich bei jedem Schritt begleiten.</p>
       </section>
 
+      <!-- Abschnitt: Trainer-Karten -->
       <section class="highlight-cards">
         <div class="card">
           <img src="./assets/img/trainer1.jpg" alt="Trainer Max" class="trainer-img">
-          <h3>ERIK BOT</h3>
-          <p>Functional & CrossFit Experte</p>
+          <h3 data-i18n="trainer1_name">ERIK BOT</h3>
+          <p data-i18n="trainer1_role">Functional & CrossFit Experte</p>
         </div>
         <div class="card">
           <img src="./assets/img/trainer2.jpg" alt="Trainerin Lisa" class="trainer-img">
-          <h3>ERIK Flex</h3>
-          <p>Yoga & Mobility Coach</p>
+          <h3 data-i18n="trainer2_name">ERIK Flex</h3>
+          <p data-i18n="trainer2_role">Yoga & Mobility Coach</p>
         </div>
       </section>
 
+      <!-- Footer -->
       <footer>
-        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+        <p data-i18n="footer">© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
       </footer>
     </main>
   </div>
 
-  <script src="./assets/js/include.js"></script>
+  <script src="./assets/js/include.js" defer></script>
 </body>
 </html>

@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ERIK-Fit | Kontakt</title>
+  <title data-i18n="contact_title">ERIK-Fit | Kontakt</title>
   <link rel="stylesheet" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="loading">
   <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
       <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo"/>
       <div class="preloader-ring"></div>
-      <p>Lädt...</p>
+      <p data-i18n="loading">Lädt...</p>
     </div>
   </div>
 
@@ -22,31 +23,35 @@
     <div id="sidebar-mount"></div>
 
     <main class="content">
+      <!-- Überschrift -->
       <section class="about">
-        <h2>Kontaktiere uns</h2>
-        <p>Hast du Fragen, Anregungen oder möchtest dich anmelden? Schreib uns einfach!</p>
+        <h2 data-i18n="contact_heading">Kontaktiere uns</h2>
+        <p data-i18n="contact_text">Hast du Fragen, Anregungen oder möchtest dich anmelden? Schreib uns einfach!</p>
       </section>
 
+      <!-- Kontaktformular -->
       <section class="contact">
         <form action="https://formsubmit.co/YOUR_EMAIL" method="POST" class="kontakt-form">
-          <input type="text" name="name" placeholder="Dein Name" required>
-          <input type="email" name="email" placeholder="Deine E-Mail" required>
-          <textarea name="message" rows="5" placeholder="Deine Nachricht..." required></textarea>
-          <button type="submit" class="btn btn-gold">Absenden</button>
+          <input type="text" name="name" placeholder="Dein Name" data-i18n-placeholder="contact_name" required>
+          <input type="email" name="email" placeholder="Deine E-Mail" data-i18n-placeholder="contact_email" required>
+          <textarea name="message" rows="5" placeholder="Deine Nachricht..." data-i18n-placeholder="contact_message" required></textarea>
+          <button type="submit" class="btn btn-gold" data-i18n="contact_submit">Absenden</button>
         </form>
 
+        <!-- Kontaktinfos -->
         <div class="info">
-          <p><strong>Adresse:</strong> Musterstraße 123, 12345 Musterstadt</p>
-          <p><strong>Öffnungszeiten:</strong> Mo–Fr 8–22 Uhr, Sa–So 10–20 Uhr</p>
+          <p><strong data-i18n="address_label">Adresse:</strong> <span data-i18n="address_text">Musterstraße 123, 12345 Musterstadt</span></p>
+          <p><strong data-i18n="hours_label">Öffnungszeiten:</strong> <span data-i18n="hours_text">Mo–Fr 8–22 Uhr, Sa–So 10–20 Uhr</span></p>
         </div>
       </section>
 
+      <!-- Footer -->
       <footer>
-        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+        <p data-i18n="footer">© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
       </footer>
     </main>
   </div>
 
-  <script src="./assets/js/include.js"></script>
+  <script src="./assets/js/include.js" defer></script>
 </body>
 </html>

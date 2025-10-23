@@ -1,4 +1,6 @@
 {
+  "file_0": "Mitgliedschaft-DAtei",
+
   "title": "Mitgliedschaften",
   "description": "Wähle die Mitgliedschaft, die zu deinem Lebensstil passt.",
   "basic": "Ideal für Einsteiger.",
@@ -11,5 +13,60 @@
   "birthday": "Geburtsdatum",
   "startdate": "Startdatum",
   "submit": "Vertrag absenden",
-  "footer": "© 2025 MC-Fit. Alle Rechte vorbehalten."
+
+
+  "file_1": "INDEX-DAtei",
+
+  "index_title": "ERIK-Fit | Dein Fitnessstudio",
+  "hero_title": "Willkommen bei <span>ERIK-Fit</span>",
+  "hero_text": "Dein Weg zu mehr Kraft, Ausdauer und Wohlbefinden beginnt hier.",
+  "hero_btn": "Jetzt Kontakt aufnehmen",
+  "why_title": "Warum ERIK-Fit?",
+  "why_text": "Update VERSION mit mehreren SPRACHEN",
+  "card1_title": "Moderne Ausstattung",
+  "card1_text": "Trainiere mit hochwertigen Geräten in angenehmer Atmosphäre.",
+  "card2_title": "Individuelle Betreuung",
+  "card2_text": "Unsere Trainer unterstützen dich mit Expertise und Motivation.",
+  "card3_title": "Flexible Kurse",
+  "card3_text": "Von Yoga bis CrossFit – wir bieten für jeden das passende Programm.",
+  "footer": "© 2025 ERIK-Fit. Alle Rechte vorbehalten.",
+  "loading": "Lädt...",
+
+  "file_2": "kontakt-DAtei",
+
+  "contact_title": "ERIK-Fit | Kontakt",
+  "contact_heading": "Kontaktiere uns",
+  "contact_text": "Hast du Fragen, Anregungen oder möchtest dich anmelden? Schreib uns einfach!",
+  "contact_name": "Dein Name",
+  "contact_email": "Deine E-Mail",
+  "contact_message": "Deine Nachricht...",
+  "contact_submit": "Absenden",
+  "address_label": "Adresse:",
+  "address_text": "Musterstraße 123, 12345 Musterstadt",
+  "hours_label": "Öffnungszeiten:",
+  "hours_text": "Mo–Fr 8–22 Uhr, Sa–So 10–20 Uhr",
+
+
+  "file_3": "INDEX-DAtei",
+
+  "courses_title": "MC-Fit | Kurse",
+  "courses_heading": "Unsere Kurse",
+  "courses_intro": "Hier findest du eine Auswahl unserer beliebtesten Kurse.",
+  "course1_title": "Functional Training",
+  "course1_time": "Montag & Mittwoch – 18:00 Uhr",
+  "course2_title": "Yoga",
+  "course2_time": "Dienstag & Donnerstag – 17:30 Uhr",
+  "course3_title": "Box-Fit",
+  "course3_time": "Freitag – 19:00 Uhr",
+  
+  
+  "file_4": "INDEX-DAtei",
+
+  "trainer_title": "ERIK-Fit | Trainer",
+  "trainer_heading": "Unser Team",
+  "trainer_intro": "Lerne unsere erfahrenen Trainer kennen, die dich bei jedem Schritt begleiten.",
+  "trainer1_name": "ERIK BOT",
+  "trainer1_role": "Functional & CrossFit Experte",
+  "trainer2_name": "ERIK Flex",
+  "trainer2_role": "Yoga & Mobility Coach"
 }

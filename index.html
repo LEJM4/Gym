@@ -3,64 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ERIK-Fit | Dein Fitnessstudio</title>
+  <title data-i18n="index_title">ERIK-Fit | Dein Fitnessstudio</title>
   <link rel="stylesheet" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
-<!-- ⬇️ Wichtig: Body startet im Ladezustand -->
 <body class="loading">
-
-  <!-- Preloader (wird sofort angezeigt, da body.loading Inhalt versteckt) -->
+  <!-- Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
       <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo"/>
       <div class="preloader-ring"></div>
-      <p>Lädt...</p>
+      <p data-i18n="loading">Lädt...</p>
     </div>
   </div>
 
-  <!-- Mount-Punkte für Partials -->
+  <!-- Partials -->
   <div id="topbar-mount"></div>
 
   <div class="layout">
     <div id="sidebar-mount"></div>
 
     <main class="content">
+      <!-- Hero -->
       <section class="hero">
-        <h2>Willkommen bei <span>ERIK-Fit</span></h2>
-        <p>Dein Weg zu mehr Kraft, Ausdauer und Wohlbefinden beginnt hier.</p>
-        <a href="kontakt.html" class="btn btn-gold">Jetzt Kontakt aufnehmen</a>
+        <h2 data-i18n="hero_title">Willkommen bei <span>ERIK-Fit</span></h2>
+        <p data-i18n="hero_text">Dein Weg zu mehr Kraft, Ausdauer und Wohlbefinden beginnt hier.</p>
+        <a href="kontakt.html" class="btn btn-gold" data-i18n="hero_btn">Jetzt Kontakt aufnehmen</a>
       </section>
 
+      <!-- About -->
       <section class="about">
-        <h2>Warum ERIK-Fit?</h2>
-        <p>Update v2.5</p>
+        <h2 data-i18n="why_title">Warum ERIK-Fit?</h2>
+        <p data-i18n="why_text">Update v2.5</p>
       </section>
 
+      <!-- Highlight-Cards -->
       <section class="highlight-cards">
         <div class="card">
-          <h3>Moderne Ausstattung</h3>
-          <p>Trainiere mit hochwertigen Geräten in angenehmer Atmosphäre.</p>
+          <h3 data-i18n="card1_title">Moderne Ausstattung</h3>
+          <p data-i18n="card1_text">Trainiere mit hochwertigen Geräten in angenehmer Atmosphäre.</p>
         </div>
         <div class="card">
-          <h3>Individuelle Betreuung</h3>
-          <p>Unsere Trainer unterstützen dich mit Expertise und Motivation.</p>
+          <h3 data-i18n="card2_title">Individuelle Betreuung</h3>
+          <p data-i18n="card2_text">Unsere Trainer unterstützen dich mit Expertise und Motivation.</p>
         </div>
         <div class="card">
-          <h3>Flexible Kurse</h3>
-          <p>Von Yoga bis CrossFit – wir bieten für jeden das passende Programm.</p>
+          <h3 data-i18n="card3_title">Flexible Kurse</h3>
+          <p data-i18n="card3_text">Von Yoga bis CrossFit – wir bieten für jeden das passende Programm.</p>
         </div>
       </section>
 
+      <!-- Footer -->
       <footer>
-        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+        <p data-i18n="footer">© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
       </footer>
     </main>
   </div>
 
   <script src="./assets/js/include.js" defer></script>
   <script src="./assets/js/spa.js" defer></script>
-
 </body>
 </html>
