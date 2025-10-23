@@ -1,0 +1,15 @@
+{
+  "title": "Memberships",
+  "description": "Choose the membership that fits your lifestyle.",
+  "basic": "Perfect for beginners.",
+  "premium": "Access to all classes and sauna.",
+  "vip": "Personal training included.",
+  "contractBtn": "View contract draft",
+  "formTitle": "Contract draft for",
+  "name": "Name",
+  "email": "Email",
+  "birthday": "Date of birth",
+  "startdate": "Start date",
+  "submit": "Submit contract",
+  "footer": "© 2025 MC-Fit. All rights reserved."
+}

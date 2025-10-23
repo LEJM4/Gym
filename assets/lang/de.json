@@ -1,0 +1,15 @@
+{
+  "title": "Mitgliedschaften",
+  "description": "Wähle die Mitgliedschaft, die zu deinem Lebensstil passt.",
+  "basic": "Ideal für Einsteiger.",
+  "premium": "Zugang zu allen Kursen und Sauna.",
+  "vip": "Personal Training inklusive.",
+  "contractBtn": "Vertragsentwurf ansehen",
+  "formTitle": "Vertragsentwurf für",
+  "name": "Name",
+  "email": "E-Mail",
+  "birthday": "Geburtsdatum",
+  "startdate": "Startdatum",
+  "submit": "Vertrag absenden",
+  "footer": "© 2025 MC-Fit. Alle Rechte vorbehalten."
+}
