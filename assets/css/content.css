@@ -120,14 +120,14 @@ footer {
   to { opacity: 1; transform: translateY(0); }
 }
 
-[data-theme="dark"] .vertrag-btn,
-[data-theme="dark"] .submit-btn {
-  background: #b8860b; /* dunkles Gold / Bronze */
-  color: #f8f8f8;      /* warmweiß */
+/* === 🎨 Dark Mode Anpassungen für Vertragsauswahl === */
+:root[data-theme="dark"] .vertrag-btn,
+:root[data-theme="dark"] .submit-btn {
+  background: #fff;      /* Weißer Button im Dark Mode */
+  color: #000;           /* Schwarzer Text */
 }
 
-[data-theme="dark"] .vertrag-btn:hover,
-[data-theme="dark"] .submit-btn:hover {
-  background: #a67c00;
-  color: #fff;
+:root[data-theme="dark"] .vertrag-btn:hover,
+:root[data-theme="dark"] .submit-btn:hover {
+  background: #f0f0f0;   /* Etwas helleres Weiß beim Hover */
 }
