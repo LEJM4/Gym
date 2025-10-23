@@ -129,5 +129,5 @@ footer {
 
 :root[data-theme="dark"] .vertrag-btn:hover,
 :root[data-theme="dark"] .submit-btn:hover {
-  background: #f0f0f0;   /* Etwas helleres Weiß beim Hover */
+  background:  gold;   
 }
