@@ -119,3 +119,15 @@ footer {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+[data-theme="dark"] .vertrag-btn,
+[data-theme="dark"] .submit-btn {
+  background: #b8860b; /* dunkles Gold / Bronze */
+  color: #f8f8f8;      /* warmweiß */
+}
+
+[data-theme="dark"] .vertrag-btn:hover,
+[data-theme="dark"] .submit-btn:hover {
+  background: #a67c00;
+  color: #fff;
+}
