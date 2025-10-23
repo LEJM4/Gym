@@ -1,4 +1,16 @@
 {
+  "TOP_AND_SIDEBAR": "TOP und SIDEBAR",
+
+  "nav_home": "Home",
+  "nav_courses": "Classes",
+  "nav_trainers": "Trainers",
+  "nav_membership": "Memberships",
+  "nav_contact": "Contact",
+  "join_btn": "Join now",
+  "brand_name": "ERIK-Fit",
+
+
+
   "file_name_0": "Mitgliedschaft",
   "title": "Memberships",
   "description": "Choose the membership that fits your lifestyle.",
