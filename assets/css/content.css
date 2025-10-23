@@ -54,3 +54,68 @@ footer {
   border-top: 2px solid var(--accent-color);
   margin-top: 40px; border-radius: 15px;
 }
+
+/* === 🧾 Vertragsauswahl (Mitgliedschaften) === */
+.vertrag-btn {
+  margin-top: 1rem;
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.vertrag-btn:hover {
+  background: var(--btn-hover, #d62828);
+}
+
+.vertrag-section {
+  display: none;
+  max-width: 700px;
+  margin: 2rem auto;
+  background: var(--card-bg);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  text-align: left;
+  animation: fadeIn 0.5s ease;
+}
+.vertrag-section.active {
+  display: block;
+}
+
+.vertrags-formular {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.vertrags-formular input {
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 2px solid var(--border-color);
+  background: var(--bg-color);
+  color: var(--text-color);
+}
+
+.submit-btn {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+.submit-btn:hover {
+  background: var(--btn-hover, #d62828);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}

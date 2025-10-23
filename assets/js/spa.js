@@ -1,6 +1,6 @@
 /* =======================================================
    spa.js – Mini-SPA mit Cache, Auto-Refresh & Tages-Reset
-   Version 4.0 – ERIK-Fit 🚀
+   Version 5.0 – ERIK-Fit 🚀
    ======================================================= */
 
 const contentContainer = document.querySelector('main.content');
@@ -77,6 +77,11 @@ async function renderPage(html, url, addToHistory) {
   contentContainer.classList.remove('fade-out');
   contentContainer.classList.add('fade-in');
   setTimeout(() => contentContainer.classList.remove('fade-in'), 400);
+
+  // 🪄 Custom Event: signalisiere, dass eine neue Seite geladen wurde
+  document.dispatchEvent(new CustomEvent("pageLoaded", {
+    detail: { url }
+  }));
 }
 
 /** Preloader sanft ausblenden */

@@ -142,22 +142,18 @@ function initMenuToggle() {
       sidebar.style.overflow = 'hidden';
 
       if (!isCollapsed) {
-        // ✅ Einklappen
         sidebar.classList.add('collapsed');
         document.body.classList.add('sidebar-collapsed');
         sidebar.style.width = '0px';
         sidebar.style.opacity = '0';
       } else {
-        // ✅ Ausklappen (synchron mit Content)
         sidebar.classList.remove('collapsed');
         sidebar.style.width = '230px';
         sidebar.style.opacity = '1';
-
         sidebar.offsetHeight;
         requestAnimationFrame(() => {
           document.body.classList.remove('sidebar-collapsed');
         });
-
         setTimeout(() => (sidebar.style.overflow = 'auto'), 460);
       }
     }
@@ -191,14 +187,12 @@ function initMenuToggle() {
 document.addEventListener('DOMContentLoaded', () => {
   loadPartials();
 
-  // 📱 Fix: Wenn Handy → Sidebar standardmäßig geschlossen
   if (window.innerWidth < 900) {
     document.body.classList.add('sidebar-collapsed');
   } else {
     document.body.classList.remove('sidebar-collapsed');
   }
 
-  // 🧭 Dynamische Topbar-Höhe (z. B. für iPhone Safe-Area)
   const observer = new ResizeObserver(() => {
     const topbar = document.querySelector('.topbar');
     if (topbar) {
@@ -216,7 +210,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }, 100);
 });
 
-// === 🔄 Bei Fensteränderung oder Bildschirmdrehung Höhe neu berechnen ===
 window.addEventListener('resize', updateTopbarHeight);
 window.addEventListener('orientationchange', updateTopbarHeight);
 
@@ -226,4 +219,39 @@ function updateTopbarHeight() {
     const h = topbar.offsetHeight;
     document.documentElement.style.setProperty('--real-topbar-height', `${h}px`);
   }
+}
+
+/* === 🪄 SPA-Hook: Seitenabhängiger Code === */
+document.addEventListener("pageLoaded", (e) => {
+  const current = (e.detail.url.split("/").pop() || "index.html").toLowerCase();
+
+  // Nur auf der Mitgliedschaftsseite aktivieren
+  if (current === "mitgliedschaften.html") {
+    initVertragsAuswahl();
+  }
+});
+
+/* === 🧾 Vertragsauswahl (Mitgliedschaften) === */
+function initVertragsAuswahl() {
+  const buttons = document.querySelectorAll(".vertrag-btn");
+  const vertragSection = document.getElementById("vertrag-section");
+  const selectedTarif = document.getElementById("selected-tarif");
+
+  if (!buttons.length || !vertragSection) return;
+
+  buttons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tarif = btn.closest(".card").dataset.tarif;
+      selectedTarif.textContent = tarif;
+      vertragSection.classList.add("active");
+      vertragSection.scrollIntoView({ behavior: "smooth" });
+    });
+  });
+
+  const form = document.getElementById("vertrags-formular");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    alert(`✅ Vertrag für "${selectedTarif.textContent}" wurde erfolgreich übermittelt!`);
+    form.reset();
+  });
 }

@@ -28,22 +28,49 @@
       </section>
 
       <section class="highlight-cards">
-        <div class="card">
+        <div class="card" data-tarif="Basic">
           <h3>Basic</h3>
           <p>Ideal für Einsteiger.</p>
           <p><strong>29,99 € / Monat</strong></p>
+          <button class="vertrag-btn">Vertragsentwurf ansehen</button>
         </div>
-        <div class="card">
+
+        <div class="card" data-tarif="Premium">
           <h3>Premium</h3>
           <p>Zugang zu allen Kursen und Sauna.</p>
           <p><strong>49,99 € / Monat</strong></p>
+          <button class="vertrag-btn">Vertragsentwurf ansehen</button>
         </div>
-        <div class="card">
+
+        <div class="card" data-tarif="VIP">
           <h3>VIP</h3>
           <p>Personal Training inklusive.</p>
           <p><strong>79,99 € / Monat</strong></p>
+          <button class="vertrag-btn">Vertragsentwurf ansehen</button>
         </div>
       </section>
+
+      <!-- 💡 Versteckter Bereich, der nach Klick eingeblendet wird -->
+      <section class="vertrag-section" id="vertrag-section">
+        <h3>Vertragsentwurf für <span id="selected-tarif">—</span></h3>
+
+        <form id="vertrags-formular" class="vertrags-formular">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+
+          <label for="email">E-Mail</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="geburtsdatum">Geburtsdatum</label>
+          <input type="date" id="geburtsdatum" name="geburtsdatum">
+
+          <label for="startdatum">Startdatum</label>
+          <input type="date" id="startdatum" name="startdatum" required>
+
+          <button type="submit" class="submit-btn">Vertrag absenden</button>
+        </form>
+      </section>
+
 
       <footer>
         <p>© 2025 MC-Fit. Alle Rechte vorbehalten.</p>
