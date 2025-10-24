@@ -9,6 +9,9 @@
   "join_btn": "Join now",
   "brand_name": "ERIK-Fit",
 
+  
+  "FOOTER": "FOOTER TEXT",
+  "footer_text": "© 2025 MC-Fit. All rights reserved.",
 
 
   "file_name_0": "Mitgliedschaft",
@@ -27,7 +30,6 @@
 
 
   "file_name_1": "INDEX", 
-  "footer": "© 2025 MC-Fit. All rights reserved.",
   "index_title": "ERIK-Fit | Your Fitness Studio",
   "hero_title": "Welcome to ERIK-Fit",
   "hero_text": "Your journey to more strength, endurance and well-being starts here.",

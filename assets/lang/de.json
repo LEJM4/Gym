@@ -1,6 +1,6 @@
 {
   "TOP_UND_SIDEBAR": "TOP und SIDEBAR",
-
+  
   "nav_home": "Start",
   "nav_courses": "Kurse",
   "nav_trainers": "Trainer",
@@ -8,6 +8,11 @@
   "nav_contact": "Kontakt",
   "join_btn": "Mitglied werden",
   "brand_name": "ERIK-Fit",
+  
+
+
+  "FOOTER": "FOOOTER",
+  "footer_text": "© 2025 ERIK-Fit. Alle Rechte vorbehalten.",
 
 
   "file_0": "Mitgliedschaft-DAtei",
@@ -34,7 +39,13 @@
   "hero_btn": "Jetzt Kontakt aufnehmen",
   "why_title": "Warum ERIK-Fit?",
 
-  "why_text": "update 24-10 V1",
+
+
+  "why_text": "update 24-10 V2 with footer ",
+
+
+
+
 
   "card1_title": "Moderne Ausstattung",
   "card1_text": "Trainiere mit hochwertigen Geräten in angenehmer Atmosphäre.",
@@ -42,7 +53,6 @@
   "card2_text": "Unsere Trainer unterstützen dich mit Expertise und Motivation.",
   "card3_title": "Flexible Kurse",
   "card3_text": "Von Yoga bis CrossFit – wir bieten für jeden das passende Programm.",
-  "footer": "© 2025 ERIK-Fit. Alle Rechte vorbehalten.",
   "loading": "Lädt...",
 
   "file_2": "kontakt-DAtei",

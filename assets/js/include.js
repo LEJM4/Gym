@@ -38,20 +38,27 @@ async function loadComponent(path, targetId, replacements = {}) {
 // ===========================================================
 async function loadPartials() {
   try {
-    const [topbarHtml, sidebarHtml] = await Promise.all([
+    const [topbarHtml, sidebarHtml, footerHtml] = await Promise.all([
       fetch('./partials/layout/topbar.html').then(r => r.ok ? r.text() : Promise.reject('Topbar Fehler')),
-      fetch('./partials/layout/sidebar.html').then(r => r.ok ? r.text() : Promise.reject('Sidebar Fehler'))
+      fetch('./partials/layout/sidebar.html').then(r => r.ok ? r.text() : Promise.reject('Sidebar Fehler')),
+      fetch('./partials/layout/footer.html').then(r => r.ok ? r.text() : Promise.reject('Footer Fehler'))
     ]);
 
     document.getElementById('topbar-mount').innerHTML = topbarHtml;
     document.getElementById('sidebar-mount').innerHTML = sidebarHtml;
+
+    // 🔽 Footer hinzufügen, falls noch nicht vorhanden
+    const main = document.querySelector('main.content');
+    if (main && !main.querySelector('footer')) {
+      main.insertAdjacentHTML('beforeend', footerHtml);
+    }
 
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
     initMenuToggle();
 
-    // --- Preloader steuern ---
+    // --- Preloader ---
     const preloader = document.getElementById('preloader');
     document.documentElement.style.visibility = 'hidden';
     setTimeout(() => preloader?.classList.add('hidden'), 300);
