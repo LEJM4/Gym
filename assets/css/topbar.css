@@ -16,6 +16,7 @@
   right: 0;
   z-index: 1000;
   box-sizing: border-box;
+  transition: background 0.3s ease, padding 0.3s ease;
 }
 
 /* --- Linke Seite: Burger + Logo --- */
@@ -35,7 +36,7 @@
   width: 42px;
   height: 42px;
   cursor: pointer;
-  transition: none; /* ❌ Keine Animation */
+  transition: transform 0.2s ease;
 }
 
 .menu-toggle svg {
@@ -43,7 +44,10 @@
   height: 28px;
   stroke: var(--accent-color);
   display: block;
-  margin: auto;
+}
+
+.menu-toggle:active {
+  transform: scale(0.9);
 }
 
 .logo {
@@ -52,7 +56,6 @@
   border-radius: 50%;
   object-fit: cover;
   display: block;
-  align-self: center;
   position: relative;
   top: 1px; /* minimaler optischer Ausgleich */
 }
@@ -93,9 +96,6 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 32px;
 }
 
@@ -121,23 +121,11 @@
   width: 20px;
   height: 20px;
   fill: var(--accent-color);
-  display: block;
-  margin: auto;
-}
-
-/* --- Vertikale Zentrierung Fix für alle Container --- */
-.topbar,
-.topbar-left,
-.topbar-center,
-.topbar-right {
-  display: flex;
-  align-items: center;
 }
 
 /* --- Responsive Anpassungen --- */
 @media (max-width: 900px) {
   .topbar {
-    grid-template-columns: auto 1fr auto;
     padding: 0 12px;
     height: 62px;
   }
@@ -158,7 +146,6 @@
 
   .logo {
     height: 38px;
-    top: 0;
   }
 
   .topbar-center .btn-gold {
@@ -189,4 +176,34 @@
     font-size: 0.8rem;
     padding: 6px 10px;
   }
+}
+
+/* === 📱 iPhone Querformat Safe-Area Fix === */
+@supports(padding: max(0px)) {
+  .topbar {
+    /* Platz für Kamera / Dynamic Island erzwingen */
+    padding-top: max(var(--safe-top), 8px);
+  }
+
+  .menu-toggle {
+    margin-top: max(var(--safe-top), 6px);
+  }
+}
+
+/* === Querformat-spezifischer Hintergrund === */
+@media (orientation: landscape) {
+  .topbar {
+    background: rgba(0, 0, 0, 0.65); /* leichte Abdunklung für bessere Sichtbarkeit */
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  [data-theme="light"] .topbar {
+    background: rgba(255, 255, 255, 0.75);
+  }
+}
+
+/* ✅ Sanfte Anpassung beim Drehen */
+.topbar.orientation-fix {
+  transition: padding 0.3s ease, background 0.4s ease;
 }
