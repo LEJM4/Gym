@@ -322,3 +322,36 @@ document.addEventListener('pageLoaded', (e) => {
     initVertragsAuswahl();
   }
 });
+
+// === 🔁 FOOTER nach jedem Seitenwechsel laden (ohne Duplikate) ===
+async function ensureFooter() {
+  try {
+    // Stelle sicher, dass kein doppelter Footer existiert
+    document.querySelectorAll('main.content footer').forEach((f, i) => {
+      if (i > 0) f.remove(); // alle bis auf den ersten löschen
+    });
+
+    const main = document.querySelector('main.content');
+    if (!main) return;
+
+    // Wenn kein Footer vorhanden → nachladen
+    if (!main.querySelector('footer')) {
+      const res = await fetch('./partials/layout/footer.html');
+      if (!res.ok) throw new Error('Footer Fehler');
+      const footerHtml = await res.text();
+      main.insertAdjacentHTML('beforeend', footerHtml);
+    }
+  } catch (err) {
+    console.error('❌ Footer konnte nicht geladen werden:', err);
+  }
+}
+
+// 🧠 Footer einmal beim ersten Laden einfügen
+document.addEventListener('DOMContentLoaded', () => {
+  ensureFooter();
+});
+
+// 🔄 Footer auch bei jedem SPA-Seitenwechsel sicherstellen
+document.addEventListener('pageLoaded', () => {
+  ensureFooter();
+});
