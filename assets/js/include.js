@@ -323,35 +323,35 @@ document.addEventListener('pageLoaded', (e) => {
   }
 });
 
-// === 🔁 FOOTER nach jedem Seitenwechsel laden (ohne Duplikate) ===
+// === 🔁 FOOTER Handling: Initial + SPA-kompatibel, ohne Duplikate ===
 async function ensureFooter() {
   try {
-    // Stelle sicher, dass kein doppelter Footer existiert
-    document.querySelectorAll('main.content footer').forEach((f, i) => {
-      if (i > 0) f.remove(); // alle bis auf den ersten löschen
-    });
-
     const main = document.querySelector('main.content');
     if (!main) return;
 
-    // Wenn kein Footer vorhanden → nachladen
-    if (!main.querySelector('footer')) {
-      const res = await fetch('./partials/layout/footer.html');
-      if (!res.ok) throw new Error('Footer Fehler');
-      const footerHtml = await res.text();
-      main.insertAdjacentHTML('beforeend', footerHtml);
-    }
+    // Wenn schon ein Footer existiert → abbrechen
+    if (main.querySelector('footer')) return;
+
+    const res = await fetch('./partials/layout/footer.html');
+    if (!res.ok) throw new Error('Footer Fehler');
+    const footerHtml = await res.text();
+
+    main.insertAdjacentHTML('beforeend', footerHtml);
   } catch (err) {
     console.error('❌ Footer konnte nicht geladen werden:', err);
   }
 }
 
-// 🧠 Footer einmal beim ersten Laden einfügen
-document.addEventListener('DOMContentLoaded', () => {
-  ensureFooter();
-});
+// ✅ Footer wird beim ersten Laden über loadPartials() eingefügt
+// 🔄 Hier nur für SPA-Navigation aktivieren
+document.addEventListener('pageLoaded', async () => {
+  const main = document.querySelector('main.content');
 
-// 🔄 Footer auch bei jedem SPA-Seitenwechsel sicherstellen
-document.addEventListener('pageLoaded', () => {
-  ensureFooter();
+  // Doppelte Footer entfernen (Sicherheitsnetz)
+  main?.querySelectorAll('footer')?.forEach((f, i) => {
+    if (i > 0) f.remove();
+  });
+
+  // Falls Footer fehlt → nachladen
+  await ensureFooter();
 });
