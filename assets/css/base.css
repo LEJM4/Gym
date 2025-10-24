@@ -1,3 +1,38 @@
+html, body {
+  height: calc(var(--real-vh, 1vh) * 100);
+}
+
+
+:root {
+  /* Definiere sichere Bereiche für Notch-Displays */
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
+  --safe-right: env(safe-area-inset-right);
+}
+
+/* Stelle sicher, dass der Body diese Zonen berücksichtigt */
+body {
+  padding-top: var(--safe-top);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+  padding-right: var(--safe-right);
+  background-color: var(--bg-color);
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Topbar erhält zusätzlich Puffer */
+.topbar {
+  padding-top: calc(10px + var(--safe-top));
+}
+
+/* Optional: Footer nicht verdecken lassen */
+.site-footer {
+  padding-bottom: calc(20px + var(--safe-bottom));
+}
+
+
 /* === 1️⃣ BASE: Variablen, Grundlayout === */
 
 :root[data-theme='light'] {

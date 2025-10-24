@@ -372,3 +372,19 @@ document.addEventListener('pageLoaded', async () => {
   // Nachladen + Übersetzung
   await ensureFooter();
 });
+
+// 📱 iOS Fix: Viewport nach Drehung korrigieren
+window.addEventListener('orientationchange', () => {
+  setTimeout(() => {
+    document.documentElement.style.setProperty(
+      '--real-vh',
+      `${window.innerHeight * 0.01}px`
+    );
+  }, 250);
+});
+
+// Initial setzen
+document.documentElement.style.setProperty(
+  '--real-vh',
+  `${window.innerHeight * 0.01}px`
+);
