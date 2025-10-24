@@ -323,35 +323,52 @@ document.addEventListener('pageLoaded', (e) => {
   }
 });
 
-// === 🔁 FOOTER Handling: Initial + SPA-kompatibel, ohne Duplikate ===
+// === 🔁 FOOTER Handling: Initial + SPA-kompatibel + Mehrsprachig ===
 async function ensureFooter() {
   try {
     const main = document.querySelector('main.content');
     if (!main) return;
 
-    // Wenn schon ein Footer existiert → abbrechen
-    if (main.querySelector('footer')) return;
+    // Wenn Footer schon existiert → abbrechen
+    if (main.querySelector('footer')) {
+      // 🧠 aber Übersetzung trotzdem aktualisieren
+      const lang = localStorage.getItem('lang') || 'de';
+      const res = await fetch(`./assets/lang/${lang}.json`);
+      if (res.ok) {
+        const data = await res.json();
+        applyTranslations(data);
+      }
+      return;
+    }
 
+    // 🔄 Footer nachladen
     const res = await fetch('./partials/layout/footer.html');
     if (!res.ok) throw new Error('Footer Fehler');
     const footerHtml = await res.text();
 
     main.insertAdjacentHTML('beforeend', footerHtml);
+
+    // 🌍 Direkt nach dem Einfügen Übersetzung anwenden
+    const lang = localStorage.getItem('lang') || 'de';
+    const langRes = await fetch(`./assets/lang/${lang}.json`);
+    if (langRes.ok) {
+      const data = await langRes.json();
+      applyTranslations(data);
+    }
   } catch (err) {
-    console.error('❌ Footer konnte nicht geladen werden:', err);
+    console.error('❌ Footer konnte nicht geladen oder übersetzt werden:', err);
   }
 }
 
-// ✅ Footer wird beim ersten Laden über loadPartials() eingefügt
-// 🔄 Hier nur für SPA-Navigation aktivieren
+// 🔄 Footer bei jedem SPA-Seitenwechsel prüfen & übersetzen
 document.addEventListener('pageLoaded', async () => {
   const main = document.querySelector('main.content');
 
-  // Doppelte Footer entfernen (Sicherheitsnetz)
+  // Sicherheitsnetz: Doppelte Footer löschen
   main?.querySelectorAll('footer')?.forEach((f, i) => {
     if (i > 0) f.remove();
   });
 
-  // Falls Footer fehlt → nachladen
+  // Nachladen + Übersetzung
   await ensureFooter();
 });
