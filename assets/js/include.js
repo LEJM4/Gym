@@ -1,6 +1,8 @@
-/* ===============================
-   include.js – erweitert mit Sprachsystem (DE / EN)
-   =============================== */
+/* ===========================================================
+   include.js – ERIK-Fit Modular System v6
+   Lädt Layout, Sections & Components automatisch
+   + Theme, Language, SPA-Kompatibilität & Komponentenlogik
+   =========================================================== */
 
 // --- 0️⃣ Ladezustand sofort aktivieren ---
 document.documentElement.style.visibility = 'hidden';
@@ -10,28 +12,48 @@ document.body.classList.add('loading');
 const savedTheme = localStorage.getItem('theme') || 'dark';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
-// --- 2️⃣ Partials laden ---
+// ===========================================================
+// 🧩 UNIVERSAL-COMPONENT-LOADER
+// ===========================================================
+async function loadComponent(path, targetId, replacements = {}) {
+  try {
+    const res = await fetch(path);
+    if (!res.ok) throw new Error(`Fehler beim Laden von ${path}`);
+    let html = await res.text();
+
+    // 🧠 Platzhalter ersetzen → {{TITLE}} etc.
+    for (const [key, value] of Object.entries(replacements)) {
+      html = html.replaceAll(`{{${key}}}`, value);
+    }
+
+    const target = document.getElementById(targetId);
+    if (target) target.innerHTML = html;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// ===========================================================
+// 🧭 PARTIALS LADEN (Topbar + Sidebar)
+// ===========================================================
 async function loadPartials() {
   try {
     const [topbarHtml, sidebarHtml] = await Promise.all([
-      fetch('./partials/topbar.html').then(r => r.ok ? r.text() : Promise.reject('Topbar Fehler')),
-      fetch('./partials/sidebar.html').then(r => r.ok ? r.text() : Promise.reject('Sidebar Fehler'))
+      fetch('./partials/layout/topbar.html').then(r => r.ok ? r.text() : Promise.reject('Topbar Fehler')),
+      fetch('./partials/layout/sidebar.html').then(r => r.ok ? r.text() : Promise.reject('Sidebar Fehler'))
     ]);
 
-    // Mount-Punkte einfügen
     document.getElementById('topbar-mount').innerHTML = topbarHtml;
     document.getElementById('sidebar-mount').innerHTML = sidebarHtml;
 
-    // Init-Funktionen erst starten, wenn HTML geladen ist
     initSidebarActive();
     initThemeToggle();
     initLanguageSwitch();
     initMenuToggle();
 
-    // --- Preloader sichtbar lassen bis alles eingefügt ist ---
+    // --- Preloader steuern ---
     const preloader = document.getElementById('preloader');
     document.documentElement.style.visibility = 'hidden';
-
     setTimeout(() => preloader?.classList.add('hidden'), 300);
     setTimeout(() => {
       document.body.classList.remove('loading');
@@ -46,7 +68,9 @@ async function loadPartials() {
   }
 }
 
-/* --- Sidebar: aktiven Menüpunkt markieren --- */
+// ===========================================================
+// 🔗 SIDEBAR – aktiven Menüpunkt markieren
+// ===========================================================
 function initSidebarActive() {
   const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
   document.querySelectorAll('.sidebar a').forEach(a => {
@@ -55,7 +79,9 @@ function initSidebarActive() {
   });
 }
 
-/* --- 🌗 Theme Toggle mit SVG --- */
+// ===========================================================
+// 🌗 THEME SWITCH
+// ===========================================================
 function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   const icon = document.getElementById('theme-icon');
@@ -77,22 +103,17 @@ function initThemeToggle() {
   });
 }
 
-/* --- 🔆 SVG-Icon wechseln --- */
 function setThemeIcon(theme) {
   const icon = document.getElementById('theme-icon');
   if (!icon) return;
-
-  if (theme === 'dark') {
-    icon.innerHTML = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
-  } else {
-    icon.innerHTML = `
-      <circle cx="12" cy="12" r="5"/>
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-    `;
-  }
+  icon.innerHTML = theme === 'dark'
+    ? `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`
+    : `<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>`;
 }
 
-/* === 🌍 Sprachsystem === */
+// ===========================================================
+// 🌍 LANGUAGE SYSTEM (JSON + Auto Translate)
+// ===========================================================
 async function loadLanguage(lang) {
   try {
     const res = await fetch(`./assets/lang/${lang}.json`);
@@ -105,9 +126,26 @@ async function loadLanguage(lang) {
 }
 
 function applyTranslations(data) {
+  // Normaler Text
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
-    if (data[key]) el.textContent = data[key];
+    if (data[key]) el.innerHTML = data[key];
+  });
+
+  // Placeholder-Texte
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (data[key]) el.setAttribute('placeholder', data[key]);
+  });
+
+  // Aria-Labels, Title usw.
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const key = el.getAttribute('data-i18n-aria');
+    if (data[key]) el.setAttribute('aria-label', data[key]);
+  });
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const key = el.getAttribute('data-i18n-title');
+    if (data[key]) el.setAttribute('title', data[key]);
   });
 }
 
@@ -123,8 +161,7 @@ function initLanguageSwitch() {
     document.documentElement.setAttribute('lang', lang);
 
     const preloaderText = document.querySelector('#preloader p');
-    if (preloaderText)
-      preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
+    if (preloaderText) preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
 
     loadLanguage(lang);
   };
@@ -135,7 +172,9 @@ function initLanguageSwitch() {
   btnEn.addEventListener('click', () => setLang('en'));
 }
 
-/* === 📱💻 Mobile & Desktop Menü Toggle (synchronisiert) === */
+// ===========================================================
+// 📱 MENÜ-TOGGLE (Mobile + Desktop Slide)
+// ===========================================================
 function initMenuToggle() {
   const menuBtn = document.getElementById('menu-toggle');
   const sidebar = document.querySelector('.sidebar');
@@ -154,7 +193,6 @@ function initMenuToggle() {
       const isCollapsed = sidebar.classList.contains('collapsed');
       sidebar.style.transition = 'width 0.45s ease, opacity 0.35s ease';
       sidebar.style.overflow = 'hidden';
-
       if (!isCollapsed) {
         sidebar.classList.add('collapsed');
         document.body.classList.add('sidebar-collapsed');
@@ -173,7 +211,7 @@ function initMenuToggle() {
     }
   });
 
-  // Klick außerhalb → schließt Menü (nur Mobile)
+  // Klick außerhalb → Menü schließen (nur Mobile)
   document.addEventListener('click', (e) => {
     if (
       window.innerWidth < 900 &&
@@ -187,7 +225,7 @@ function initMenuToggle() {
     }
   });
 
-  // Klick auf Link (nur Mobile) → Sidebar automatisch schließen
+  // Klick auf Link (nur Mobile)
   sidebar.addEventListener('click', (e) => {
     if (e.target.tagName === 'A' && window.innerWidth < 900) {
       sidebar.classList.remove('open');
@@ -197,16 +235,44 @@ function initMenuToggle() {
   });
 }
 
-/* === Start + Topbar-Höhenbeobachtung === */
+// ===========================================================
+// 🧾 Vertragsauswahl (Mitgliedschaften)
+// ===========================================================
+function initVertragsAuswahl() {
+  const buttons = document.querySelectorAll('.vertrag-btn');
+  const vertragSection = document.getElementById('vertrag-section');
+  const selectedTarif = document.getElementById('selected-tarif');
+
+  if (!buttons.length || !vertragSection) return;
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tarif = btn.closest('.card').dataset.tarif;
+      selectedTarif.textContent = tarif;
+      vertragSection.classList.add('active');
+      vertragSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const form = document.getElementById('vertrags-formular');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    alert(`✅ Vertrag für "${selectedTarif.textContent}" wurde erfolgreich übermittelt!`);
+    form.reset();
+  });
+}
+
+// ===========================================================
+// 📏 INIT (nach DOM-Load)
+// ===========================================================
 document.addEventListener('DOMContentLoaded', () => {
   loadPartials();
 
-  if (window.innerWidth < 900) {
-    document.body.classList.add('sidebar-collapsed');
-  } else {
-    document.body.classList.remove('sidebar-collapsed');
-  }
+  // Sidebar-Zustand
+  if (window.innerWidth < 900) document.body.classList.add('sidebar-collapsed');
+  else document.body.classList.remove('sidebar-collapsed');
 
+  // Dynamische Topbar-Höhe
   const observer = new ResizeObserver(() => {
     const topbar = document.querySelector('.topbar');
     if (topbar) {
@@ -235,41 +301,17 @@ function updateTopbarHeight() {
   }
 }
 
-/* === 🪄 SPA-Hook: Seitenabhängiger Code === */
+// ===========================================================
+// 🪄 SPA-HOOK: Seitenabhängiger Code
+// ===========================================================
 document.addEventListener('pageLoaded', (e) => {
   const current = (e.detail.url.split('/').pop() || 'index.html').toLowerCase();
 
-  // Sprache nachladen bei SPA-Wechsel
+  // Sprache immer nachladen
   const lang = localStorage.getItem('lang') || 'de';
   loadLanguage(lang);
 
-  // Nur auf der Mitgliedschaftsseite aktivieren
   if (current === 'mitgliedschaften.html') {
     initVertragsAuswahl();
   }
 });
-
-/* === 🧾 Vertragsauswahl (Mitgliedschaften) === */
-function initVertragsAuswahl() {
-  const buttons = document.querySelectorAll('.vertrag-btn');
-  const vertragSection = document.getElementById('vertrag-section');
-  const selectedTarif = document.getElementById('selected-tarif');
-
-  if (!buttons.length || !vertragSection) return;
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tarif = btn.closest('.card').dataset.tarif;
-      selectedTarif.textContent = tarif;
-      vertragSection.classList.add('active');
-      vertragSection.scrollIntoView({ behavior: 'smooth' });
-    });
-  });
-
-  const form = document.getElementById('vertrags-formular');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert(`✅ Vertrag für "${selectedTarif.textContent}" wurde erfolgreich übermittelt!`);
-    form.reset();
-  });
-}
