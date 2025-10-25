@@ -214,3 +214,53 @@
 .topbar.orientation-fix {
   transition: padding 0.3s ease, background 0.4s ease;
 }
+
+
+/* === 🔐 LOGIN BUTTONS === */
+.desktop-login {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.25s ease;
+}
+
+.desktop-login:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+/* Mobile Login Icon */
+.mobile-login {
+  display: none;
+  width: 34px;
+  height: 34px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.mobile-login svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent-color);
+}
+
+.mobile-login:hover {
+  background: rgba(255, 215, 0, 0.1);
+}
+
+/* Sichtbarkeit je nach Gerät */
+@media (max-width: 900px) {
+  .desktop-login {
+    display: none;
+  }
+  .mobile-login {
+    display: flex;
+  }
+}

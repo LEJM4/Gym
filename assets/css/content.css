@@ -131,3 +131,24 @@ footer {
 :root[data-theme="dark"] .submit-btn:hover {
   background:  gold;   
 }
+
+.login-section {
+  text-align: center;
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.register-hint {
+  margin-top: 20px;
+  font-size: 0.95rem;
+}
+
+.link-highlight {
+  color: var(--accent-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.link-highlight:hover {
+  text-decoration: underline;
+}

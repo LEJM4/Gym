@@ -12,16 +12,27 @@
     </button>
 
     <img src="./assets/img/logo.png" alt="ERIK-Fit Logo" class="logo">
-    <h1 data-i18n="brand_name">ERIK-Fit</h1>
+    <h1>ERIK-Fit</h1>
   </div>
 
-  <!-- MITTE: Mitglied werden -->
+  <!-- 💎 Desktop: Mitglied werden -->
   <div class="topbar-center">
-    <a href="mitgliedschaften.html" data-link class="btn btn-gold" data-i18n="join_btn">Mitglied werden</a>
+    <a href="mitgliedschaften.html" data-link class="btn btn-gold">Mitglied werden</a>
   </div>
 
-  <!-- RECHTS: Sprache + Theme -->
+  <!-- ➡️ Rechts: Login / Sprache / Theme -->
   <div class="topbar-right">
+    <!-- Desktop-Login -->
+    <a href="login.html" data-link class="btn btn-outline desktop-login">Login</a>
+
+    <!-- Mobile Login Icon -->
+    <a href="login.html" data-link class="mobile-login" aria-label="Login">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2">
+        <path d="M10 17v-3H3v-4h7V7l5 5-5 5z"/>
+        <path d="M20 3h-8v2h8v14h-8v2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2z"/>
+      </svg>
+    </a>
+
     <!-- Sprache -->
     <div class="lang-switch">
       <button id="lang-de" class="lang-btn active">DE</button>

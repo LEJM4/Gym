@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ERIK-Fit | Login</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="loading">
+  <div id="preloader">
+    <div class="preloader-inner">
+      <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo"/>
+      <div class="preloader-ring"></div>
+      <p>Lädt...</p>
+    </div>
+  </div>
+
+  <div id="topbar-mount"></div>
+  <div class="layout">
+    <div id="sidebar-mount"></div>
+
+    <main class="content">
+      <section class="about">
+        <h2>Login</h2>
+        <p>Melde dich mit deinem ERIK-Fit-Konto an.</p>
+      </section>
+
+      <section class="login-section">
+        <form class="kontakt-form">
+          <input type="email" name="email" placeholder="E-Mail" required>
+          <input type="password" name="password" placeholder="Passwort" required>
+          <button type="submit" class="btn btn-gold">Einloggen</button>
+        </form>
+
+        <p class="register-hint">
+          Noch kein Konto?
+          <a href="mitgliedschaften.html" data-link class="link-highlight">Jetzt Mitglied werden</a>
+        </p>
+      </section>
+
+      <footer>
+        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+      </footer>
+    </main>
+  </div>
+
+  <script src="./assets/js/include.js"></script>
+</body>
+</html>
