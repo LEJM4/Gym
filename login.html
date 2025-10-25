@@ -3,16 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>ERIK-Fit | Login</title>
+  <title data-i18n="login_title">ERIK-Fit | Login</title>
   <link rel="stylesheet" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="loading">
+  <!-- 🌀 Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
       <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo"/>
       <div class="preloader-ring"></div>
-      <p>Lädt...</p>
+      <p data-i18n="loading_text">Lädt...</p>
     </div>
   </div>
 
@@ -22,29 +24,39 @@
 
     <main class="content">
       <section class="about">
-        <h2>Login</h2>
-        <p>Melde dich mit deinem ERIK-Fit-Konto an.</p>
+        <h2 data-i18n="login_heading">Login</h2>
+        <p data-i18n="login_description">Melde dich mit deinem ERIK-Fit-Konto an.</p>
       </section>
 
       <section class="login-section">
-        <form class="kontakt-form">
-          <input type="email" name="email" placeholder="E-Mail" required>
-          <input type="password" name="password" placeholder="Passwort" required>
-          <button type="submit" class="btn btn-gold">Einloggen</button>
+        <form id="login-form" class="kontakt-form">
+          <input type="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="E-Mail" required>
+          <input type="password" name="password" data-i18n-placeholder="password_placeholder" placeholder="Passwort" required>
+          <button type="submit" class="btn btn-gold" data-i18n="login_button">Einloggen</button>
         </form>
 
         <p class="register-hint">
-          Noch kein Konto?
-          <a href="mitgliedschaften.html" data-link class="link-highlight">Jetzt Mitglied werden</a>
+          <span data-i18n="no_account_text">Noch kein Konto?</span>
+          <a href="mitgliedschaften.html" data-link class="link-highlight" data-i18n="register_link">Jetzt Mitglied werden</a>
         </p>
       </section>
 
       <footer>
-        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+        <p data-i18n="footer_text">© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
       </footer>
     </main>
   </div>
 
   <script src="./assets/js/include.js"></script>
+
+  <script>
+    // 💾 Fake-Login (Simulation)
+    document.getElementById("login-form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      localStorage.setItem("userLoggedIn", "true");
+      alert("✅ Erfolgreich eingeloggt!");
+      window.location.href = "mitgliedschaften.html";
+    });
+  </script>
 </body>
 </html>

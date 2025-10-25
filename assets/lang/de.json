@@ -91,5 +91,18 @@
   "trainer1_name": "ERIK BOT",
   "trainer1_role": "Functional & CrossFit Experte",
   "trainer2_name": "ERIK Flex",
-  "trainer2_role": "Yoga & Mobility Coach"
+  "trainer2_role": "Yoga & Mobility Coach",
+
+
+  
+  "file_5": "LOGIN STUF",
+  "login_title": "ERIK-Fit | Login",
+  "loading_text": "Lädt...",
+  "login_heading": "Login",
+  "login_description": "Melde dich mit deinem ERIK-Fit-Konto an.",
+  "email_placeholder": "E-Mail",
+  "password_placeholder": "Passwort",
+  "login_button": "Einloggen",
+  "no_account_text": "Noch kein Konto?",
+  "register_link": "Jetzt Mitglied werden"
 }
