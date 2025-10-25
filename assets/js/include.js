@@ -391,23 +391,57 @@ document.documentElement.style.setProperty(
 
 
 /* === 🌍 Sprachmenü-Logik === */
-document.addEventListener("click", (e) => {
+/* === 🌍 Sprachmenü-Logik === */
+document.addEventListener("click", async (e) => {
   const toggle = e.target.closest("#lang-toggle");
   const dropdown = document.getElementById("lang-dropdown");
 
+  // 🌍 Dropdown öffnen/schließen
   if (toggle) {
     dropdown.classList.toggle("show");
-  } else if (!e.target.closest(".lang-menu")) {
+    return;
+  }
+
+  // 🌍 Dropdown schließen bei Klick außerhalb
+  if (!e.target.closest(".lang-menu")) {
     dropdown.classList.remove("show");
   }
 
-  // Sprache wechseln
+  // 🌍 Sprache wechseln
   const langBtn = e.target.closest("[data-lang]");
   if (langBtn) {
     const lang = langBtn.getAttribute("data-lang");
     localStorage.setItem("lang", lang);
     document.documentElement.setAttribute("lang", lang);
     dropdown.classList.remove("show");
-    updateLanguage(lang); // 🔄 dein bestehender Sprachwechsel
+
+    // 🔁 Sprache anwenden
+    await updateLanguage(lang);
   }
 });
+
+/* === 🔄 Sprachupdate-Funktion === */
+async function updateLanguage(lang) {
+  try {
+    // JSON-Datei laden
+    const res = await fetch(`./assets/lang/${lang}.json`);
+    if (!res.ok) throw new Error(`Sprachdatei ${lang}.json fehlt`);
+    const data = await res.json();
+
+    // Übersetzungen anwenden
+    applyTranslations(data);
+
+    // Preloader-Text anpassen
+    const preloaderText = document.querySelector('#preloader p');
+    if (preloaderText) {
+      preloaderText.textContent = lang === 'de' ? 'Lädt...' : 'Loading...';
+    }
+
+    // Footer mitübersetzen
+    await ensureFooter();
+
+    console.log(`🌍 Sprache erfolgreich gewechselt zu: ${lang.toUpperCase()}`);
+  } catch (err) {
+    console.error('❌ Fehler beim Sprachwechsel:', err);
+  }
+}
