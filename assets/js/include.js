@@ -391,7 +391,7 @@ document.documentElement.style.setProperty(
 
 
 /* === 🌍 Sprachmenü-Logik === */
-/* === 🌍 Sprachmenü-Logik === */
+/* === 🌍 Sprachmenü-Logik (mit aktiver Markierung) === */
 document.addEventListener("click", async (e) => {
   const toggle = e.target.closest("#lang-toggle");
   const dropdown = document.getElementById("lang-dropdown");
@@ -399,6 +399,11 @@ document.addEventListener("click", async (e) => {
   // 🌍 Dropdown öffnen/schließen
   if (toggle) {
     dropdown.classList.toggle("show");
+
+    // Wenn geöffnet → aktuelle Sprache hervorheben
+    if (dropdown.classList.contains("show")) {
+      highlightActiveLang();
+    }
     return;
   }
 
@@ -440,8 +445,21 @@ async function updateLanguage(lang) {
     // Footer mitübersetzen
     await ensureFooter();
 
+    // Aktive Markierung aktualisieren
+    highlightActiveLang();
+
     console.log(`🌍 Sprache erfolgreich gewechselt zu: ${lang.toUpperCase()}`);
   } catch (err) {
     console.error('❌ Fehler beim Sprachwechsel:', err);
   }
+}
+
+/* === 🟡 Aktive Sprache visuell hervorheben === */
+function highlightActiveLang() {
+  const current = localStorage.getItem("lang") || "de";
+  const buttons = document.querySelectorAll("#lang-dropdown [data-lang]");
+  buttons.forEach(btn => {
+    const isActive = btn.getAttribute("data-lang") === current;
+    btn.classList.toggle("active", isActive);
+  });
 }

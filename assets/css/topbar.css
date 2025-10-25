@@ -338,3 +338,10 @@
     top: 38px;
   }
 }
+
+/* === 🌍 Sprachmenü: aktive Sprache markieren === */
+.lang-dropdown button.active {
+  background: var(--accent-color);
+  color: var(--bg-color);
+  font-weight: 700;
+}
