@@ -264,3 +264,77 @@
     display: flex;
   }
 }
+
+/* === 🌍 Sprachmenü kompakt === */
+.lang-menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lang-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-color);
+  transition: background 0.2s ease;
+}
+
+.lang-toggle svg {
+  width: 22px;
+  height: 22px;
+  stroke: var(--accent-color);
+}
+
+.lang-toggle:hover {
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Dropdown Menü */
+.lang-dropdown {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--accent-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  z-index: 1500;
+}
+
+.lang-dropdown button {
+  background: none;
+  border: none;
+  padding: 10px 16px;
+  color: var(--text-color);
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: background 0.2s ease;
+}
+
+.lang-dropdown button:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+
+.lang-dropdown.show {
+  display: flex;
+}
+
+/* Mobile: Dropdown leicht nach unten verschieben */
+@media (max-width: 900px) {
+  .lang-dropdown {
+    top: 38px;
+  }
+}

@@ -388,3 +388,26 @@ document.documentElement.style.setProperty(
   '--real-vh',
   `${window.innerHeight * 0.01}px`
 );
+
+
+/* === 🌍 Sprachmenü-Logik === */
+document.addEventListener("click", (e) => {
+  const toggle = e.target.closest("#lang-toggle");
+  const dropdown = document.getElementById("lang-dropdown");
+
+  if (toggle) {
+    dropdown.classList.toggle("show");
+  } else if (!e.target.closest(".lang-menu")) {
+    dropdown.classList.remove("show");
+  }
+
+  // Sprache wechseln
+  const langBtn = e.target.closest("[data-lang]");
+  if (langBtn) {
+    const lang = langBtn.getAttribute("data-lang");
+    localStorage.setItem("lang", lang);
+    document.documentElement.setAttribute("lang", lang);
+    dropdown.classList.remove("show");
+    updateLanguage(lang); // 🔄 dein bestehender Sprachwechsel
+  }
+});
