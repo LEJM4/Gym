@@ -178,15 +178,22 @@
   }
 }
 
-/* === 📱 iPhone Querformat Safe-Area Fix === */
+/* === 📱 iPhone Querformat Safe-Area Fix (optimiert & zentriert) === */
 @supports(padding: max(0px)) {
   .topbar {
-    /* Platz für Kamera / Dynamic Island erzwingen */
-    padding-top: max(var(--safe-top), 8px);
+    /* Fix: Safe-Area berücksichtigen, aber Inhalt optisch mittig halten */
+    padding-top: max(var(--safe-top), 0px);
+    padding-bottom: max(var(--safe-bottom), 0px);
+    display: flex;
+    align-items: center;
+  }
+
+  .topbar > * {
+    align-items: center;
   }
 
   .menu-toggle {
-    margin-top: max(var(--safe-top), 6px);
+    margin-top: 0; /* nicht zusätzlich verschieben */
   }
 }
 
