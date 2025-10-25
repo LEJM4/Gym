@@ -275,6 +275,12 @@ function initVertragsAuswahl() {
 document.addEventListener('DOMContentLoaded', () => {
   loadPartials();
 
+  // === 🌍 Sprache initial laden & markieren ===
+  const lang = localStorage.getItem('lang') || 'de';
+  loadLanguage(lang);
+  highlightActiveLang();
+
+
   // Sidebar-Zustand
   if (window.innerWidth < 900) document.body.classList.add('sidebar-collapsed');
   else document.body.classList.remove('sidebar-collapsed');
