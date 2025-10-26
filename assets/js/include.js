@@ -241,50 +241,13 @@ function initMenuToggle() {
     }
   });
 }
-
 // ===========================================================
 // 🧾 Vertragsauswahl (Mitgliedschaften)
 // ===========================================================
+// ⚠️ Alte Logik deaktiviert – ersetzt durch modulare Version in "mitgliedschaften.js"
+// Diese Funktion bleibt leer, um Konflikte zu vermeiden.
 function initVertragsAuswahl() {
-  const buttons = document.querySelectorAll('.vertrag-btn');
-  const vertragSection = document.getElementById('vertrag-section');
-  const selectedTarif = document.getElementById('selected-tarif');
-
-  if (!buttons.length) return;
-
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-
-      if (!isLoggedIn) {
-        // 🔒 Nicht eingeloggt → Hinweis & Weiterleitung
-        alert("Bitte melde dich zuerst an, um einen Vertrag abzuschließen.");
-        window.location.href = "login.html";
-        return;
-      }
-
-      // ✅ Eingeloggt → Vertrag anzeigen
-      const tarif = btn.closest('.card').dataset.tarif;
-      selectedTarif.textContent = tarif;
-      vertragSection.classList.add('active');
-      vertragSection.scrollIntoView({ behavior: "smooth" });
-    });
-  });
-
-  const form = document.getElementById('vertrags-formular');
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
-    if (!isLoggedIn) {
-      alert("Du musst eingeloggt sein, um den Vertrag abzuschließen.");
-      window.location.href = "login.html";
-      return;
-    }
-
-    alert(`✅ Vertrag für "${selectedTarif.textContent}" wurde erfolgreich übermittelt!`);
-    form.reset();
-  });
+  console.log("ℹ️ Alte Vertragslogik deaktiviert (siehe mitgliedschaften.js)");
 }
 
 // ===========================================================
@@ -335,6 +298,9 @@ function updateTopbarHeight() {
 // ===========================================================
 // 🪄 SPA-HOOK: Seitenabhängiger Code
 // ===========================================================
+// ===========================================================
+// 🪄 SPA-HOOK: Seitenabhängiger Code
+// ===========================================================
 document.addEventListener('pageLoaded', (e) => {
   const current = (e.detail.url.split('/').pop() || 'index.html').toLowerCase();
 
@@ -343,9 +309,14 @@ document.addEventListener('pageLoaded', (e) => {
   loadLanguage(lang);
 
   if (current === 'mitgliedschaften.html') {
-    initVertragsAuswahl();
+    if (typeof initMitgliedschaftFlow === 'function') {
+      initMitgliedschaftFlow();
+    } else {
+      console.warn("Mitgliedschaftsmodul (mitgliedschaften.js) nicht geladen.");
+    }
   }
 });
+
 
 // === 🔁 FOOTER Handling: Initial + SPA-kompatibel + Mehrsprachig ===
 async function ensureFooter() {

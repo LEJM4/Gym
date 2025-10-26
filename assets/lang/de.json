@@ -104,5 +104,24 @@
   "password_placeholder": "Passwort",
   "login_button": "Einloggen",
   "no_account_text": "Noch kein Konto?",
-  "register_link": "Jetzt Mitglied werden"
+  "register_link": "Jetzt Mitglied werden",
+
+  "LGOIN": "ss",
+  "membership_title": "Unsere Mitgliedschaften",
+  "membership_intro": "Wähle dein Trainingspaket und starte jetzt mit ERIK-Fit.",
+  "membership_select": "Vertrag ansehen",
+  "membership_basic_desc": "Ideal für Einsteiger.",
+  "membership_premium_desc": "Zugang zu allen Kursen und Sauna.",
+  "membership_vip_desc": "Personal Training inklusive.",
+  "contract_heading": "Vertragsabschluss für",
+  "login_btn": "Einloggen",
+  "login_email": "E-Mail",
+  "login_password": "Passwort",
+  "no_account": "Noch kein Konto?",
+  "register_name": "Vollständiger Name",
+  "register_email": "E-Mail",
+  "register_password": "Passwort",
+  "register_btn": "Registrieren",
+  "contract_start": "Startdatum",
+  "contract_submit": "Vertrag absenden"
 }

@@ -1,81 +1,100 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>MC-Fit | Mitgliedschaften</title>
-  <link rel="stylesheet" href="./assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ERIK-Fit | Mitgliedschaften</title>
+
+  <link rel="stylesheet" href="./assets/css/style.css" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="loading">
-  <!-- Preloader -->
+  <!-- 🔄 Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
-      <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo"/>
+      <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo" />
       <div class="preloader-ring"></div>
-      <p data-i18n="loading">Lädt...</p>
+      <p>Lädt...</p>
     </div>
   </div>
 
+  <!-- Mount-Punkte -->
   <div id="topbar-mount"></div>
+
   <div class="layout">
     <div id="sidebar-mount"></div>
 
     <main class="content">
-      <!-- === Abschnitt: Überschrift & Beschreibung === -->
       <section class="about">
-        <h2 data-i18n="title">Mitgliedschaften</h2>
-        <p data-i18n="description">Wähle die Mitgliedschaft, die zu deinem Lebensstil passt.</p>
+        <h2 data-i18n="membership_title">Unsere Mitgliedschaften</h2>
+        <p data-i18n="membership_intro">Wähle dein Trainingspaket und starte jetzt mit ERIK-Fit.</p>
       </section>
 
-      <!-- === Abschnitt: Mitgliedschafts-Karten === -->
+      <!-- 💎 Vertragskarten -->
       <section class="highlight-cards">
         <div class="card" data-tarif="Basic">
           <h3>Basic</h3>
-          <p data-i18n="basic">Ideal für Einsteiger.</p>
+          <p data-i18n="membership_basic_desc">Ideal für Einsteiger.</p>
           <p><strong>29,99 € / Monat</strong></p>
-          <button class="vertrag-btn" data-i18n="contractBtn">Vertragsentwurf ansehen</button>
+          <button class="btn btn-gold vertrag-btn" data-i18n="membership_select">Vertrag ansehen</button>
         </div>
 
         <div class="card" data-tarif="Premium">
           <h3>Premium</h3>
-          <p data-i18n="premium">Zugang zu allen Kursen und Sauna.</p>
+          <p data-i18n="membership_premium_desc">Zugang zu allen Kursen und Sauna.</p>
           <p><strong>49,99 € / Monat</strong></p>
-          <button class="vertrag-btn" data-i18n="contractBtn">Vertragsentwurf ansehen</button>
+          <button class="btn btn-gold vertrag-btn" data-i18n="membership_select">Vertrag ansehen</button>
         </div>
 
         <div class="card" data-tarif="VIP">
           <h3>VIP</h3>
-          <p data-i18n="vip">Personal Training inklusive.</p>
+          <p data-i18n="membership_vip_desc">Personal Training inklusive.</p>
           <p><strong>79,99 € / Monat</strong></p>
-          <button class="vertrag-btn" data-i18n="contractBtn">Vertragsentwurf ansehen</button>
+          <button class="btn btn-gold vertrag-btn" data-i18n="membership_select">Vertrag ansehen</button>
         </div>
       </section>
 
-      <!-- === Abschnitt: Vertragsformular === -->
-      <section class="vertrag-section" id="vertrag-section">
-        <h3><span data-i18n="formTitle">Vertragsentwurf für</span> <span id="selected-tarif">—</span></h3>
+      <!-- 🔽 Login + Vertrag unten -->
+      <section id="vertrag-section" class="hidden">
+        <h3 data-i18n="contract_heading">Vertragsabschluss für <span id="selected-tarif">–</span></h3>
 
-        <form id="vertrags-formular" class="vertrags-formular">
-          <label for="name" data-i18n="name">Name</label>
-          <input type="text" id="name" name="name" required>
+        <!-- 🔐 Login / Registrierung -->
+        <div id="auth-section">
+          <form id="login-form">
+            <input type="email" id="login-email" placeholder="E-Mail" required data-i18n-placeholder="login_email">
+            <input type="password" id="login-password" placeholder="Passwort" required data-i18n-placeholder="login_password">
+            <button type="submit" class="btn btn-gold" data-i18n="login_btn">Einloggen</button>
+          </form>
 
-          <label for="email" data-i18n="email">E-Mail</label>
-          <input type="email" id="email" name="email" required>
+          <p class="register-hint">
+            <span data-i18n="no_account">Noch kein Konto?</span>
+            <button id="show-register" class="link-highlight" type="button" data-i18n="register_link">Jetzt registrieren</button>
+          </p>
 
-          <label for="geburtsdatum" data-i18n="birthday">Geburtsdatum</label>
-          <input type="date" id="geburtsdatum" name="geburtsdatum">
+          <form id="register-form" class="hidden">
+            <input type="text" id="reg-name" placeholder="Vollständiger Name" required data-i18n-placeholder="register_name">
+            <input type="email" id="reg-email" placeholder="E-Mail" required data-i18n-placeholder="register_email">
+            <input type="password" id="reg-password" placeholder="Passwort" required data-i18n-placeholder="register_password">
+            <button type="submit" class="btn btn-gold" data-i18n="register_btn">Registrieren</button>
+          </form>
+        </div>
 
-          <label for="startdatum" data-i18n="startdate">Startdatum</label>
-          <input type="date" id="startdatum" name="startdatum" required>
-
-          <button type="submit" class="submit-btn" data-i18n="submit">Vertrag absenden</button>
+        <!-- 🧾 Vertragsformular -->
+        <form id="vertrags-formular" class="vertrags-formular hidden">
+          <label for="startdatum" data-i18n="contract_start">Startdatum</label>
+          <input type="date" id="startdatum" required />
+          <button type="submit" class="btn btn-gold" data-i18n="contract_submit">Vertrag absenden</button>
         </form>
       </section>
 
+      <footer>
+        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+      </footer>
     </main>
   </div>
 
   <script src="./assets/js/include.js"></script>
+  <script src="./assets/js/mitgliedschaften.js"></script>
 </body>
 </html>

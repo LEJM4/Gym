@@ -98,5 +98,27 @@
   "password_placeholder": "Password",
   "login_button": "Sign in",
   "no_account_text": "Don't have an account?",
-  "register_link": "Join now"
+  "register_link": "Join now",
+
+
+
+
+  "ww": "saaa",
+  "membership_title": "Our Memberships",
+  "membership_intro": "Choose your training plan and start now with ERIK-Fit.",
+  "membership_select": "View Contract",
+  "membership_basic_desc": "Perfect for beginners.",
+  "membership_premium_desc": "Access to all classes and sauna.",
+  "membership_vip_desc": "Includes personal training.",
+  "contract_heading": "Contract for",
+  "login_btn": "Sign in",
+  "login_email": "Email",
+  "login_password": "Password",
+  "no_account": "No account yet?",
+  "register_name": "Full name",
+  "register_email": "Email",
+  "register_password": "Password",
+  "register_btn": "Create account",
+  "contract_start": "Start date",
+  "contract_submit": "Submit contract"
 }
