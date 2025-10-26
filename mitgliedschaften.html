@@ -1,95 +1,94 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>ERIK-Fit | Mitgliedschaften</title>
-
-  <link rel="stylesheet" href="./assets/css/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title data-i18n="membership_title">ERIK-Fit | Mitgliedschaften</title>
+  <link rel="stylesheet" href="./assets/css/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 
 <body class="loading">
-  <!-- 🔄 Preloader -->
+  <!-- 🌀 Preloader -->
   <div id="preloader">
     <div class="preloader-inner">
       <img src="./assets/img/logo.png" alt="Logo" class="preloader-logo" />
       <div class="preloader-ring"></div>
-      <p>Lädt...</p>
+      <p data-i18n="loading_text">Lädt...</p>
     </div>
   </div>
 
-  <!-- Mount-Punkte -->
   <div id="topbar-mount"></div>
-
   <div class="layout">
     <div id="sidebar-mount"></div>
 
     <main class="content">
       <section class="about">
-        <h2 data-i18n="membership_title">Unsere Mitgliedschaften</h2>
-        <p data-i18n="membership_intro">Wähle dein Trainingspaket und starte jetzt mit ERIK-Fit.</p>
+        <h2 data-i18n="membership_heading">Unsere Mitgliedschaften</h2>
+        <p data-i18n="membership_description">Wähle den passenden Vertrag für deine Fitnessziele.</p>
       </section>
 
-      <!-- 💎 Vertragskarten -->
-      <section class="highlight-cards">
-        <div class="card" data-tarif="Basic">
-          <h3>Basic</h3>
-          <p data-i18n="membership_basic_desc">Ideal für Einsteiger.</p>
-          <p><strong>29,99 € / Monat</strong></p>
-          <button class="btn btn-gold vertrag-btn" data-i18n="membership_select">Vertrag ansehen</button>
+      <!-- 🧩 Vertragskarten -->
+      <section class="highlight-cards grid-memberships">
+        <div class="card vertrag-btn" data-tarif="Basic">
+          <h3 data-i18n="tarif_basic_name">Basic</h3>
+          <p data-i18n="tarif_basic_desc">Perfekt für Einsteiger</p>
+          <span class="price" data-i18n="tarif_basic_price">19 €/Monat</span>
         </div>
 
-        <div class="card" data-tarif="Premium">
-          <h3>Premium</h3>
-          <p data-i18n="membership_premium_desc">Zugang zu allen Kursen und Sauna.</p>
-          <p><strong>49,99 € / Monat</strong></p>
-          <button class="btn btn-gold vertrag-btn" data-i18n="membership_select">Vertrag ansehen</button>
+        <div class="card vertrag-btn" data-tarif="Pro">
+          <h3 data-i18n="tarif_pro_name">Pro</h3>
+          <p data-i18n="tarif_pro_desc">Für regelmäßige Trainierende</p>
+          <span class="price" data-i18n="tarif_pro_price">39 €/Monat</span>
         </div>
 
-        <div class="card" data-tarif="VIP">
-          <h3>VIP</h3>
-          <p data-i18n="membership_vip_desc">Personal Training inklusive.</p>
-          <p><strong>79,99 € / Monat</strong></p>
-          <button class="btn btn-gold vertrag-btn" data-i18n="membership_select">Vertrag ansehen</button>
+        <div class="card vertrag-btn" data-tarif="Premium">
+          <h3 data-i18n="tarif_premium_name">Premium</h3>
+          <p data-i18n="tarif_premium_desc">Alles inklusive (Sauna, Kurse etc.)</p>
+          <span class="price" data-i18n="tarif_premium_price">59 €/Monat</span>
         </div>
       </section>
 
-      <!-- 🔽 Login + Vertrag unten -->
-      <section id="vertrag-section" class="hidden">
-        <h3 data-i18n="contract_heading">Vertragsabschluss für <span id="selected-tarif">–</span></h3>
+      <!-- 🧾 Login / Registrierung / Vertragsabschluss -->
+      <section id="mitgliedschaft-flow" class="flow-section hidden">
+        <div class="login-container">
+          <h3 id="flow-heading" data-i18n="login_heading">Login</h3>
+          <p id="flow-desc" data-i18n="login_description">Melde dich mit deinem ERIK-Fit-Konto an.</p>
 
-        <!-- 🔐 Login / Registrierung -->
-        <div id="auth-section">
-          <form id="login-form">
-            <input type="email" id="login-email" placeholder="E-Mail" required data-i18n-placeholder="login_email">
-            <input type="password" id="login-password" placeholder="Passwort" required data-i18n-placeholder="login_password">
-            <button type="submit" class="btn btn-gold" data-i18n="login_btn">Einloggen</button>
+          <!-- Login -->
+          <form id="login-form" class="kontakt-form">
+            <input type="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="E-Mail" required>
+            <input type="password" name="password" data-i18n-placeholder="password_placeholder" placeholder="Passwort" required>
+            <button type="submit" class="btn btn-gold" data-i18n="login_button">Einloggen</button>
+          </form>
+
+          <!-- Registrierung (versteckt) -->
+          <form id="register-form" class="kontakt-form hidden">
+            <input type="text" name="name" data-i18n-placeholder="name_placeholder" placeholder="Name" required>
+            <input type="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="E-Mail" required>
+            <input type="password" name="password" data-i18n-placeholder="password_placeholder" placeholder="Passwort" required>
+            <button type="submit" class="btn btn-gold" data-i18n="register_button">Registrieren</button>
           </form>
 
           <p class="register-hint">
-            <span data-i18n="no_account">Noch kein Konto?</span>
-            <button id="show-register" class="link-highlight" type="button" data-i18n="register_link">Jetzt registrieren</button>
+            <span id="toggle-text" data-i18n="no_account_text">Noch kein Konto?</span>
+            <a href="#" id="toggle-link" class="link-highlight" data-i18n="register_link">Jetzt registrieren</a>
           </p>
-
-          <form id="register-form" class="hidden">
-            <input type="text" id="reg-name" placeholder="Vollständiger Name" required data-i18n-placeholder="register_name">
-            <input type="email" id="reg-email" placeholder="E-Mail" required data-i18n-placeholder="register_email">
-            <input type="password" id="reg-password" placeholder="Passwort" required data-i18n-placeholder="register_password">
-            <button type="submit" class="btn btn-gold" data-i18n="register_btn">Registrieren</button>
-          </form>
         </div>
 
-        <!-- 🧾 Vertragsformular -->
-        <form id="vertrags-formular" class="vertrags-formular hidden">
-          <label for="startdatum" data-i18n="contract_start">Startdatum</label>
-          <input type="date" id="startdatum" required />
-          <button type="submit" class="btn btn-gold" data-i18n="contract_submit">Vertrag absenden</button>
-        </form>
+        <!-- Bestätigung nach Login -->
+        <div id="contract-confirmation" class="hidden confirmation">
+          <h3 data-i18n="contract_title">Vertrag bestätigen</h3>
+          <p>
+            <span data-i18n="contract_selected">Gewählter Tarif:</span>
+            <strong id="selected-tarif">-</strong>
+          </p>
+          <button id="confirm-contract" class="btn btn-gold" data-i18n="confirm_button">Vertrag abschließen</button>
+        </div>
       </section>
 
       <footer>
-        <p>© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
+        <p data-i18n="footer_text">© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
       </footer>
     </main>
   </div>

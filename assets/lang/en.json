@@ -120,5 +120,25 @@
   "register_password": "Password",
   "register_btn": "Create account",
   "contract_start": "Start date",
-  "contract_submit": "Submit contract"
+  "contract_submit": "Submit contract",
+
+
+
+  
+  "membership_heading": "Our Memberships",
+  "membership_description": "Choose the perfect plan for your fitness goals.",
+  "tarif_basic_name": "Basic",
+  "tarif_basic_desc": "Perfect for beginners",
+  "tarif_basic_price": "€19/month",
+  "tarif_pro_name": "Pro",
+  "tarif_pro_desc": "For regular athletes",
+  "tarif_pro_price": "€39/month",
+  "tarif_premium_name": "Premium",
+  "tarif_premium_desc": "All inclusive (sauna, classes, etc.)",
+  "tarif_premium_price": "€59/month",
+  "contract_title": "Confirm Contract",
+  "contract_selected": "Selected Plan:",
+  "confirm_button": "Confirm Contract",
+  "register_button": "Register",
+  "name_placeholder": "Name"
 }

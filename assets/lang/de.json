@@ -123,5 +123,23 @@
   "register_password": "Passwort",
   "register_btn": "Registrieren",
   "contract_start": "Startdatum",
-  "contract_submit": "Vertrag absenden"
+  "contract_submit": "Vertrag absenden",
+
+
+  "membership_heading": "Unsere Mitgliedschaften",
+  "membership_description": "Wähle den passenden Vertrag für deine Fitnessziele.",
+  "tarif_basic_name": "Basic",
+  "tarif_basic_desc": "Perfekt für Einsteiger",
+  "tarif_basic_price": "19 €/Monat",
+  "tarif_pro_name": "Pro",
+  "tarif_pro_desc": "Für regelmäßige Trainierende",
+  "tarif_pro_price": "39 €/Monat",
+  "tarif_premium_name": "Premium",
+  "tarif_premium_desc": "Alles inklusive (Sauna, Kurse etc.)",
+  "tarif_premium_price": "59 €/Monat",
+  "contract_title": "Vertrag bestätigen",
+  "contract_selected": "Gewählter Tarif:",
+  "confirm_button": "Vertrag abschließen",
+  "register_button": "Registrieren",
+  "name_placeholder": "Name"
 }

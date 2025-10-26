@@ -1,76 +1,79 @@
-console.log("mitgliedschaften.js geladen ✅");
+/* ===========================================================
+   mitgliedschaften.js – Vertragsauswahl, Login & Registrierung
+   =========================================================== */
 
-// === 🧾 Vertragsauswahl + Login/Register Flow ===
-function initMitgliedschaftFlow() {
-  const buttons = document.querySelectorAll('.vertrag-btn');
-  const vertragSection = document.getElementById('vertrag-section');
-  const selectedTarif = document.getElementById('selected-tarif');
-  const loginForm = document.getElementById('login-form');
-  const registerForm = document.getElementById('register-form');
-  const showRegisterBtn = document.getElementById('show-register');
-  const vertragsForm = document.getElementById('vertrags-formular');
-  const authSection = document.getElementById('auth-section');
+document.addEventListener("DOMContentLoaded", () => {
+  const flowSection = document.getElementById("mitgliedschaft-flow");
+  const loginForm = document.getElementById("login-form");
+  const registerForm = document.getElementById("register-form");
+  const toggleLink = document.getElementById("toggle-link");
+  const toggleText = document.getElementById("toggle-text");
+  const flowHeading = document.getElementById("flow-heading");
+  const flowDesc = document.getElementById("flow-desc");
+  const confirmation = document.getElementById("contract-confirmation");
+  const selectedTarif = document.getElementById("selected-tarif");
 
-  if (!buttons.length || !vertragSection) return;
+  // === 1️⃣ Wenn eingeloggt → nur Vertragsabschluss anzeigen ===
+  const isLoggedIn = localStorage.getItem("userLoggedIn") === "true";
+  if (isLoggedIn) {
+    document.querySelector(".highlight-cards").classList.remove("hidden");
+  }
 
-  // 🧾 Tarif auswählen
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tarif = btn.closest('.card').dataset.tarif;
+  // === 2️⃣ Klick auf Tarif-Karte ===
+  document.querySelectorAll(".vertrag-btn").forEach(card => {
+    card.addEventListener("click", () => {
+      const tarif = card.dataset.tarif;
       selectedTarif.textContent = tarif;
-      vertragSection.classList.remove('hidden');
-      vertragSection.scrollIntoView({ behavior: "smooth" });
+      flowSection.classList.remove("hidden");
+      flowSection.scrollIntoView({ behavior: "smooth" });
 
-      const isLoggedIn = localStorage.getItem('userLoggedIn') === 'true';
       if (isLoggedIn) {
-        authSection.classList.add('hidden');
-        vertragsForm.classList.remove('hidden');
+        document.querySelector(".login-container").classList.add("hidden");
+        confirmation.classList.remove("hidden");
       } else {
-        authSection.classList.remove('hidden');
-        vertragsForm.classList.add('hidden');
+        document.querySelector(".login-container").classList.remove("hidden");
       }
     });
   });
 
-  // 🔐 Login
-  loginForm?.addEventListener('submit', (e) => {
+  // === 3️⃣ Login-Formular ===
+  loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    localStorage.setItem('userLoggedIn', 'true');
-    alert("✅ Erfolgreich eingeloggt!");
-    authSection.classList.add('hidden');
-    vertragsForm.classList.remove('hidden');
+    localStorage.setItem("userLoggedIn", "true");
+    alert("✅ Login erfolgreich!");
+    loginForm.classList.add("hidden");
+    document.querySelector(".register-hint").classList.add("hidden");
+    confirmation.classList.remove("hidden");
   });
 
-  // 🆕 Registrierung umschalten
-  showRegisterBtn?.addEventListener('click', () => {
-    registerForm.classList.toggle('hidden');
-  });
-
-  // 🆕 Registrierung abschließen
-  registerForm?.addEventListener('submit', (e) => {
+  // === 4️⃣ Registrierung ===
+  registerForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    localStorage.setItem('userLoggedIn', 'true');
-    alert("🎉 Konto erstellt und eingeloggt!");
-    authSection.classList.add('hidden');
-    vertragsForm.classList.remove('hidden');
+    localStorage.setItem("userLoggedIn", "true");
+    alert("🎉 Konto erstellt & eingeloggt!");
+    registerForm.classList.add("hidden");
+    document.querySelector(".register-hint").classList.add("hidden");
+    confirmation.classList.remove("hidden");
   });
 
-  // 📄 Vertragsformular absenden
-  vertragsForm?.addEventListener('submit', (e) => {
+  // === 5️⃣ Umschalten Login <-> Registrierung ===
+  toggleLink.addEventListener("click", (e) => {
     e.preventDefault();
-    const tarif = selectedTarif.textContent;
-    alert(`✅ Vertrag für "${tarif}" erfolgreich abgeschlossen!`);
-    vertragsForm.reset();
+    const showRegister = registerForm.classList.contains("hidden");
+    registerForm.classList.toggle("hidden", !showRegister);
+    loginForm.classList.toggle("hidden", showRegister);
+
+    toggleText.textContent = showRegister
+      ? "Bereits ein Konto?"
+      : "Noch kein Konto?";
+    toggleLink.textContent = showRegister
+      ? "Jetzt einloggen"
+      : "Jetzt registrieren";
   });
-}
 
-// === 📦 Initialisierung nach DOM-Load ===
-document.addEventListener("DOMContentLoaded", initMitgliedschaftFlow);
-
-// === 🔄 SPA-Hook (wenn du deine Navigation über JS lädst) ===
-document.addEventListener("pageLoaded", (e) => {
-  const current = (e.detail.url.split("/").pop() || "").toLowerCase();
-  if (current === "mitgliedschaften.html") {
-    initMitgliedschaftFlow();
-  }
+  // === 6️⃣ Vertragsabschluss ===
+  document.getElementById("confirm-contract").addEventListener("click", () => {
+    alert(`✅ Vertrag für "${selectedTarif.textContent}" abgeschlossen!`);
+    window.location.href = "index.html";
+  });
 });
