@@ -141,5 +141,8 @@
   "contract_selected": "Gewählter Tarif:",
   "confirm_button": "Vertrag abschließen",
   "register_button": "Registrieren",
-  "name_placeholder": "Name"
+  "name_placeholder": "Name",
+  "firstname_placeholder": "Vorname",
+  "lastname_placeholder": "Nachname",
+  "repeat_password_placeholder": "Passwort wiederholen"
 }

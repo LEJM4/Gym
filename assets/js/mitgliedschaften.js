@@ -6,74 +6,73 @@ document.addEventListener("DOMContentLoaded", () => {
   const flowSection = document.getElementById("mitgliedschaft-flow");
   const loginForm = document.getElementById("login-form");
   const registerForm = document.getElementById("register-form");
-  const toggleLink = document.getElementById("toggle-link");
-  const toggleText = document.getElementById("toggle-text");
-  const flowHeading = document.getElementById("flow-heading");
-  const flowDesc = document.getElementById("flow-desc");
-  const confirmation = document.getElementById("contract-confirmation");
-  const selectedTarif = document.getElementById("selected-tarif");
+  const switchLink = document.getElementById("switch-link");
+  const switchInfo = document.getElementById("switch-info");
+  const formTitle = document.getElementById("form-title");
 
-  // === 1️⃣ Wenn eingeloggt → nur Vertragsabschluss anzeigen ===
-  const isLoggedIn = localStorage.getItem("userLoggedIn") === "true";
-  if (isLoggedIn) {
-    document.querySelector(".highlight-cards").classList.remove("hidden");
-  }
-
-  // === 2️⃣ Klick auf Tarif-Karte ===
+  // === 1️⃣ Vertrag auswählen ===
   document.querySelectorAll(".vertrag-btn").forEach(card => {
     card.addEventListener("click", () => {
       const tarif = card.dataset.tarif;
-      selectedTarif.textContent = tarif;
+      localStorage.setItem("selectedTarif", tarif);
       flowSection.classList.remove("hidden");
       flowSection.scrollIntoView({ behavior: "smooth" });
-
-      if (isLoggedIn) {
-        document.querySelector(".login-container").classList.add("hidden");
-        confirmation.classList.remove("hidden");
-      } else {
-        document.querySelector(".login-container").classList.remove("hidden");
-      }
     });
   });
 
-  // === 3️⃣ Login-Formular ===
+  // === 2️⃣ Login-Formular absenden ===
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
     localStorage.setItem("userLoggedIn", "true");
-    alert("✅ Login erfolgreich!");
-    loginForm.classList.add("hidden");
-    document.querySelector(".register-hint").classList.add("hidden");
-    confirmation.classList.remove("hidden");
+    alert("✅ Erfolgreich eingeloggt!");
+    showContractConfirmation();
   });
 
-  // === 4️⃣ Registrierung ===
+  // === 3️⃣ Registrierung absenden ===
   registerForm.addEventListener("submit", (e) => {
     e.preventDefault();
     localStorage.setItem("userLoggedIn", "true");
     alert("🎉 Konto erstellt & eingeloggt!");
-    registerForm.classList.add("hidden");
-    document.querySelector(".register-hint").classList.add("hidden");
-    confirmation.classList.remove("hidden");
+    showContractConfirmation();
   });
 
-  // === 5️⃣ Umschalten Login <-> Registrierung ===
-  toggleLink.addEventListener("click", (e) => {
+  // === 4️⃣ Wechsel zwischen Login & Registrierung ===
+  switchLink.addEventListener("click", (e) => {
     e.preventDefault();
-    const showRegister = registerForm.classList.contains("hidden");
-    registerForm.classList.toggle("hidden", !showRegister);
-    loginForm.classList.toggle("hidden", showRegister);
 
-    toggleText.textContent = showRegister
-      ? "Bereits ein Konto?"
-      : "Noch kein Konto?";
-    toggleLink.textContent = showRegister
-      ? "Jetzt einloggen"
-      : "Jetzt registrieren";
+    const showingLogin = !loginForm.classList.contains("hidden");
+
+    if (showingLogin) {
+      // Wechsel zu Registrierung
+      loginForm.classList.add("hidden");
+      registerForm.classList.remove("hidden");
+      formTitle.textContent = "Registrieren";
+      switchInfo.textContent = "Wenn Sie bereits ein Konto haben,";
+      switchLink.textContent = "jetzt einloggen";
+    } else {
+      // Wechsel zu Login
+      registerForm.classList.add("hidden");
+      loginForm.classList.remove("hidden");
+      formTitle.textContent = "Login";
+      switchInfo.textContent = "Wenn Sie noch kein Konto haben,";
+      switchLink.textContent = "jetzt registrieren";
+    }
   });
 
-  // === 6️⃣ Vertragsabschluss ===
-  document.getElementById("confirm-contract").addEventListener("click", () => {
-    alert(`✅ Vertrag für "${selectedTarif.textContent}" abgeschlossen!`);
-    window.location.href = "index.html";
-  });
+  // === 5️⃣ Nach Login / Registrierung → Vertrag bestätigen ===
+  function showContractConfirmation() {
+    const tarif = localStorage.getItem("selectedTarif") || "-";
+    flowSection.innerHTML = `
+      <div class="confirmation centered">
+        <h3>Vertrag bestätigen</h3>
+        <p>Sie haben den Tarif <strong>${tarif}</strong> gewählt.</p>
+        <button id="confirm-contract" class="btn btn-gold">Vertrag abschließen</button>
+      </div>
+    `;
+
+    document.getElementById("confirm-contract").addEventListener("click", () => {
+      alert(`✅ Vertrag für "${tarif}" erfolgreich abgeschlossen!`);
+      window.location.href = "index.html";
+    });
+  }
 });
