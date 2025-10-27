@@ -23,6 +23,7 @@
     <div id="sidebar-mount"></div>
 
     <main class="content">
+      <!-- 🏋️ Einführung -->
       <section class="about">
         <h2 data-i18n="membership_heading">Unsere Mitgliedschaften</h2>
         <p data-i18n="membership_description">Wähle den passenden Vertrag für deine Fitnessziele.</p>
@@ -49,25 +50,22 @@
         </div>
       </section>
 
-      <!-- 💾 Login-Bereich (anfangs versteckt) -->
-      <section id="login-flow" class="login-flow hidden">
+      <!-- 💾 Login/Registrierung-Bereich (wird dynamisch angezeigt) -->
+      <section id="mitgliedschaft-flow" class="hidden">
         <div class="login-box">
-          <h3 data-i18n="login_heading">Login</h3>
-          <p data-i18n="login_description">Melde dich mit deinem ERIK-Fit-Konto an, um fortzufahren.</p>
+          <h3 id="form-title">Login</h3>
 
-          <form id="login-form" class="kontakt-form">
-            <input type="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="E-Mail" required>
-            <input type="password" name="password" data-i18n-placeholder="password_placeholder" placeholder="Passwort" required>
-            <button type="submit" class="btn btn-gold" data-i18n="login_button">Einloggen</button>
-          </form>
+          <!-- Wird dynamisch per JS befüllt -->
+          <div id="form-container"></div>
 
-          <p class="register-hint">
-            <span data-i18n="no_account_text">Noch kein Konto?</span>
-            <a href="#" class="link-highlight" data-i18n="register_link">Jetzt registrieren</a>
+          <p class="switch-text">
+            <span id="switch-info">Wenn Sie noch kein Konto haben,</span>
+            <a href="#" id="switch-link" class="link-highlight">jetzt registrieren</a>
           </p>
         </div>
       </section>
 
+      <!-- ⚖️ Footer -->
       <footer>
         <p data-i18n="footer_text">© 2025 ERIK-Fit. Alle Rechte vorbehalten.</p>
       </footer>
