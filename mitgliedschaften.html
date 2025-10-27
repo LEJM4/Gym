@@ -49,32 +49,21 @@
         </div>
       </section>
 
-      <!-- 💾 Login/Registrierung -->
-      <section id="mitgliedschaft-flow" class="flow-section hidden">
-        <div class="form-container">
-          <h3 id="form-title" data-i18n="login_heading">Login</h3>
+      <!-- 💾 Login-Bereich (anfangs versteckt) -->
+      <section id="login-flow" class="login-flow hidden">
+        <div class="login-box">
+          <h3 data-i18n="login_heading">Login</h3>
+          <p data-i18n="login_description">Melde dich mit deinem ERIK-Fit-Konto an, um fortzufahren.</p>
 
-          <!-- Login -->
           <form id="login-form" class="kontakt-form">
             <input type="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="E-Mail" required>
             <input type="password" name="password" data-i18n-placeholder="password_placeholder" placeholder="Passwort" required>
             <button type="submit" class="btn btn-gold" data-i18n="login_button">Einloggen</button>
           </form>
 
-          <!-- Registrierung -->
-          <form id="register-form" class="kontakt-form hidden">
-            <input type="text" name="vorname" data-i18n-placeholder="firstname_placeholder" placeholder="Vorname" required>
-            <input type="text" name="nachname" data-i18n-placeholder="lastname_placeholder" placeholder="Nachname" required>
-            <input type="email" name="email" data-i18n-placeholder="email_placeholder" placeholder="E-Mail" required>
-            <input type="password" name="password" data-i18n-placeholder="password_placeholder" placeholder="Passwort" required>
-            <input type="password" name="password_repeat" data-i18n-placeholder="repeat_password_placeholder" placeholder="Passwort wiederholen" required>
-            <button type="submit" class="btn btn-gold" data-i18n="register_button">Registrieren</button>
-          </form>
-
-          <!-- Umschalter -->
-          <p class="switch-text">
-            <span id="switch-info" data-i18n="no_account_text">Wenn Sie noch kein Konto haben,</span>
-            <a href="#" id="switch-link" class="link-highlight" data-i18n="register_link">jetzt registrieren</a>.
+          <p class="register-hint">
+            <span data-i18n="no_account_text">Noch kein Konto?</span>
+            <a href="#" class="link-highlight" data-i18n="register_link">Jetzt registrieren</a>
           </p>
         </div>
       </section>
