@@ -42,27 +42,30 @@ class GymApp:
     def create_base_routes(self):
         """
         Erstellt Standardrouten:
-        - /  → liefert index.html aus
-        - 404-Fallback  → leitet alles Unbekannte ebenfalls auf index.html
+        - /  → index.html
+        - /partials/...  → lädt HTML-Komponenten
+        - /assets/...    → liefert CSS, JS, Bilder usw.
+        - 404-Fallback   → index.html
         """
 
         @self.app.route("/")
         def index():
-            """
-            Gibt die Startseite des Frontends aus.
-            send_from_directory() sucht im angegebenen Ordner nach der Datei.
-            """
             return send_from_directory(self.BASE_DIR, "index.html")
+
+        # === NEU: Route für Partials (HTML-Komponenten) ===
+        @self.app.route("/partials/<path:filename>")
+        def serve_partials(filename):
+            return send_from_directory(os.path.join(self.BASE_DIR, "partials"), filename)
+
+        # === NEU: Route für Assets (CSS, JS, Bilder) ===
+        @self.app.route("/assets/<path:filename>")
+        def serve_assets(filename):
+            return send_from_directory(os.path.join(self.BASE_DIR, "assets"), filename)
 
         @self.app.errorhandler(404)
         def not_found(e):
-            """
-            Fängt 404-Fehler (nicht gefundene Seiten) ab und gibt trotzdem die Startseite zurück.
-            Das ist nützlich für SPA-Seiten (Single Page Applications),
-            bei denen der Client selbst das Routing übernimmt.
-            """
             return send_from_directory(self.BASE_DIR, "index.html")
-
+        
     def run(self):
         """
         Startet den Flask-Server.
